@@ -1,0 +1,51 @@
+name: Bybit Funding Monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every 5 minutes, shifted away from the top of the hour.
+    - cron: "2-59/5 * * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Restore previous monitor state
+        uses: actions/cache@v4
+        with:
+          path: .monitor-state
+          key: funding-state-${{ github.run_id }}
+          restore-keys: |
+            funding-state-
+
+      - name: Run funding monitor
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          STATE_FILE: .monitor-state/state.json
+
+          # Alert settings
+          MIN_APR_PCT: "20"
+          HIGH_APR_PCT: "35"
+          MIN_SPOT_TURNOVER_24H: "5000000"
+          MIN_PERP_TURNOVER_24H: "5000000"
+          MAX_ABS_ENTRY_SPREAD_PCT: "0.30"
+          MIN_RISE_RATIO: "1.20"
+          MIN_RATE_DELTA_PCT: "0.005"
+          ALERT_COOLDOWN_MINUTES: "360"
+          ASSUMED_ROUND_TRIP_COST_PCT: "0.31"
+          MAX_HISTORY_CHECKS: "20"
+        run: python monitor.py
