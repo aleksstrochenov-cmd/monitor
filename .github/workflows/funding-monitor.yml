@@ -35,6 +35,8 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+          BYBIT_BASE: "https://api.bytick.com"
           STATE_FILE: .monitor-state/state.json
 
           # Alert settings
@@ -48,4 +50,5 @@ jobs:
           ALERT_COOLDOWN_MINUTES: "360"
           ASSUMED_ROUND_TRIP_COST_PCT: "0.31"
           MAX_HISTORY_CHECKS: "20"
+
         run: python monitor.py
