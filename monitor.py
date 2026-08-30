@@ -27,7 +27,7 @@ from typing import Dict, Iterable, List, Optional, Tuple
 import requests
 
 
-ASTER_BASE = os.getenv("ASTER_BASE_URL", "https://fapi3.asterdex.com")
+ASTER_BASE = os.getenv("ASTER_BASE_URL", "https://fapi.asterdex.com")
 BYBIT_BASE = os.getenv("BYBIT_BASE_URL", "https://api.bybit.com")
 BITGET_BASE = os.getenv("BITGET_BASE_URL", "https://api.bitget.com")
 MEXC_BASE = os.getenv("MEXC_BASE_URL", "https://api.mexc.com")
