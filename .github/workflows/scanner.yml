@@ -41,46 +41,68 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
           ASTER_BASE_URL: 'https://fapi.asterdex.com'
+          BYBIT_BASE_URL: 'https://api.bybit.com'
+          BITGET_BASE_URL: 'https://api.bitget.com'
+          MEXC_BASE_URL: 'https://api.mexc.com'
 
-          # Stage 1: fast market filter
+          # Stage 1:
+          # Aster PERP vs external PERP fair.
+          # SPOT is diagnostic only.
           MIN_ASTER_SPREAD_PCT: '0.15'
           MIN_DEVIATION_PCT: '0.20'
           MIN_EXECUTABLE_EDGE_PCT: '0.15'
           MIN_CURRENT_EXECUTABLE_EDGE_PCT: '0.15'
+
           MIN_24H_MOVE_PCT: '8.0'
           MIN_ASTER_QUOTE_VOLUME_24H: '50000'
-          MIN_REFERENCE_EXCHANGES: '2'
-          MAX_REFERENCE_DISAGREEMENT_PCT: '0.20'
+
+          # Need at least 2 other perpetual markets
+          MIN_PERP_REFERENCE_EXCHANGES: '2'
+          MAX_PERP_REFERENCE_DISAGREEMENT_PCT: '0.20'
+
+          # Spot is displayed only for comparison / basis
+          MIN_SPOT_REFERENCE_EXCHANGES: '2'
+          MAX_SPOT_REFERENCE_DISAGREEMENT_PCT: '0.30'
+
           MAX_CANDIDATES: '25'
 
-          # Stage 2: observe shortlisted names for ~45 sec
+          # Stage 2:
+          # observe candidates for ~45 seconds
           CONFIRM_DURATION_SECONDS: '45'
           CONFIRM_INTERVAL_SECONDS: '1.5'
+
           MAX_TRADE_ANALYSIS_CANDIDATES: '25'
           ASTER_TRADE_LIMIT: '500'
           TRADE_SAMPLE_MATCH_TOLERANCE_SECONDS: '3.0'
 
-          # CONFIRMED-MM: real Aster trade excursions and clean reversions
+          # CONFIRMED-MM:
+          # actual Aster trades must move away from
+          # EXTERNAL PERP fair and then cleanly revert
           EXCURSION_THRESHOLD_PCT: '0.20'
           REVERSION_BAND_PCT: '0.08'
+
           MIN_EXCURSIONS: '3'
           MIN_CLEAN_REVERSION_RATE: '0.70'
+
           MAX_MEDIAN_REVERSION_SECONDS: '8.0'
           MAX_REFERENCE_MOVE_DURING_REVERSION_PCT: '0.12'
+
           MIN_ASTER_TRADES_FOR_MM: '6'
 
-          # CONFIRMED-LAG: executable bid/ask edge only (not midpoint deviation)
+          # CONFIRMED-LAG:
+          # executable Aster bid/ask edge against PERP fair
           MIN_EXEC_EDGE_HIT_RATIO: '0.60'
           MAX_LAG_MEDIAN_SPREAD_PCT: '0.60'
           MIN_ASTER_TRADES_FOR_LAG: '3'
           MIN_REF_GOOD_RATIO: '0.80'
 
-          # No WATCH alerts in v4
+          # Only confirmed alerts.
+          # WATCH remains disabled.
           CONFIRMED_SCORE: '70'
           ALERT_LEVELS: 'CONFIRMED'
           ALERT_COOLDOWN_MINUTES: '60'
 
-          # Telegram chart for confirmed signals
+          # Telegram chart
           CHART_ALERT_LEVELS: 'CONFIRMED'
           CHARTS_DIR: 'charts'
 
