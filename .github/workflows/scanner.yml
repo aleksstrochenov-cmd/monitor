@@ -2,7 +2,7 @@ name: Aster Algo Scanner
 
 on:
   schedule:
-    - cron: '3-59/10 * * * *'
+    - cron: '3,13,23,33,43,53 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -45,9 +45,7 @@ jobs:
           BITGET_BASE_URL: 'https://api.bitget.com'
           MEXC_BASE_URL: 'https://api.mexc.com'
 
-          # Stage 1:
-          # Aster PERP vs external PERP fair.
-          # SPOT is diagnostic only.
+          # Stage 1 / MM prefilter diagnostics.
           MIN_ASTER_SPREAD_PCT: '0.15'
           MIN_DEVIATION_PCT: '0.20'
           MIN_EXECUTABLE_EDGE_PCT: '0.15'
@@ -56,53 +54,55 @@ jobs:
           MIN_24H_MOVE_PCT: '8.0'
           MIN_ASTER_QUOTE_VOLUME_24H: '50000'
 
-          # Need at least 2 other perpetual markets
+          # External perpetual reference.
           MIN_PERP_REFERENCE_EXCHANGES: '2'
           MAX_PERP_REFERENCE_DISAGREEMENT_PCT: '0.20'
 
-          # Spot is displayed only for comparison / basis
+          # Spot is diagnostic only and cannot create a signal.
           MIN_SPOT_REFERENCE_EXCHANGES: '2'
           MAX_SPOT_REFERENCE_DISAGREEMENT_PCT: '0.30'
 
           MAX_CANDIDATES: '25'
 
-          # Stage 2:
-          # observe candidates for ~45 seconds
+          # Stage 2: observe shortlisted markets for ~45 seconds.
           CONFIRM_DURATION_SECONDS: '45'
           CONFIRM_INTERVAL_SECONDS: '1.5'
-
           MAX_TRADE_ANALYSIS_CANDIDATES: '25'
           ASTER_TRADE_LIMIT: '500'
           TRADE_SAMPLE_MATCH_TOLERANCE_SECONDS: '3.0'
 
-          # CONFIRMED-MM:
-          # actual Aster trades must move away from
-          # EXTERNAL PERP fair and then cleanly revert
-          EXCURSION_THRESHOLD_PCT: '0.20'
-          REVERSION_BAND_PCT: '0.08'
+          # CONFIRMED-LAG v6.
+          # SHORT = Aster bid vs median external ask
+          # LONG  = Aster ask vs median external bid
+          MIN_HEDGEABLE_EDGE_PCT: '0.20'
+          MIN_CURRENT_HEDGEABLE_EDGE_PCT: '0.20'
+          MIN_HEDGEABLE_EDGE_HIT_RATIO: '0.60'
 
-          MIN_EXCURSIONS: '3'
-          MIN_CLEAN_REVERSION_RATE: '0.70'
+          # Estimated fees for the complete hedged round trip:
+          # open Aster + open reference + close Aster + close reference.
+          # Replace later with your actual fees.
+          ESTIMATED_ROUNDTRIP_FEES_PCT: '0.20'
+          MIN_NET_HEDGEABLE_EDGE_PCT: '0.05'
 
-          MAX_MEDIAN_REVERSION_SECONDS: '8.0'
-          MAX_REFERENCE_MOVE_DURING_REVERSION_PCT: '0.12'
-
-          MIN_ASTER_TRADES_FOR_MM: '6'
-
-          # CONFIRMED-LAG:
-          # executable Aster bid/ask edge against PERP fair
-          MIN_EXEC_EDGE_HIT_RATIO: '0.60'
           MAX_LAG_MEDIAN_SPREAD_PCT: '0.60'
           MIN_ASTER_TRADES_FOR_LAG: '3'
           MIN_REF_GOOD_RATIO: '0.80'
 
-          # Only confirmed alerts.
-          # WATCH remains disabled.
+          # CONFIRMED-MM.
+          EXCURSION_THRESHOLD_PCT: '0.20'
+          REVERSION_BAND_PCT: '0.08'
+          MIN_EXCURSIONS: '3'
+          MIN_CLEAN_REVERSION_RATE: '0.70'
+          MAX_MEDIAN_REVERSION_SECONDS: '8.0'
+          MAX_REFERENCE_MOVE_DURING_REVERSION_PCT: '0.12'
+          MIN_ASTER_TRADES_FOR_MM: '6'
+
+          # WATCH disabled.
           CONFIRMED_SCORE: '70'
           ALERT_LEVELS: 'CONFIRMED'
           ALERT_COOLDOWN_MINUTES: '60'
 
-          # Telegram chart
+          # Telegram chart.
           CHART_ALERT_LEVELS: 'CONFIRMED'
           CHARTS_DIR: 'charts'
 
