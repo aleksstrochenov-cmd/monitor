@@ -1,0 +1,95 @@
+name: Aster Algo Scanner
+
+on:
+  schedule:
+    - cron: '3-59/10 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aster-algo-scanner
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Self-test
+        run: python monitor.py --self-test
+
+      - name: Scan markets
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+          ASTER_BASE_URL: 'https://fapi.asterdex.com'
+
+          # Stage 1: fast market filter
+          MIN_ASTER_SPREAD_PCT: '0.15'
+          MIN_DEVIATION_PCT: '0.20'
+          MIN_EXECUTABLE_EDGE_PCT: '0.12'
+          MIN_24H_MOVE_PCT: '8.0'
+          MIN_ASTER_QUOTE_VOLUME_24H: '50000'
+          MIN_REFERENCE_EXCHANGES: '2'
+          MAX_REFERENCE_DISAGREEMENT_PCT: '0.20'
+          MAX_CANDIDATES: '25'
+
+          # Stage 2: observe shortlisted names for ~45 sec
+          CONFIRM_DURATION_SECONDS: '45'
+          CONFIRM_INTERVAL_SECONDS: '1.5'
+          MAX_TRADE_ANALYSIS_CANDIDATES: '10'
+          ASTER_TRADE_LIMIT: '500'
+          TRADE_SAMPLE_MATCH_TOLERANCE_SECONDS: '3.0'
+
+          # Actual Aster trade excursion / reversion rules
+          EXCURSION_THRESHOLD_PCT: '0.20'
+          REVERSION_BAND_PCT: '0.08'
+          MIN_EXCURSIONS: '3'
+          MIN_CLEAN_REVERSION_RATE: '0.70'
+          MAX_MEDIAN_REVERSION_SECONDS: '8.0'
+          MAX_REFERENCE_MOVE_DURING_REVERSION_PCT: '0.12'
+
+          # Persistent lag / executable mispricing rules
+          MIN_EXEC_EDGE_HIT_RATIO: '0.35'
+          MIN_DIRECTIONAL_HIT_RATIO: '0.50'
+          MIN_REF_GOOD_RATIO: '0.80'
+
+          WATCH_SCORE: '55'
+          CONFIRMED_SCORE: '70'
+          ALERT_LEVELS: 'WATCH,CONFIRMED'
+          ALERT_COOLDOWN_MINUTES: '60'
+
+        run: python monitor.py
+
+      - name: Persist Telegram cooldown state
+        shell: bash
+        run: |
+          if git diff --quiet -- state/state.json; then
+            echo "No state change"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add state/state.json
+          git commit -m "chore: update scanner alert state [skip ci]"
+          git push
