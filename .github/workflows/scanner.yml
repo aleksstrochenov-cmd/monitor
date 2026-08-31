@@ -45,7 +45,8 @@ jobs:
           # Stage 1: fast market filter
           MIN_ASTER_SPREAD_PCT: '0.15'
           MIN_DEVIATION_PCT: '0.20'
-          MIN_EXECUTABLE_EDGE_PCT: '0.12'
+          MIN_EXECUTABLE_EDGE_PCT: '0.15'
+          MIN_CURRENT_EXECUTABLE_EDGE_PCT: '0.15'
           MIN_24H_MOVE_PCT: '8.0'
           MIN_ASTER_QUOTE_VOLUME_24H: '50000'
           MIN_REFERENCE_EXCHANGES: '2'
@@ -55,29 +56,31 @@ jobs:
           # Stage 2: observe shortlisted names for ~45 sec
           CONFIRM_DURATION_SECONDS: '45'
           CONFIRM_INTERVAL_SECONDS: '1.5'
-          MAX_TRADE_ANALYSIS_CANDIDATES: '10'
+          MAX_TRADE_ANALYSIS_CANDIDATES: '25'
           ASTER_TRADE_LIMIT: '500'
           TRADE_SAMPLE_MATCH_TOLERANCE_SECONDS: '3.0'
 
-          # Actual Aster trade excursion / reversion rules
+          # CONFIRMED-MM: real Aster trade excursions and clean reversions
           EXCURSION_THRESHOLD_PCT: '0.20'
           REVERSION_BAND_PCT: '0.08'
           MIN_EXCURSIONS: '3'
           MIN_CLEAN_REVERSION_RATE: '0.70'
           MAX_MEDIAN_REVERSION_SECONDS: '8.0'
           MAX_REFERENCE_MOVE_DURING_REVERSION_PCT: '0.12'
+          MIN_ASTER_TRADES_FOR_MM: '6'
 
-          # Persistent lag / executable mispricing rules
-          MIN_EXEC_EDGE_HIT_RATIO: '0.35'
-          MIN_DIRECTIONAL_HIT_RATIO: '0.50'
+          # CONFIRMED-LAG: executable bid/ask edge only (not midpoint deviation)
+          MIN_EXEC_EDGE_HIT_RATIO: '0.60'
+          MAX_LAG_MEDIAN_SPREAD_PCT: '0.60'
+          MIN_ASTER_TRADES_FOR_LAG: '3'
           MIN_REF_GOOD_RATIO: '0.80'
 
-          WATCH_SCORE: '55'
+          # No WATCH alerts in v4
           CONFIRMED_SCORE: '70'
-          ALERT_LEVELS: 'WATCH,CONFIRMED'
+          ALERT_LEVELS: 'CONFIRMED'
           ALERT_COOLDOWN_MINUTES: '60'
 
-          # Telegram mini-chart for confirmed signals
+          # Telegram chart for confirmed signals
           CHART_ALERT_LEVELS: 'CONFIRMED'
           CHARTS_DIR: 'charts'
 
