@@ -15,7 +15,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 7
 
     steps:
       - name: Checkout
@@ -45,7 +45,7 @@ jobs:
           BITGET_BASE_URL: 'https://api.bitget.com'
           MEXC_BASE_URL: 'https://api.mexc.com'
 
-          # Stage 1 / MM prefilter diagnostics.
+          # Stage 1: broad prefilter.
           MIN_ASTER_SPREAD_PCT: '0.15'
           MIN_DEVIATION_PCT: '0.20'
           MIN_EXECUTABLE_EDGE_PCT: '0.15'
@@ -54,33 +54,48 @@ jobs:
           MIN_24H_MOVE_PCT: '8.0'
           MIN_ASTER_QUOTE_VOLUME_24H: '50000'
 
-          # External perpetual reference.
           MIN_PERP_REFERENCE_EXCHANGES: '2'
           MAX_PERP_REFERENCE_DISAGREEMENT_PCT: '0.20'
 
-          # Spot is diagnostic only and cannot create a signal.
+          # Spot is diagnostic only.
           MIN_SPOT_REFERENCE_EXCHANGES: '2'
           MAX_SPOT_REFERENCE_DISAGREEMENT_PCT: '0.30'
 
-          MAX_CANDIDATES: '25'
+          # Observe more names than the old 25-candidate version.
+          MAX_CANDIDATES: '50'
 
-          # Stage 2: observe shortlisted markets for ~45 seconds.
+          # Stage 2: initial confirmation for all shortlisted names.
           CONFIRM_DURATION_SECONDS: '45'
           CONFIRM_INTERVAL_SECONDS: '1.5'
-          MAX_TRADE_ANALYSIS_CANDIDATES: '25'
+          MAX_TRADE_ANALYSIS_CANDIDATES: '50'
           ASTER_TRADE_LIMIT: '500'
           TRADE_SAMPLE_MATCH_TOLERANCE_SECONDS: '3.0'
 
-          # CONFIRMED-LAG v6.
-          # SHORT = Aster bid vs median external ask
-          # LONG  = Aster ask vs median external bid
+          # Stage 3: only the strongest initial CONFIRMED-MM names.
+          # We continue observing them so "7 excursions in 45s" can become
+          # real multi-minute regime statistics with dozens of events.
+          EXTENDED_MM_ENABLED: 'true'
+          EXTENDED_MM_MAX_CANDIDATES: '3'
+          EXTENDED_MM_DURATION_SECONDS: '180'
+          EXTENDED_MM_INTERVAL_SECONDS: '1.5'
+          EXTENDED_MM_TRADES_POLL_SECONDS: '5'
+
+          # MATURE-MM criteria.
+          # A MATURE-MM has to survive extended observation, not just a short burst.
+          MATURE_MM_MIN_OBSERVED_SECONDS: '180'
+          MATURE_MM_MIN_EXCURSIONS: '20'
+          MATURE_MM_MIN_CLEAN_REVERSION_RATE: '0.70'
+          MATURE_MM_MAX_MEDIAN_REVERSION_SECONDS: '5.0'
+          MATURE_MM_MIN_EXCURSIONS_PER_MINUTE: '3.0'
+          MATURE_MM_MAX_QUIET_SECONDS: '45'
+
+          # CONFIRMED-LAG v6/v7 economics.
+          # SHORT: sell Aster bid, buy external median PERP ask.
+          # LONG:  buy Aster ask, sell external median PERP bid.
           MIN_HEDGEABLE_EDGE_PCT: '0.20'
           MIN_CURRENT_HEDGEABLE_EDGE_PCT: '0.20'
           MIN_HEDGEABLE_EDGE_HIT_RATIO: '0.60'
 
-          # Estimated fees for the complete hedged round trip:
-          # open Aster + open reference + close Aster + close reference.
-          # Replace later with your actual fees.
           ESTIMATED_ROUNDTRIP_FEES_PCT: '0.20'
           MIN_NET_HEDGEABLE_EDGE_PCT: '0.05'
 
@@ -88,7 +103,7 @@ jobs:
           MIN_ASTER_TRADES_FOR_LAG: '3'
           MIN_REF_GOOD_RATIO: '0.80'
 
-          # CONFIRMED-MM.
+          # MM excursion/reversion rules.
           EXCURSION_THRESHOLD_PCT: '0.20'
           REVERSION_BAND_PCT: '0.08'
           MIN_EXCURSIONS: '3'
@@ -97,12 +112,12 @@ jobs:
           MAX_REFERENCE_MOVE_DURING_REVERSION_PCT: '0.12'
           MIN_ASTER_TRADES_FOR_MM: '6'
 
-          # WATCH disabled.
+          # WATCH stays disabled.
           CONFIRMED_SCORE: '70'
           ALERT_LEVELS: 'CONFIRMED'
           ALERT_COOLDOWN_MINUTES: '60'
 
-          # Telegram chart.
+          # Telegram charts.
           CHART_ALERT_LEVELS: 'CONFIRMED'
           CHARTS_DIR: 'charts'
 
