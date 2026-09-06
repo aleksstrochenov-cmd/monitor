@@ -1,4 +1,4 @@
-name: Aster Algo Scanner
+name: Perp Inefficiency Scanner V10
 
 on:
   schedule:
@@ -9,13 +9,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: aster-algo-scanner
+  group: perp-inefficiency-scanner
   cancel-in-progress: false
 
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 9
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
@@ -40,12 +40,65 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
+          # --------------------------------------------------
+          # Public market-data endpoints
+          # --------------------------------------------------
           ASTER_BASE_URL: 'https://fapi.asterdex.com'
           BYBIT_BASE_URL: 'https://api.bybit.com'
           BITGET_BASE_URL: 'https://api.bitget.com'
           MEXC_BASE_URL: 'https://api.mexc.com'
 
-          # Stage 1: broad prefilter.
+          HYPERLIQUID_INFO_URL: 'https://api.hyperliquid.xyz/info'
+          LIGHTER_BASE_URL: 'https://mainnet.zklighter.elliot.ai'
+          LIGHTER_WS_URL: 'wss://mainnet.zklighter.elliot.ai/stream?readonly=true'
+          EDGEX_WS_URL: 'wss://quote.edgex.exchange/api/v1/public/ws'
+          DYDX_BASE_URL: 'https://indexer.dydx.trade/v4'
+
+          HYPERLIQUID_ENABLED: 'true'
+          LIGHTER_ENABLED: 'true'
+          EDGEX_ENABLED: 'true'
+
+          # --------------------------------------------------
+          # V10 architecture
+          #
+          # Fair consensus sources:
+          # Bitget + MEXC + Bybit + Hyperliquid + Lighter + edgeX + dYdX
+          #
+          # Targets:
+          # Aster + Hyperliquid + Lighter
+          #
+          # The current target is always excluded from its own consensus.
+          # --------------------------------------------------
+          TARGET_VENUES: 'aster,hyperliquid,lighter'
+
+          # Robust fair consensus trims outliers until at least 3 agreeing
+          # reference venues remain.
+          MIN_FAIR_REFERENCE_EXCHANGES: '3'
+          MAX_FAIR_REFERENCE_DISAGREEMENT_PCT: '0.20'
+
+          # LAG uses only reference venues that expose a real bid/ask.
+          # Midpoint-only DEX/oracle sources are never converted into fake BBOs.
+          MIN_EXEC_REFERENCE_EXCHANGES: '2'
+          MAX_EXEC_REFERENCE_DISAGREEMENT_PCT: '0.20'
+
+          # Give Lighter/edgeX websocket streams a moment to populate broad data.
+          STREAM_WARMUP_SECONDS: '3.0'
+
+          # Hyperliquid exact target BBO is cached to stay well inside REST limits.
+          HYPERLIQUID_BOOK_POLL_SECONDS: '3.0'
+          HYPERLIQUID_TRADES_POLL_SECONDS: '10.0'
+          AUX_REFERENCE_REFRESH_SECONDS: '5.0'
+
+          # Per-target Stage-1 caps. All targets share the same 45s confirmation
+          # window and the same extended window, so runtime does not triple.
+          MAX_CANDIDATES_ASTER: '25'
+          MAX_CANDIDATES_HYPERLIQUID: '5'
+          MAX_CANDIDATES_LIGHTER: '10'
+          MAX_CANDIDATES: '50'
+
+          # --------------------------------------------------
+          # Stage 1: broad prefilter
+          # --------------------------------------------------
           MIN_ASTER_SPREAD_PCT: '0.15'
           MIN_DEVIATION_PCT: '0.20'
           MIN_EXECUTABLE_EDGE_PCT: '0.15'
@@ -54,6 +107,7 @@ jobs:
           MIN_24H_MOVE_PCT: '8.0'
           MIN_ASTER_QUOTE_VOLUME_24H: '50000'
 
+          # Kept for compatibility with the V9 scoring engine.
           MIN_PERP_REFERENCE_EXCHANGES: '2'
           MAX_PERP_REFERENCE_DISAGREEMENT_PCT: '0.20'
 
@@ -61,28 +115,35 @@ jobs:
           MIN_SPOT_REFERENCE_EXCHANGES: '2'
           MAX_SPOT_REFERENCE_DISAGREEMENT_PCT: '0.30'
 
-          # Reject obviously incomparable same-symbol contracts / multipliers.
-          # Example: Aster price 0.10 vs external PERP 0.0005 should never become
-          # an 18,000% LAG alert.
+          # Reject same-ticker contract multiplier / underlying mismatches.
           MAX_CROSS_VENUE_PRICE_RATIO: '2.0'
 
-          MAX_CANDIDATES: '50'
-
-          # Stage 2: initial confirmation for all shortlisted names.
+          # --------------------------------------------------
+          # Stage 2: shared initial confirmation
+          # --------------------------------------------------
           CONFIRM_DURATION_SECONDS: '45'
           CONFIRM_INTERVAL_SECONDS: '1.5'
           MAX_TRADE_ANALYSIS_CANDIDATES: '50'
           ASTER_TRADE_LIMIT: '500'
           TRADE_SAMPLE_MATCH_TOLERANCE_SECONDS: '3.0'
 
-          # Stage 3 MM: extend only strongest initial MM candidates.
+          # --------------------------------------------------
+          # Stage 3: shared extended MM/LAG observation
+          # --------------------------------------------------
           EXTENDED_MM_ENABLED: 'true'
           EXTENDED_MM_MAX_CANDIDATES: '3'
           EXTENDED_MM_DURATION_SECONDS: '180'
           EXTENDED_MM_INTERVAL_SECONDS: '1.5'
           EXTENDED_MM_TRADES_POLL_SECONDS: '5'
 
-          # MATURE-MM criteria.
+          EXTENDED_LAG_ENABLED: 'true'
+          EXTENDED_LAG_MAX_CANDIDATES: '3'
+          EXTENDED_LAG_DURATION_SECONDS: '180'
+          EXTENDED_LAG_INTERVAL_SECONDS: '1.5'
+
+          # --------------------------------------------------
+          # MATURE-MM
+          # --------------------------------------------------
           MATURE_MM_MIN_OBSERVED_SECONDS: '180'
           MATURE_MM_MIN_EXCURSIONS: '20'
           MATURE_MM_MIN_CLEAN_REVERSION_RATE: '0.70'
@@ -90,9 +151,11 @@ jobs:
           MATURE_MM_MIN_EXCURSIONS_PER_MINUTE: '3.0'
           MATURE_MM_MAX_QUIET_SECONDS: '45'
 
-          # Initial LAG economics.
-          # SHORT: sell Aster bid, buy external median PERP ask.
-          # LONG:  buy Aster ask, sell external median PERP bid.
+          # --------------------------------------------------
+          # LAG economics
+          # SHORT target: sell target bid / buy external consensus ask
+          # LONG target:  buy target ask / sell external consensus bid
+          # --------------------------------------------------
           MIN_HEDGEABLE_EDGE_PCT: '0.20'
           MIN_CURRENT_HEDGEABLE_EDGE_PCT: '0.20'
           MIN_HEDGEABLE_EDGE_HIT_RATIO: '0.60'
@@ -104,42 +167,27 @@ jobs:
           MIN_ASTER_TRADES_FOR_LAG: '3'
           MIN_REF_GOOD_RATIO: '0.80'
 
-          # V8: initial LAG is NOT sent immediately. The strongest candidates
-          # are observed for another ~3 minutes and must actually converge.
-          EXTENDED_LAG_ENABLED: 'true'
-          EXTENDED_LAG_MAX_CANDIDATES: '3'
-          EXTENDED_LAG_DURATION_SECONDS: '180'
-          EXTENDED_LAG_INTERVAL_SECONDS: '1.5'
-
-          # At least 50% of the initial same-side gap must disappear at least once.
+          # --------------------------------------------------
+          # Extended LAG convergence verification
+          # --------------------------------------------------
           LAG_MIN_EXTENDED_OBSERVED_SECONDS: '120'
           LAG_MIN_CONVERGENCE_FRACTION: '0.50'
           LAG_MIN_CONVERGENCE_EVENTS: '1'
-
-          # A gap <= 0.05% counts as a near/full convergence cycle.
           LAG_FULL_CONVERGENCE_EDGE_PCT: '0.05'
-
-          # After a convergence, re-arm a new cycle only after the gap expands
-          # back to at least 75% of the original detected gap.
           LAG_REEXPANSION_FRACTION: '0.75'
 
-          # V8: cross-run structural-gap baseline stored in state/state.json.
-          # With a 10-minute schedule, 60 minutes gives roughly 6 prior points.
+          # Cross-run structural-gap baseline.
           LAG_BASELINE_LOOKBACK_MINUTES: '60'
           LAG_BASELINE_MIN_POINTS: '3'
           LAG_BASELINE_MAX_POINTS: '12'
-
-          # Once enough history exists, the newly detected gap must be materially
-          # larger than its recent normal level. Required gap is the larger of:
-          # baseline median + 0.10 percentage points, or baseline median * 1.25.
           LAG_BASELINE_MIN_EXCESS_PCT: '0.10'
           LAG_BASELINE_MIN_RATIO: '1.25'
 
           # --------------------------------------------------
-          # V9 ACTIVE-LAG (signal only; NO orders)
+          # ACTIVE-LAG — signal only, no orders
+          # History is keyed by TARGET:SYMBOL so Aster/Hype/Lighter profiles
+          # cannot contaminate one another.
           # --------------------------------------------------
-          # A new active gap is reported only after the SAME symbol/side has
-          # at least one prior verified CONVERGING-LAG episode in state history.
           ACTIVE_LAG_ENABLED: 'true'
           ACTIVE_LAG_MIN_GROSS_EDGE_PCT: '0.30'
           ACTIVE_LAG_MIN_NET_EDGE_PCT: '0.10'
@@ -149,7 +197,9 @@ jobs:
           ACTIVE_LAG_PROFILE_LOOKBACK_HOURS: '24'
           ACTIVE_LAG_PROFILE_MAX_POINTS: '50'
 
-          # MM excursion/reversion rules.
+          # --------------------------------------------------
+          # MM excursion/reversion rules
+          # --------------------------------------------------
           EXCURSION_THRESHOLD_PCT: '0.20'
           REVERSION_BAND_PCT: '0.08'
           MIN_EXCURSIONS: '3'
@@ -159,10 +209,8 @@ jobs:
           MIN_ASTER_TRADES_FOR_MM: '6'
 
           # --------------------------------------------------
-          # V9 ACTIVE-MM-EXCURSION (signal only; NO orders)
+          # ACTIVE-MM-EXCURSION — signal only, no orders
           # --------------------------------------------------
-          # After Stage 2 confirms an MM regime, Stage 3 watches for NEW
-          # excursions. Telegram batches them, but reports the exact event count.
           ACTIVE_MM_EXCURSION_ENABLED: 'true'
           ACTIVE_MM_MIN_EXCURSION_PCT: '0.30'
           ACTIVE_MM_MAX_REFERENCE_DISAGREEMENT_PCT: '0.20'
