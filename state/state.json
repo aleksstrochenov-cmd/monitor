@@ -119,6 +119,46 @@
       "taker_edge_pct": 0.041675201842175894,
       "target": "lighter",
       "target_label": "Lighter"
+    },
+    "lighter:SPXUSDT:ABOVE:1788994689733": {
+      "clean_reversion": true,
+      "closed_ts": 1788994692.5533218,
+      "counted": true,
+      "direction": "ABOVE",
+      "extra_adverse_after_signal_pct": 0.0,
+      "id": "lighter:SPXUSDT:ABOVE:1788994689733",
+      "maker_quote_edge_pct": 0.3582785668857259,
+      "max_peak_pct": 0.37751855779427446,
+      "reversion_seconds": 0.34800004959106445,
+      "side": "SHORT",
+      "signal_peak_pct": 0.37751855779427446,
+      "start_ts": 1788994689.733,
+      "state_key": "lighter:SPXUSDT",
+      "status": "CLEAN_REVERTED",
+      "symbol": "SPXUSDT",
+      "taker_edge_pct": -0.0932796268814916,
+      "target": "lighter",
+      "target_label": "Lighter"
+    },
+    "lighter:SPXUSDT:ABOVE:1788994690081": {
+      "clean_reversion": false,
+      "closed_ts": 1788994716.7633936,
+      "counted": true,
+      "direction": "ABOVE",
+      "extra_adverse_after_signal_pct": 0.21202678425754107,
+      "id": "lighter:SPXUSDT:ABOVE:1788994690081",
+      "maker_quote_edge_pct": 0.3582785668857259,
+      "max_peak_pct": 0.5874244512777,
+      "reversion_seconds": 25.158999919891357,
+      "side": "SHORT",
+      "signal_peak_pct": 0.375397667020159,
+      "start_ts": 1788994690.081,
+      "state_key": "lighter:SPXUSDT",
+      "status": "REVERTED_NOT_CLEAN",
+      "symbol": "SPXUSDT",
+      "taker_edge_pct": -0.0932796268814916,
+      "target": "lighter",
+      "target_label": "Lighter"
     }
   },
   "active_signal_open": {
@@ -683,11 +723,6 @@
     ],
     "hyperliquid:AEROUSDT": [
       {
-        "edge_pct": 0.167961,
-        "side": "SHORT",
-        "ts": 1788983645
-      },
-      {
         "edge_pct": 0.117138,
         "side": "SHORT",
         "ts": 1788984837
@@ -731,6 +766,11 @@
         "edge_pct": 0.065596,
         "side": "SHORT",
         "ts": 1788994043
+      },
+      {
+        "edge_pct": 0.084683,
+        "side": "SHORT",
+        "ts": 1788994873
       }
     ],
     "hyperliquid:ARBUSDT": [
@@ -1164,34 +1204,9 @@
     ],
     "hyperliquid:MEGAUSDT": [
       {
-        "edge_pct": 0.087316,
+        "edge_pct": 0.077272,
         "side": "SHORT",
-        "ts": 1788880656
-      },
-      {
-        "edge_pct": 0.121417,
-        "side": "SHORT",
-        "ts": 1788881773
-      },
-      {
-        "edge_pct": 0.203798,
-        "side": "SHORT",
-        "ts": 1788882847
-      },
-      {
-        "edge_pct": 0.137209,
-        "side": "SHORT",
-        "ts": 1788883552
-      },
-      {
-        "edge_pct": 0.131641,
-        "side": "SHORT",
-        "ts": 1788884906
-      },
-      {
-        "edge_pct": 0.219501,
-        "side": "SHORT",
-        "ts": 1788885883
+        "ts": 1788994873
       }
     ],
     "hyperliquid:METUSDT": [
@@ -1344,9 +1359,9 @@
     ],
     "hyperliquid:SKRUSDT": [
       {
-        "edge_pct": 0.032653,
+        "edge_pct": 0.007568,
         "side": "LONG",
-        "ts": 1788938233
+        "ts": 1788994873
       }
     ],
     "hyperliquid:SKYUSDT": [
@@ -1364,6 +1379,11 @@
         "edge_pct": 0.006499,
         "side": "SHORT",
         "ts": 1788990758
+      },
+      {
+        "edge_pct": 0.032884,
+        "side": "SHORT",
+        "ts": 1788994873
       }
     ],
     "hyperliquid:STRKUSDT": [
@@ -1551,6 +1571,11 @@
         "edge_pct": 0.008619,
         "side": "LONG",
         "ts": 1788990758
+      },
+      {
+        "edge_pct": 0.0,
+        "side": "LONG",
+        "ts": 1788994873
       }
     ],
     "hyperliquid:VIRTUALUSDT": [
@@ -2407,17 +2432,18 @@
       "total_started": 1
     },
     "ACTIVE-MM-EXCURSION": {
-      "clean_reverted": 1,
+      "clean_reverted": 2,
       "full": 0,
-      "last_ts": 1788824513,
-      "reverted_not_clean": 3,
+      "last_ts": 1788994872,
+      "reverted_not_clean": 4,
       "stale": 1,
       "symbols": {
-        "lighter:PONSUSDT": 5
+        "lighter:PONSUSDT": 5,
+        "lighter:SPXUSDT": 2
       },
       "t50": 0,
       "t80": 0,
-      "total_started": 5
+      "total_started": 7
     }
   },
   "reference_health": {},
@@ -2434,16 +2460,17 @@
       "total": 2
     },
     "ACTIVE-MM-EXCURSION": {
-      "last_ts": 1788823927,
+      "last_ts": 1788994692,
       "sides": {
         "LONG": 2,
-        "SHORT": 9
+        "SHORT": 11
       },
       "symbols": {
         "MARSCOINUSDT": 4,
-        "lighter:PONSUSDT": 7
+        "lighter:PONSUSDT": 7,
+        "lighter:SPXUSDT": 2
       },
-      "total": 11
+      "total": 13
     }
   },
   "state_schema_version": 11
