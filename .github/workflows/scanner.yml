@@ -1,4 +1,4 @@
-name: Perp Inefficiency Scanner V11
+name: Perp Inefficiency Scanner V12
 
 on:
   schedule:
@@ -47,6 +47,7 @@ jobs:
           BYBIT_BASE_URL: 'https://api.bybit.com'
           BITGET_BASE_URL: 'https://api.bitget.com'
           MEXC_BASE_URL: 'https://api.mexc.com'
+          MEXC_CONTRACT_BASE_URL: 'https://contract.mexc.com'
 
           HYPERLIQUID_INFO_URL: 'https://api.hyperliquid.xyz/info'
           LIGHTER_BASE_URL: 'https://mainnet.zklighter.elliot.ai'
@@ -59,7 +60,7 @@ jobs:
           EDGEX_ENABLED: 'true'
 
           # --------------------------------------------------
-          # V11 architecture
+          # V12 architecture
           #
           # Fair consensus sources:
           # Bitget + MEXC + Bybit + Hyperliquid + Lighter + edgeX + dYdX
@@ -89,7 +90,8 @@ jobs:
           HYPERLIQUID_TRADES_POLL_SECONDS: '10.0'
           AUX_REFERENCE_REFRESH_SECONDS: '5.0'
 
-          # Per-target Stage-1 caps.
+          # Per-target Stage-1 caps. All targets share the same 45s confirmation
+          # window and the same extended window, so runtime does not triple.
           MAX_CANDIDATES_ASTER: '25'
           MAX_CANDIDATES_HYPERLIQUID: '5'
           MAX_CANDIDATES_LIGHTER: '10'
@@ -175,7 +177,7 @@ jobs:
           LAG_FULL_CONVERGENCE_EDGE_PCT: '0.05'
           LAG_REEXPANSION_FRACTION: '0.75'
 
-          # V11: missing executable BBO is invalid data, not convergence.
+          # V12: missing executable BBO is invalid data, not convergence.
           # A verified LAG needs enough valid BBO snapshots across Stage 3.
           LAG_MIN_VALID_BBO_COVERAGE: '0.80'
           LAG_MIN_VALID_BBO_POINTS: '20'
@@ -189,6 +191,8 @@ jobs:
 
           # --------------------------------------------------
           # ACTIVE-LAG — signal only, no orders
+          # History is keyed by TARGET:SYMBOL so Aster/Hype/Lighter profiles
+          # cannot contaminate one another.
           # --------------------------------------------------
           ACTIVE_LAG_ENABLED: 'true'
           ACTIVE_LAG_MIN_GROSS_EDGE_PCT: '0.30'
@@ -222,16 +226,35 @@ jobs:
           ACTIVE_MM_ALERT_BATCH_SECONDS: '30'
 
           # --------------------------------------------------
-          # V11 forward outcome tracking
+          # V12 forward outcome tracking
           # --------------------------------------------------
-          # Follow what happens AFTER ACTIVE-LAG / ACTIVE-MM events.
+          # Follow what happens AFTER ACTIVE-LAG / ACTIVE-MM events so we can
+          # measure forward success instead of only hindsight-selected setups.
           ACTIVE_LAG_OUTCOME_MAX_AGE_MINUTES: '30'
           ACTIVE_MM_OUTCOME_MAX_AGE_SECONDS: '120'
           ACTIVE_OUTCOME_ALERTS_ENABLED: 'true'
 
-          # Best-level capacity diagnostics.
-          # If venue size is unavailable it is shown as UNKNOWN.
+          # Best-level capacity diagnostics. If venue size is unavailable the
+          # Telegram check is shown as UNKNOWN, never guessed.
           BBO_NOTIONAL_CHECKS_USD: '100,500,1000'
+
+          # --------------------------------------------------
+          # V12 execution-readiness probe — SIGNAL ONLY, NO ORDERS
+          # --------------------------------------------------
+          # On each new ACTIVE-LAG, re-read public depth and simulate both legs
+          # for several USD sizes. READY means the fresh depth still leaves at
+          # least EXECUTION_MIN_NET_EDGE_PCT after the configured fee reserve.
+          EXECUTION_READINESS_ENABLED: 'true'
+          EXECUTION_PROBE_NOTIONALS_USD: '100,500,1000'
+          EXECUTION_MIN_NOTIONAL_USD: '100'
+          EXECUTION_MIN_NET_EDGE_PCT: '0.10'
+          EXECUTION_BOOK_LEVELS: '20'
+          EXECUTION_MAX_PROBE_SECONDS: '6.0'
+          EXECUTION_MAX_BOOK_AGE_SECONDS: '2.0'
+
+          # Lighter target books are subscribed only for shortlisted markets.
+          # The first order_book payload is a full snapshot, then 50ms changes.
+          LIGHTER_BOOK_WARMUP_SECONDS: '0.50'
 
           # WATCH stays disabled.
           CONFIRMED_SCORE: '70'
