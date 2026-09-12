@@ -278,6 +278,60 @@
       "valid_observations": 72,
       "version": 15
     },
+    "hyperliquid:LINEAUSDT:SHORT:1789254971090": {
+      "entry_exit_slippage_reserve_pct": 0.02658907487272889,
+      "entry_gap_pct": 0.23561170312498453,
+      "entry_net_edge_pct": 0.03902262825225565,
+      "entry_roundtrip_cost_pct": 0.19658907487272886,
+      "entry_roundtrip_fees_pct": 0.16999999999999998,
+      "estimated_pair_pnl_if_closed_pct": -0.18561233992445447,
+      "execution_ready": true,
+      "full_ts": null,
+      "funding": {
+        "hedge_error": "",
+        "hedge_pnl_pct": -0.0,
+        "hedge_settlement_count": 0,
+        "hedge_settlements": {},
+        "hedge_side": "LONG",
+        "hedge_venue": "aster-perp",
+        "net_pnl_pct": 0.0,
+        "target_error": "",
+        "target_pnl_pct": 0.0,
+        "target_settlement_count": 0,
+        "target_settlements": {},
+        "target_side": "SHORT",
+        "target_venue": "hyperliquid",
+        "updated_ts": 1789255157.6481607
+      },
+      "funding_hedge_pnl_pct": -0.0,
+      "funding_hedge_settlements": 0,
+      "funding_net_pnl_pct": 0.0,
+      "funding_net_usd_at_notional": 0.0,
+      "funding_notional_usd": 100.0,
+      "funding_target_pnl_pct": 0.0,
+      "funding_target_settlements": 0,
+      "funding_tracking_status": "READY",
+      "hedge_venue": "aster-perp",
+      "horizons": {},
+      "id": "hyperliquid:LINEAUSDT:SHORT:1789254971090",
+      "last_gap_pct": 0.22463496817671014,
+      "last_observed_ts": 1789255156.5193346,
+      "max_adverse_extra_pct": 0.06423837183754155,
+      "max_gap_pct": 0.2998500749625261,
+      "min_gap_pct": 0.18726591760298864,
+      "side": "SHORT",
+      "start_ts": 1789254971.0905116,
+      "state_key": "hyperliquid:LINEAUSDT",
+      "status": "OPEN",
+      "symbol": "LINEAUSDT",
+      "t50": null,
+      "t80": null,
+      "target": "hyperliquid",
+      "target_label": "Hyperliquid",
+      "trigger": "historical-profile",
+      "valid_observations": 44,
+      "version": 15
+    },
     "lighter:NEARUSDT:SHORT:1789012422954": {
       "closed_ts": 1789014782.1261988,
       "entry_gap_pct": 0.32490475908490485,
@@ -515,6 +569,27 @@
       "status": "REVERTED_NOT_CLEAN",
       "symbol": "PUMPUSDT",
       "taker_edge_pct": null,
+      "target": "aster",
+      "target_label": "Aster"
+    },
+    "aster:REZUSDT:ABOVE:1789255069000": {
+      "clean_reversion": false,
+      "closed_ts": 1789255156.8667097,
+      "counted": true,
+      "direction": "ABOVE",
+      "extra_adverse_after_signal_pct": 0.0,
+      "id": "aster:REZUSDT:ABOVE:1789255069000",
+      "maker_quote_edge_pct": 0.1196744853997079,
+      "max_peak_pct": 0.263473053892209,
+      "profile_counted": true,
+      "reversion_seconds": 83.95000004768372,
+      "side": "SHORT",
+      "signal_peak_pct": 0.263473053892209,
+      "start_ts": 1789255069.0,
+      "state_key": "aster:REZUSDT",
+      "status": "REVERTED_NOT_CLEAN",
+      "symbol": "REZUSDT",
+      "taker_edge_pct": -0.04786979415989146,
       "target": "aster",
       "target_label": "Aster"
     },
@@ -786,7 +861,9 @@
     }
   },
   "active_signal_open": {
-    "ACTIVE-LAG": [],
+    "ACTIVE-LAG": [
+      "hyperliquid:LINEAUSDT:SHORT"
+    ],
     "POSITIVE-ECONOMICS": [
       "aster:TAOUSDT:SHORT:lighter-perp",
       "hyperliquid:LINEAUSDT:SHORT:mexc-perp",
@@ -1299,11 +1376,6 @@
     ],
     "aster:ASTERUSDT": [
       {
-        "edge_pct": 0.131444,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.131483,
         "side": "SHORT",
         "ts": 1789244446
@@ -1382,6 +1454,11 @@
         "edge_pct": 0.131733,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.131675,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:ATOMUSDT": [
@@ -1445,11 +1522,6 @@
       }
     ],
     "aster:BNBUSDT": [
-      {
-        "edge_pct": 0.096574,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
       {
         "edge_pct": 0.105012,
         "side": "SHORT",
@@ -1529,6 +1601,11 @@
         "edge_pct": 0.109675,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.104504,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:BRUSDT": [
@@ -1539,11 +1616,6 @@
       }
     ],
     "aster:BTCUSDT": [
-      {
-        "edge_pct": 0.002204,
-        "side": "LONG",
-        "ts": 1789244170
-      },
       {
         "edge_pct": 0.001037,
         "side": "LONG",
@@ -1608,6 +1680,11 @@
         "edge_pct": 0.000259,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.006474,
+        "side": "LONG",
+        "ts": 1789255158
       }
     ],
     "aster:CAKEUSDT": [
@@ -1715,11 +1792,6 @@
     ],
     "aster:ENAUSDT": [
       {
-        "edge_pct": 0.088552,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.09211,
         "side": "SHORT",
         "ts": 1789244446
@@ -1798,6 +1870,11 @@
         "edge_pct": 0.091665,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.091388,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:ETCUSDT": [
@@ -1820,11 +1897,6 @@
       }
     ],
     "aster:ETHUSDT": [
-      {
-        "edge_pct": 0.000793,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
       {
         "edge_pct": 0.00119,
         "side": "SHORT",
@@ -1884,6 +1956,11 @@
         "edge_pct": 0.003172,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.00634,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:EWYUSDT": [
@@ -2141,11 +2218,6 @@
     ],
     "aster:LINKUSDT": [
       {
-        "edge_pct": 0.04859,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.039088,
         "side": "SHORT",
         "ts": 1789244446
@@ -2224,14 +2296,14 @@
         "edge_pct": 0.027969,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.036047,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:LITUSDT": [
-      {
-        "edge_pct": 0.10584,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
       {
         "edge_pct": 0.120255,
         "side": "SHORT",
@@ -2311,6 +2383,11 @@
         "edge_pct": 0.161313,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.140169,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:MANTAUSDT": [
@@ -2363,6 +2440,11 @@
         "edge_pct": 0.050938,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.042319,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:NVDAUSDT": [
@@ -2511,6 +2593,11 @@
         "edge_pct": 0.0,
         "side": "SHORT",
         "ts": 1789253798
+      },
+      {
+        "edge_pct": 0.0,
+        "side": "LONG",
+        "ts": 1789255158
       }
     ],
     "aster:SEIUSDT": [
@@ -2605,6 +2692,11 @@
         "edge_pct": 0.013856,
         "side": "SHORT",
         "ts": 1789253289
+      },
+      {
+        "edge_pct": 0.027655,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:SUSDT": [
@@ -2615,11 +2707,6 @@
       }
     ],
     "aster:TAOUSDT": [
-      {
-        "edge_pct": 0.134132,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
       {
         "edge_pct": 0.11863,
         "side": "SHORT",
@@ -2699,14 +2786,14 @@
         "edge_pct": 0.134195,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.127663,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:TRXUSDT": [
-      {
-        "edge_pct": 0.011784,
-        "side": "SHORT",
-        "ts": 1789243290
-      },
       {
         "edge_pct": 0.023543,
         "side": "SHORT",
@@ -2726,6 +2813,11 @@
         "edge_pct": 0.014715,
         "side": "SHORT",
         "ts": 1789253798
+      },
+      {
+        "edge_pct": 0.014718,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:TUTUSDT": [
@@ -2743,11 +2835,6 @@
       }
     ],
     "aster:UNITREEUSDT": [
-      {
-        "edge_pct": 0.140072,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
       {
         "edge_pct": 0.118514,
         "side": "SHORT",
@@ -2822,6 +2909,11 @@
         "edge_pct": 0.169762,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.145138,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:UNIUSDT": [
@@ -3302,11 +3394,6 @@
     ],
     "aster:ZECUSDT": [
       {
-        "edge_pct": 0.012465,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.007566,
         "side": "SHORT",
         "ts": 1789244446
@@ -3360,6 +3447,11 @@
         "edge_pct": 0.018687,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.009786,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "aster:ZESTUSDT": [
@@ -3423,6 +3515,11 @@
         "edge_pct": 0.076414,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.111449,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "hyperliquid:AAVEUSDT": [
@@ -3626,26 +3723,6 @@
     ],
     "hyperliquid:BERAUSDT": [
       {
-        "edge_pct": 0.041688,
-        "side": "SHORT",
-        "ts": 1789242049
-      },
-      {
-        "edge_pct": 0.09312,
-        "side": "SHORT",
-        "ts": 1789242635
-      },
-      {
-        "edge_pct": 0.145228,
-        "side": "SHORT",
-        "ts": 1789243290
-      },
-      {
-        "edge_pct": 0.05123,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.071651,
         "side": "SHORT",
         "ts": 1789244446
@@ -3659,6 +3736,11 @@
         "edge_pct": 0.0,
         "side": "SHORT",
         "ts": 1789250523
+      },
+      {
+        "edge_pct": 0.056789,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "hyperliquid:BIOUSDT": [
@@ -3774,11 +3856,6 @@
     ],
     "hyperliquid:COMPUSDT": [
       {
-        "edge_pct": 0.125031,
-        "side": "SHORT",
-        "ts": 1789242049
-      },
-      {
         "edge_pct": 0.104452,
         "side": "SHORT",
         "ts": 1789248253
@@ -3787,6 +3864,11 @@
         "edge_pct": 0.134697,
         "side": "SHORT",
         "ts": 1789252063
+      },
+      {
+        "edge_pct": 0.154498,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "hyperliquid:CRVUSDT": [
@@ -3830,24 +3912,9 @@
     ],
     "hyperliquid:DOGEUSDT": [
       {
-        "edge_pct": 0.015871,
+        "edge_pct": 0.035415,
         "side": "SHORT",
-        "ts": 1789233088
-      },
-      {
-        "edge_pct": 0.008265,
-        "side": "SHORT",
-        "ts": 1789239588
-      },
-      {
-        "edge_pct": 0.029488,
-        "side": "SHORT",
-        "ts": 1789240903
-      },
-      {
-        "edge_pct": 0.025931,
-        "side": "SHORT",
-        "ts": 1789241497
+        "ts": 1789255158
       }
     ],
     "hyperliquid:DOODUSDT": [
@@ -3867,6 +3934,13 @@
         "edge_pct": 0.038491,
         "side": "SHORT",
         "ts": 1789233088
+      }
+    ],
+    "hyperliquid:DYDXUSDT": [
+      {
+        "edge_pct": 0.043975,
+        "side": "LONG",
+        "ts": 1789255158
       }
     ],
     "hyperliquid:DYMUSDT": [
@@ -4135,6 +4209,11 @@
         "edge_pct": 0.148515,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.123609,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "hyperliquid:INJUSDT": [
@@ -4209,6 +4288,11 @@
         "edge_pct": 0.15148,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.1423,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "hyperliquid:JUPUSDT": [
@@ -4251,21 +4335,6 @@
     ],
     "hyperliquid:LINEAUSDT": [
       {
-        "edge_pct": 0.29773,
-        "side": "SHORT",
-        "ts": 1789242635
-      },
-      {
-        "edge_pct": 0.260278,
-        "side": "SHORT",
-        "ts": 1789243290
-      },
-      {
-        "edge_pct": 0.260708,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.298396,
         "side": "SHORT",
         "ts": 1789245284
@@ -4294,6 +4363,11 @@
         "edge_pct": 0.224635,
         "side": "SHORT",
         "ts": 1789253289
+      },
+      {
+        "edge_pct": 0.262271,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "hyperliquid:LINKUSDT": [
@@ -4565,11 +4639,6 @@
     ],
     "hyperliquid:PENDLEUSDT": [
       {
-        "edge_pct": 0.109329,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.118608,
         "side": "SHORT",
         "ts": 1789244446
@@ -4633,6 +4702,11 @@
         "edge_pct": 0.041429,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.009174,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "hyperliquid:PENGUUSDT": [
@@ -4714,11 +4788,6 @@
     ],
     "hyperliquid:PYTHUSDT": [
       {
-        "edge_pct": 0.078288,
-        "side": "SHORT",
-        "ts": 1789243290
-      },
-      {
         "edge_pct": 0.076025,
         "side": "SHORT",
         "ts": 1789245284
@@ -4757,6 +4826,11 @@
         "edge_pct": 0.103759,
         "side": "SHORT",
         "ts": 1789253798
+      },
+      {
+        "edge_pct": 0.07644,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "hyperliquid:RUNEUSDT": [
@@ -5135,11 +5209,6 @@
     ],
     "lighter:AAVEUSDT": [
       {
-        "edge_pct": 0.076034,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.072016,
         "side": "SHORT",
         "ts": 1789244446
@@ -5208,6 +5277,11 @@
         "edge_pct": 0.056723,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.074272,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "lighter:AEROUSDT": [
@@ -5253,6 +5327,11 @@
         "edge_pct": 0.054002,
         "side": "SHORT",
         "ts": 1789252063
+      },
+      {
+        "edge_pct": 0.091669,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "lighter:AZTECUSDT": [
@@ -5263,11 +5342,6 @@
       }
     ],
     "lighter:BCHUSDT": [
-      {
-        "edge_pct": 0.086604,
-        "side": "LONG",
-        "ts": 1789244170
-      },
       {
         "edge_pct": 0.062696,
         "side": "LONG",
@@ -5322,6 +5396,11 @@
         "edge_pct": 0.066485,
         "side": "LONG",
         "ts": 1789253798
+      },
+      {
+        "edge_pct": 0.040673,
+        "side": "LONG",
+        "ts": 1789255158
       }
     ],
     "lighter:BERAUSDT": [
@@ -5434,6 +5513,11 @@
         "edge_pct": 0.077332,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.205592,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "lighter:CHIPUSDT": [
@@ -5538,11 +5622,6 @@
     ],
     "lighter:EIGENUSDT": [
       {
-        "edge_pct": 0.115821,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.143237,
         "side": "SHORT",
         "ts": 1789244446
@@ -5611,6 +5690,11 @@
         "edge_pct": 0.061205,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.117398,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "lighter:ENAUSDT": [
@@ -5805,11 +5889,6 @@
     ],
     "lighter:JUPUSDT": [
       {
-        "edge_pct": 0.047291,
-        "side": "SHORT",
-        "ts": 1789243290
-      },
-      {
         "edge_pct": 0.041051,
         "side": "SHORT",
         "ts": 1789244446
@@ -5868,6 +5947,11 @@
         "edge_pct": 0.061971,
         "side": "SHORT",
         "ts": 1789253798
+      },
+      {
+        "edge_pct": 0.070118,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "lighter:KAITOUSDT": [
@@ -5928,11 +6012,6 @@
       }
     ],
     "lighter:LDOUSDT": [
-      {
-        "edge_pct": 0.09108,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
       {
         "edge_pct": 0.116496,
         "side": "SHORT",
@@ -6012,19 +6091,14 @@
         "edge_pct": 0.132182,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.105306,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "lighter:LITUSDT": [
-      {
-        "edge_pct": 0.067963,
-        "side": "SHORT",
-        "ts": 1789242049
-      },
-      {
-        "edge_pct": 0.070723,
-        "side": "SHORT",
-        "ts": 1789243290
-      },
       {
         "edge_pct": 0.033339,
         "side": "SHORT",
@@ -6044,6 +6118,11 @@
         "edge_pct": 0.039113,
         "side": "SHORT",
         "ts": 1789252608
+      },
+      {
+        "edge_pct": 0.04992,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "lighter:LTCUSDT": [
@@ -6141,11 +6220,6 @@
     ],
     "lighter:NEARUSDT": [
       {
-        "edge_pct": 0.105071,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.118165,
         "side": "SHORT",
         "ts": 1789244446
@@ -6224,6 +6298,11 @@
         "edge_pct": 0.220307,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.152775,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "lighter:ONDOUSDT": [
@@ -6234,11 +6313,6 @@
       }
     ],
     "lighter:PAXGUSDT": [
-      {
-        "edge_pct": 0.048342,
-        "side": "LONG",
-        "ts": 1789244170
-      },
       {
         "edge_pct": 0.052933,
         "side": "LONG",
@@ -6313,6 +6387,11 @@
         "edge_pct": 0.087573,
         "side": "LONG",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.081258,
+        "side": "LONG",
+        "ts": 1789255158
       }
     ],
     "lighter:PENDLEUSDT": [
@@ -6422,11 +6501,6 @@
     ],
     "lighter:PYTHUSDT": [
       {
-        "edge_pct": 0.090416,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.081382,
         "side": "SHORT",
         "ts": 1789244446
@@ -6505,6 +6579,11 @@
         "edge_pct": 0.136774,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.10919,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "lighter:SEIUSDT": [
@@ -6589,14 +6668,9 @@
     ],
     "lighter:STABLEUSDT": [
       {
-        "edge_pct": 0.003609,
+        "edge_pct": 0.054025,
         "side": "LONG",
-        "ts": 1789230691
-      },
-      {
-        "edge_pct": 0.010864,
-        "side": "LONG",
-        "ts": 1789235407
+        "ts": 1789255158
       }
     ],
     "lighter:STRKUSDT": [
@@ -6668,11 +6742,6 @@
     ],
     "lighter:UNIUSDT": [
       {
-        "edge_pct": 0.003152,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
-      {
         "edge_pct": 0.00631,
         "side": "SHORT",
         "ts": 1789244446
@@ -6716,6 +6785,11 @@
         "edge_pct": 0.012621,
         "side": "SHORT",
         "ts": 1789253798
+      },
+      {
+        "edge_pct": 0.022103,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "lighter:USELESSUSDT": [
@@ -6928,6 +7002,11 @@
         "edge_pct": 0.052449,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.048309,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ],
     "lighter:ZKUSDT": [
@@ -6945,11 +7024,6 @@
       }
     ],
     "lighter:ZROUSDT": [
-      {
-        "edge_pct": 0.154758,
-        "side": "SHORT",
-        "ts": 1789244170
-      },
       {
         "edge_pct": 0.142829,
         "side": "SHORT",
@@ -7024,6 +7098,11 @@
         "edge_pct": 0.11712,
         "side": "SHORT",
         "ts": 1789254300
+      },
+      {
+        "edge_pct": 0.104397,
+        "side": "SHORT",
+        "ts": 1789255158
       }
     ]
   },
@@ -7054,6 +7133,22 @@
         "time_to_80_seconds": 92.1358380317688,
         "ts": 1789247368,
         "valid_bbo_points": 90,
+        "version": 12
+      }
+    ],
+    "hyperliquid:COMPUSDT": [
+      {
+        "bbo_coverage_ratio": 1.0,
+        "convergence_events": 2,
+        "detection_ts": 1789254971,
+        "full_cycles": 0,
+        "initial_gap_pct": 0.169449,
+        "max_convergence_fraction": 0.588748,
+        "side": "SHORT",
+        "time_to_50_seconds": 92.79179263114929,
+        "time_to_80_seconds": null,
+        "ts": 1789255158,
+        "valid_bbo_points": 81,
         "version": 12
       }
     ],
@@ -7722,6 +7817,24 @@
       "sum_peak_pct": 0.2615746795710182,
       "unresolved": 0
     },
+    "aster:REZUSDT": {
+      "clean_reversion_rate": 0.0,
+      "clean_reversion_seconds_samples": [],
+      "clean_reversions": 0,
+      "last_clean_reversion_ts": 0,
+      "last_excursion_ts": 1789255069.0,
+      "max_peak_pct": 0.263473053892209,
+      "median_clean_reversion_seconds_recent": null,
+      "median_peak_pct_recent": 0.263473053892209,
+      "observed_excursions": 1,
+      "peak_pct_samples": [
+        0.263473053892209
+      ],
+      "reverted_not_clean": 1,
+      "signal_sent": 0,
+      "sum_peak_pct": 0.263473053892209,
+      "unresolved": 0
+    },
     "aster:UNITREEUSDT": {
       "clean_reversion_rate": 0.0,
       "clean_reversion_seconds_samples": [],
@@ -7828,22 +7941,22 @@
     "ACTIVE-LAG": {
       "clean_reverted": 0,
       "full": 4,
-      "last_ts": 1789252061,
+      "last_ts": 1789254975,
       "reverted_not_clean": 0,
       "stale": 0,
       "symbols": {
-        "hyperliquid:LINEAUSDT": 3,
+        "hyperliquid:LINEAUSDT": 4,
         "lighter:NEARUSDT": 1,
         "lighter:PONSUSDT": 1
       },
       "t50": 5,
       "t80": 4,
-      "total_started": 5
+      "total_started": 6
     },
     "ACTIVE-MM-EXCURSION": {
       "clean_reverted": 2,
       "full": 0,
-      "last_ts": 1789253288,
+      "last_ts": 1789255069,
       "reverted_not_clean": 7,
       "stale": 5,
       "symbols": {
@@ -7851,6 +7964,7 @@
         "aster:LITUSDT": 2,
         "aster:PONSUSDT": 5,
         "aster:PUMPUSDT": 1,
+        "aster:REZUSDT": 1,
         "aster:UNITREEUSDT": 1,
         "hyperliquid:PONSUSDT": 3,
         "lighter:PONSUSDT": 5,
@@ -7859,7 +7973,7 @@
       },
       "t50": 0,
       "t80": 0,
-      "total_started": 21
+      "total_started": 22
     }
   },
   "paper_portfolio_stats": {
@@ -7980,7 +8094,7 @@
           "ts": 1789250048.9718654
         }
       },
-      "current_net_pnl_pct_x": -0.4543254502560939,
+      "current_net_pnl_pct_x": -0.44620553295293336,
       "dedupe_key": "LAG:hyperliquid:LINEAUSDT:SHORT:aster",
       "entry_estimated_net_edge_pct": 0.09168224299062415,
       "entry_exit_slippage_reserve_pct": 1.6170054772341604e-14,
@@ -7998,10 +8112,10 @@
       "historical_median_convergence_fraction": 0.576089,
       "historical_median_t50_seconds": 148.26294922828674,
       "id": "paper:LAG:hyperliquid:LINEAUSDT:SHORT:aster:1789249375595",
-      "last_hedge_close_vwap": 0.002658,
-      "last_target_close_vwap": 0.00267264817259456,
-      "last_update_ts": 1789254299.6668937,
-      "latest_same_side_gap_pct": 0.20276791929737253,
+      "last_hedge_close_vwap": 0.002664,
+      "last_target_close_vwap": 0.0026784460973470685,
+      "last_update_ts": 1789255158.1777833,
+      "latest_same_side_gap_pct": 0.19917361602796183,
       "max_convergence_fraction": 0.3906698351959881,
       "max_same_side_gap_pct": 0.27277977906836015,
       "min_same_side_gap_pct": 0.15945088424777035,
@@ -8018,7 +8132,7 @@
       "target": "hyperliquid",
       "target_label": "Hyperliquid",
       "target_side": "SHORT",
-      "updates": 9,
+      "updates": 10,
       "verified_episodes_at_entry": 1,
       "worst_net_pnl_pct_x": -0.4543254502560939
     }
@@ -8026,27 +8140,27 @@
   "reference_health": {},
   "signal_stats": {
     "ACTIVE-LAG": {
-      "last_ts": 1789251129,
+      "last_ts": 1789254975,
       "sides": {
-        "SHORT": 6
+        "SHORT": 7
       },
       "symbols": {
         "hyperliquid:INJUSDT": 1,
-        "hyperliquid:LINEAUSDT": 3,
+        "hyperliquid:LINEAUSDT": 4,
         "lighter:NEARUSDT": 1,
         "lighter:PONSUSDT": 1
       },
-      "total": 6
+      "total": 7
     },
     "ACTIVE-LAG-READY": {
-      "last_ts": 1789251129,
+      "last_ts": 1789254975,
       "sides": {
-        "SHORT": 3
+        "SHORT": 4
       },
       "symbols": {
-        "hyperliquid:LINEAUSDT": 3
+        "hyperliquid:LINEAUSDT": 4
       },
-      "total": 3
+      "total": 4
     },
     "ACTIVE-MM-EXCURSION": {
       "last_ts": 1789253110,
@@ -8067,21 +8181,22 @@
       "total": 20
     },
     "MM-EXCURSION-OBSERVED": {
-      "last_ts": 1789253110,
+      "last_ts": 1789255069,
       "sides": {
         "LONG": 6,
-        "SHORT": 8
+        "SHORT": 9
       },
       "symbols": {
         "aster:GRIFFAINUSDT": 1,
         "aster:LITUSDT": 2,
         "aster:PONSUSDT": 5,
         "aster:PUMPUSDT": 1,
+        "aster:REZUSDT": 1,
         "aster:UNITREEUSDT": 1,
         "hyperliquid:PONSUSDT": 3,
         "lighter:PUMPUSDT": 1
       },
-      "total": 14
+      "total": 15
     },
     "POSITIVE-ECONOMICS": {
       "last_ts": 1789242442,
