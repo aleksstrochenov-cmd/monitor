@@ -1,4 +1,4 @@
-name: Perp Inefficiency Scanner V16
+name: Perp Inefficiency Scanner V16.1
 
 on:
   schedule:
@@ -15,7 +15,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 7
 
     steps:
       - name: Checkout
@@ -55,6 +55,8 @@ jobs:
           HYPERLIQUID_ENABLED: 'true'
           LIGHTER_ENABLED: 'true'
           EDGEX_ENABLED: 'true'
+
+          REQUEST_TIMEOUT_SECONDS: '4'
 
           TARGET_VENUES: 'aster,hyperliquid,lighter'
 
@@ -97,26 +99,26 @@ jobs:
 
           MAX_CROSS_VENUE_PRICE_RATIO: '2.0'
 
-          CONFIRM_DURATION_SECONDS: '45'
+          CONFIRM_DURATION_SECONDS: '30'
           CONFIRM_INTERVAL_SECONDS: '1.5'
-          MAX_TRADE_ANALYSIS_CANDIDATES: '76'
+          MAX_TRADE_ANALYSIS_CANDIDATES: '40'
 
           ASTER_TRADE_LIMIT: '500'
           TRADE_SAMPLE_MATCH_TOLERANCE_SECONDS: '3.0'
 
           EXTENDED_MM_ENABLED: 'true'
-          EXTENDED_MM_MAX_CANDIDATES: '6'
-          EXTENDED_MM_DURATION_SECONDS: '180'
+          EXTENDED_MM_MAX_CANDIDATES: '4'
+          EXTENDED_MM_DURATION_SECONDS: '105'
           EXTENDED_MM_INTERVAL_SECONDS: '1.5'
           EXTENDED_MM_TRADES_POLL_SECONDS: '5'
 
           EXTENDED_LAG_ENABLED: 'true'
-          EXTENDED_LAG_MAX_CANDIDATES: '8'
-          EXTENDED_LAG_DURATION_SECONDS: '180'
+          EXTENDED_LAG_MAX_CANDIDATES: '5'
+          EXTENDED_LAG_DURATION_SECONDS: '105'
           EXTENDED_LAG_INTERVAL_SECONDS: '1.5'
 
-          MATURE_MM_MIN_OBSERVED_SECONDS: '180'
-          MATURE_MM_MIN_EXCURSIONS: '20'
+          MATURE_MM_MIN_OBSERVED_SECONDS: '90'
+          MATURE_MM_MIN_EXCURSIONS: '10'
           MATURE_MM_MIN_CLEAN_REVERSION_RATE: '0.70'
           MATURE_MM_MAX_MEDIAN_REVERSION_SECONDS: '5.0'
           MATURE_MM_MIN_EXCURSIONS_PER_MINUTE: '3.0'
@@ -133,7 +135,7 @@ jobs:
           MIN_ASTER_TRADES_FOR_LAG: '3'
           MIN_REF_GOOD_RATIO: '0.80'
 
-          LAG_MIN_EXTENDED_OBSERVED_SECONDS: '120'
+          LAG_MIN_EXTENDED_OBSERVED_SECONDS: '90'
           LAG_MIN_CONVERGENCE_FRACTION: '0.50'
           LAG_MIN_CONVERGENCE_EVENTS: '1'
 
@@ -199,7 +201,7 @@ jobs:
           EXECUTION_MIN_NET_EDGE_PCT: '0.01'
 
           EXECUTION_BOOK_LEVELS: '20'
-          EXECUTION_MAX_PROBE_SECONDS: '6.0'
+          EXECUTION_MAX_PROBE_SECONDS: '4.0'
           EXECUTION_MAX_BOOK_AGE_SECONDS: '2.0'
 
           FEE_TAKER_ASTER_PCT: '0.040'
@@ -223,7 +225,6 @@ jobs:
 
           ECONOMIC_EXIT_SLIPPAGE_MULTIPLIER: '1.0'
           ECONOMIC_PROBE_MAX_CANDIDATES: '160'
-
           ECONOMIC_SIGNAL_COOLDOWN_MINUTES: '15'
 
           EXECUTION_MAX_HEDGE_FAIR_DEVIATION_PCT: '0.30'
@@ -238,7 +239,6 @@ jobs:
           PAPER_CAPITAL_FRACTION_PER_TRADE: '1.0'
 
           PAPER_PROBE_NOTIONAL_USD: '100'
-
           PAPER_MIN_ENTRY_NET_EDGE_PCT: '0.00'
 
           PAPER_CHECKPOINT_MINUTES: '5,30,120,360,1440'
@@ -248,15 +248,17 @@ jobs:
           PAPER_LAG_MAX_HOLD_MINUTES: '1440'
 
           PAPER_MM_REQUIRE_LIVE_EXCURSION: 'true'
-
           PAPER_MM_CLOSE_CONVERGENCE_FRACTION: '0.80'
           PAPER_MM_CLOSE_EDGE_PCT: '0.08'
           PAPER_MM_MAX_HOLD_SECONDS: '300'
 
           PAPER_MAX_OPEN_TRADES: '100'
+
+          # Open paper trades are refreshed concurrently.
+          PAPER_MARK_WORKERS: '8'
+
           PAPER_MAX_CLOSED_TRADES: '5000'
           PAPER_MAX_SKIPPED_SIGNALS: '1000'
-
           PAPER_MM_PROFILE_SAMPLE_CAP: '100'
 
           EXTENDED_MM_TRIGGER_EXCURSIONS: '1'
@@ -285,17 +287,14 @@ jobs:
             exit 0
           fi
 
-          # Сохраняем state, который создал именно этот запуск scanner.
-          # Он лежит вне working tree и не потеряется после git reset.
+          # Preserve the state produced by this scan outside the working tree.
           cp state/state.json /tmp/scanner-state.json
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # main может измениться, пока scanner работает.
-          # Поэтому каждый раз строим state-коммит поверх самого свежего main.
-          # Если ветка снова успела измениться непосредственно перед push,
-          # повторяем процедуру.
+          # main may advance while the scanner is running.
+          # Rebuild the state commit on top of the newest origin/main.
           for attempt in 1 2 3 4 5; do
             echo "Persist attempt ${attempt}/5"
 
@@ -305,7 +304,6 @@ jobs:
             mkdir -p state
             cp /tmp/scanner-state.json state/state.json
 
-            # Если такой state уже оказался в main, повторный commit не нужен.
             if git diff --quiet -- state/state.json; then
               echo "Scanner state is already up to date on origin/main"
               exit 0
