@@ -1,4 +1,4 @@
-name: Perp Inefficiency Scanner V16.2
+name: Perp Inefficiency Scanner V16.3
 
 on:
   schedule:
@@ -64,7 +64,7 @@ jobs:
           REQUEST_TIMEOUT_SECONDS: '4'
 
           # --------------------------------------------------
-          # V16.1 architecture
+          # V16.3 architecture
           #
           # Fair consensus sources:
           # Bitget + MEXC + Bybit + Hyperliquid + Lighter + edgeX + dYdX
@@ -219,10 +219,14 @@ jobs:
           ACTIVE_LAG_MIN_HIT_RATIO: '0.30'
           ACTIVE_LAG_MAX_REFERENCE_DISAGREEMENT_PCT: '0.20'
 
-          # V16.2: the live executable spread is multiplied by verified median
+          # V16.3: the live executable spread is multiplied by verified median
           # convergence before full round-trip fees and exit-slippage reserve
           # are subtracted. Only strictly positive adjusted economics alert.
-          ACTIVE_LAG_MIN_CONVERGENCE_ADJUSTED_NET_PCT: '0.00'
+          ACTIVE_LAG_MIN_CONVERGENCE_ADJUSTED_NET_PCT: '0.02'
+
+          # Once exact target/symbol/side/hedge paper history exists, prefer it
+          # over consensus convergence when estimating expected capture.
+          ACTIVE_LAG_MIN_ROUTE_PROFILE_EPISODES: '1'
           ACTIVE_LAG_MIN_VERIFIED_EPISODES: '1'
           ACTIVE_LAG_PROFILE_LOOKBACK_HOURS: '24'
           ACTIVE_LAG_PROFILE_MAX_POINTS: '50'
@@ -251,7 +255,7 @@ jobs:
           ACTIVE_MM_REQUIRE_LIVE_EXCURSION: 'true'
 
           # --------------------------------------------------
-          # V16.1 keeps long-horizon ACTIVE-LAG outcome tracking
+          # V16.3 keeps long-horizon ACTIVE-LAG outcome tracking
           # --------------------------------------------------
           # Do not declare a 30-minute failure. Keep sampling the same pair
           # across scheduled runs for up to 24 hours.
@@ -368,7 +372,7 @@ jobs:
           LIGHTER_BOOK_WARMUP_SECONDS: '0.50'
 
           # --------------------------------------------------
-          # V16.1 per-run market audit — text only, no chart
+          # V16.3 per-run market audit — text only, no chart
           # --------------------------------------------------
           # Telegram receives one compact line for every selected target:symbol
           # after every run. Each line shows gross spread and the research
