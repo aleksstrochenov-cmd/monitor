@@ -1,4 +1,4 @@
-name: Perp Inefficiency Scanner V16.1
+name: Perp Inefficiency Scanner V16.2
 
 on:
   schedule:
@@ -40,6 +40,9 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
+          # --------------------------------------------------
+          # Public market-data endpoints
+          # --------------------------------------------------
           ASTER_BASE_URL: 'https://fapi.asterdex.com'
           BYBIT_BASE_URL: 'https://api.bybit.com'
           BITGET_BASE_URL: 'https://api.bitget.com'
@@ -56,34 +59,66 @@ jobs:
           LIGHTER_ENABLED: 'true'
           EDGEX_ENABLED: 'true'
 
+          # Bound slow exchange REST calls so one degraded venue cannot stretch
+          # a 5-minute scan into a 10-20 minute queued workflow.
           REQUEST_TIMEOUT_SECONDS: '4'
 
+          # --------------------------------------------------
+          # V16.1 architecture
+          #
+          # Fair consensus sources:
+          # Bitget + MEXC + Bybit + Hyperliquid + Lighter + edgeX + dYdX
+          #
+          # Targets:
+          # Aster + Hyperliquid + Lighter
+          #
+          # The current target is always excluded from its own consensus.
+          # --------------------------------------------------
           TARGET_VENUES: 'aster,hyperliquid,lighter'
 
+          # Robust fair consensus trims outliers until at least 3 agreeing
+          # reference venues remain.
           MIN_FAIR_REFERENCE_EXCHANGES: '3'
           MAX_FAIR_REFERENCE_DISAGREEMENT_PCT: '0.20'
 
+          # LAG uses only reference venues that expose a real bid/ask.
+          # Midpoint-only DEX/oracle sources are never converted into fake BBOs.
           MIN_EXEC_REFERENCE_EXCHANGES: '2'
           MAX_EXEC_REFERENCE_DISAGREEMENT_PCT: '0.20'
 
+          # Give Lighter/edgeX websocket streams a moment to populate broad data.
           STREAM_WARMUP_SECONDS: '3.0'
 
+          # Hyperliquid exact target BBO is cached to stay well inside REST limits.
           HYPERLIQUID_BOOK_POLL_SECONDS: '3.0'
           HYPERLIQUID_TRADES_POLL_SECONDS: '10.0'
           AUX_REFERENCE_REFRESH_SECONDS: '5.0'
 
+          # Per-target Stage-1 caps. All targets share the same 45s confirmation
+          # window and the same extended window, so runtime does not triple.
           MAX_CANDIDATES_ASTER: '40'
           MAX_CANDIDATES_HYPERLIQUID: '12'
           MAX_CANDIDATES_LIGHTER: '24'
           MAX_CANDIDATES: '76'
 
+          # --------------------------------------------------
+          # Stage 1: V15 split discovery
+          # --------------------------------------------------
+          # LAG discovery does NOT require a minimum 24h move, midpoint
+          # deviation or target trade count. A cross-exchange spread is
+          # evaluated from executable BBOs during the 45s observation window.
+          # 60% of LAG slots prioritise the largest current edges; the rest
+          # rotate every run so lower-ranked symbols are also sampled over time.
           LAG_DISCOVERY_SHARE: '0.75'
           LAG_DISCOVERY_EDGE_SHARE: '0.60'
           LAG_DISCOVERY_ROTATION_ENABLED: 'true'
 
+          # MM discovery keeps its own activity/liquidity seed filter.
           MM_DISCOVERY_MIN_24H_MOVE_PCT: '5.0'
           MM_DISCOVERY_MIN_QUOTE_VOLUME_24H: '50000'
 
+          # Legacy scoring/diagnostic thresholds. MIN_24H_MOVE_PCT is no longer
+          # a LAG eligibility gate in V15.
           MIN_ASTER_SPREAD_PCT: '0.15'
           MIN_DEVIATION_PCT: '0.20'
           MIN_EXECUTABLE_EDGE_PCT: '0.15'
@@ -91,21 +126,29 @@ jobs:
           MIN_24H_MOVE_PCT: '5.0'
           MIN_ASTER_QUOTE_VOLUME_24H: '50000'
 
+          # Kept for compatibility with the V9 scoring engine.
           MIN_PERP_REFERENCE_EXCHANGES: '2'
           MAX_PERP_REFERENCE_DISAGREEMENT_PCT: '0.20'
 
+          # Spot is diagnostic only.
           MIN_SPOT_REFERENCE_EXCHANGES: '2'
           MAX_SPOT_REFERENCE_DISAGREEMENT_PCT: '0.30'
 
+          # Reject same-ticker contract multiplier / underlying mismatches.
           MAX_CROSS_VENUE_PRICE_RATIO: '2.0'
 
+          # --------------------------------------------------
+          # Stage 2: shared initial confirmation
+          # --------------------------------------------------
           CONFIRM_DURATION_SECONDS: '30'
           CONFIRM_INTERVAL_SECONDS: '1.5'
           MAX_TRADE_ANALYSIS_CANDIDATES: '40'
-
           ASTER_TRADE_LIMIT: '500'
           TRADE_SAMPLE_MATCH_TOLERANCE_SECONDS: '3.0'
 
+          # --------------------------------------------------
+          # Stage 3: shared extended MM/LAG observation
+          # --------------------------------------------------
           EXTENDED_MM_ENABLED: 'true'
           EXTENDED_MM_MAX_CANDIDATES: '4'
           EXTENDED_MM_DURATION_SECONDS: '105'
@@ -117,6 +160,9 @@ jobs:
           EXTENDED_LAG_DURATION_SECONDS: '105'
           EXTENDED_LAG_INTERVAL_SECONDS: '1.5'
 
+          # --------------------------------------------------
+          # MATURE-MM
+          # --------------------------------------------------
           MATURE_MM_MIN_OBSERVED_SECONDS: '90'
           MATURE_MM_MIN_EXCURSIONS: '10'
           MATURE_MM_MIN_CLEAN_REVERSION_RATE: '0.70'
@@ -124,6 +170,11 @@ jobs:
           MATURE_MM_MIN_EXCURSIONS_PER_MINUTE: '3.0'
           MATURE_MM_MAX_QUIET_SECONDS: '45'
 
+          # --------------------------------------------------
+          # LAG economics
+          # SHORT target: sell target bid / buy external consensus ask
+          # LONG target:  buy target ask / sell external consensus bid
+          # --------------------------------------------------
           MIN_HEDGEABLE_EDGE_PCT: '0.10'
           MIN_CURRENT_HEDGEABLE_EDGE_PCT: '0.10'
           MIN_HEDGEABLE_EDGE_HIT_RATIO: '0.30'
@@ -132,146 +183,205 @@ jobs:
           MIN_NET_HEDGEABLE_EDGE_PCT: '0.00'
 
           MAX_LAG_MEDIAN_SPREAD_PCT: '0.60'
+          # Compatibility only in V15; target trade count is not a LAG gate.
           MIN_ASTER_TRADES_FOR_LAG: '3'
           MIN_REF_GOOD_RATIO: '0.80'
 
+          # --------------------------------------------------
+          # Extended LAG convergence verification
+          # --------------------------------------------------
           LAG_MIN_EXTENDED_OBSERVED_SECONDS: '90'
           LAG_MIN_CONVERGENCE_FRACTION: '0.50'
           LAG_MIN_CONVERGENCE_EVENTS: '1'
-
           LAG_FULL_CONVERGENCE_EDGE_PCT: '0.05'
           LAG_REEXPANSION_FRACTION: '0.75'
 
+          # Missing executable BBO is invalid data, not convergence.
+          # A verified LAG needs enough valid BBO snapshots across Stage 3.
           LAG_MIN_VALID_BBO_COVERAGE: '0.80'
           LAG_MIN_VALID_BBO_POINTS: '20'
 
+          # Cross-run structural-gap baseline.
           LAG_BASELINE_LOOKBACK_MINUTES: '60'
           LAG_BASELINE_MIN_POINTS: '3'
           LAG_BASELINE_MAX_POINTS: '12'
           LAG_BASELINE_MIN_EXCESS_PCT: '0.10'
           LAG_BASELINE_MIN_RATIO: '1.25'
 
+          # --------------------------------------------------
+          # ACTIVE-LAG — signal only, no orders
+          # History is keyed by TARGET:SYMBOL so Aster/Hype/Lighter profiles
+          # cannot contaminate one another.
+          # --------------------------------------------------
           ACTIVE_LAG_ENABLED: 'true'
           ACTIVE_LAG_MIN_GROSS_EDGE_PCT: '0.10'
           ACTIVE_LAG_MIN_NET_EDGE_PCT: '0.00'
           ACTIVE_LAG_MIN_HIT_RATIO: '0.30'
           ACTIVE_LAG_MAX_REFERENCE_DISAGREEMENT_PCT: '0.20'
 
+          # V16.2: the live executable spread is multiplied by verified median
+          # convergence before full round-trip fees and exit-slippage reserve
+          # are subtracted. Only strictly positive adjusted economics alert.
+          ACTIVE_LAG_MIN_CONVERGENCE_ADJUSTED_NET_PCT: '0.00'
           ACTIVE_LAG_MIN_VERIFIED_EPISODES: '1'
           ACTIVE_LAG_PROFILE_LOOKBACK_HOURS: '24'
           ACTIVE_LAG_PROFILE_MAX_POINTS: '50'
 
+          # --------------------------------------------------
+          # MM excursion/reversion rules
+          # --------------------------------------------------
           EXCURSION_THRESHOLD_PCT: '0.20'
           REVERSION_BAND_PCT: '0.08'
-
           MIN_EXCURSIONS: '3'
           MIN_CLEAN_REVERSION_RATE: '0.70'
           MAX_MEDIAN_REVERSION_SECONDS: '8.0'
-
           MAX_REFERENCE_MOVE_DURING_REVERSION_PCT: '0.12'
           MIN_ASTER_TRADES_FOR_MM: '3'
 
+          # --------------------------------------------------
+          # ACTIVE-MM-EXCURSION — signal only, no orders
+          # --------------------------------------------------
           ACTIVE_MM_EXCURSION_ENABLED: 'true'
           ACTIVE_MM_MIN_EXCURSION_PCT: '0.20'
           ACTIVE_MM_MAX_REFERENCE_DISAGREEMENT_PCT: '0.20'
-
           ACTIVE_MM_MIN_PRIOR_EXCURSIONS: '1'
           ACTIVE_MM_MIN_CLEAN_REVERSION_RATE: '0.70'
           ACTIVE_MM_INITIAL_LOOKBACK_SECONDS: '10'
           ACTIVE_MM_ALERT_BATCH_SECONDS: '15'
-
           ACTIVE_MM_REQUIRE_LIVE_EXCURSION: 'true'
 
+          # --------------------------------------------------
+          # V16.1 keeps long-horizon ACTIVE-LAG outcome tracking
+          # --------------------------------------------------
+          # Do not declare a 30-minute failure. Keep sampling the same pair
+          # across scheduled runs for up to 24 hours.
           ACTIVE_LAG_OUTCOME_MAX_AGE_MINUTES: '1440'
+
+          # Research checkpoints while an ACTIVE-LAG remains open:
+          # 5m, 30m, 2h, 6h and 24h.
           ACTIVE_LAG_OUTCOME_HORIZONS_MINUTES: '5,30,120,360,1440'
           ACTIVE_LAG_HORIZON_ALERTS_ENABLED: 'false'
 
+          # ACTIVE-MM remains a short-horizon event.
           ACTIVE_MM_OUTCOME_MAX_AGE_SECONDS: '120'
           ACTIVE_OUTCOME_ALERTS_ENABLED: 'false'
 
+          # Track hypothetical pair funding from PUBLIC SETTLED funding rates.
+          # Positive net funding means the pair would have received funding;
+          # negative means it would have paid funding. No private account API.
           FUNDING_TRACKING_ENABLED: 'true'
           FUNDING_NOTIONAL_USD: '100'
 
+          # Best-level capacity diagnostics. If venue size is unavailable the
+          # Telegram check is shown as UNKNOWN, never guessed.
           BBO_NOTIONAL_CHECKS_USD: '100,500,1000'
 
+          # --------------------------------------------------
+          # V15 venue-specific execution-readiness — SIGNAL ONLY, NO ORDERS
+          # --------------------------------------------------
+          # On each new ACTIVE-LAG, re-read public depth and simulate both legs
+          # for several USD sizes. READY means the fresh depth still leaves at
+          # least EXECUTION_MIN_NET_EDGE_PCT after the configured fee reserve.
           EXECUTION_READINESS_ENABLED: 'true'
-
           EXECUTION_PROBE_NOTIONALS_USD: '100,500,1000'
           EXECUTION_MIN_NOTIONAL_USD: '100'
           EXECUTION_MIN_NET_EDGE_PCT: '0.01'
-
           EXECUTION_BOOK_LEVELS: '20'
           EXECUTION_MAX_PROBE_SECONDS: '4.0'
           EXECUTION_MAX_BOOK_AGE_SECONDS: '2.0'
 
+          # --------------------------------------------------
+          # V15 venue-specific taker economics
+          # Base/API rates are conservative defaults and can be overridden
+          # here if your account has a verified VIP/staking/fee discount.
+          # Round-trip pair cost = open+close on both legs = 2*(target+hedge).
+          # --------------------------------------------------
           FEE_TAKER_ASTER_PCT: '0.040'
           FEE_TAKER_HYPERLIQUID_PCT: '0.045'
           FEE_TAKER_LIGHTER_PCT: '0.000'
-
           FEE_TAKER_BITGET_PCT: '0.060'
           FEE_TAKER_MEXC_PCT: '0.080'
-
           FEE_TAKER_BYBIT_PCT: '0.055'
           FEE_TAKER_BYBIT_INNOVATION_PCT: '0.110'
           FEE_TAKER_BYBIT_PREMARKET_PCT: '0.100'
-
           FEE_TAKER_DYDX_PCT: '0.050'
           FEE_TAKER_EDGEX_PCT: '0.038'
 
+          # Broad positive-economics discovery. It probes every theoretically
+          # profitable side (up to the safety cap) and alerts only if fresh
+          # $100 depth remains positive after VWAP + four taker fees + a
+          # conservative reserve for closing slippage.
           ECONOMIC_SIGNALS_ENABLED: 'false'
-
           ECONOMIC_PROBE_MIN_GROSS_PCT: '0.08'
           ECONOMIC_MIN_NET_EDGE_PCT: '0.01'
-
           ECONOMIC_EXIT_SLIPPAGE_MULTIPLIER: '1.0'
           ECONOMIC_PROBE_MAX_CANDIDATES: '160'
           ECONOMIC_SIGNAL_COOLDOWN_MINUTES: '15'
-
           EXECUTION_MAX_HEDGE_FAIR_DEVIATION_PCT: '0.30'
 
+          # --------------------------------------------------
+          # V16 persistent paper portfolio
+          # --------------------------------------------------
+          # One normalized capital unit X is available on each venue. By default
+          # each paper trade uses the full free X on both venues, so overlapping
+          # trades that need an already-busy venue are recorded as skipped.
           PAPER_TRADING_ENABLED: 'true'
-
           PAPER_NOTIONAL_X: '1.0'
-
           PAPER_ENFORCE_VENUE_CAPITAL: 'true'
           PAPER_VENUE_CAPACITY_X: '1.0'
-
           PAPER_CAPITAL_FRACTION_PER_TRADE: '1.0'
 
+          # Entry prices come from the same fresh execution probe used by the
+          # actionable signal. PnL is normalized to X; $100 only defines the
+          # depth/VWAP size at which executable prices are sampled.
           PAPER_PROBE_NOTIONAL_USD: '100'
           PAPER_MIN_ENTRY_NET_EDGE_PCT: '0.00'
-
           PAPER_CHECKPOINT_MINUTES: '5,30,120,360,1440'
 
+          # Deterministic exits for retrospective accounting. LAG closes on 80%
+          # convergence or <=0.05% remaining same-route spread; otherwise at 24h.
           PAPER_LAG_CLOSE_CONVERGENCE_FRACTION: '0.80'
           PAPER_LAG_CLOSE_EDGE_PCT: '0.05'
           PAPER_LAG_MAX_HOLD_MINUTES: '1440'
 
+          # MM paper entries require a still-live excursion. They close when the
+          # exact target/hedge route reverts into <=0.08%, reaches 80% convergence,
+          # or times out. Fast in-run reversions are still stored in MM profiles.
           PAPER_MM_REQUIRE_LIVE_EXCURSION: 'true'
           PAPER_MM_CLOSE_CONVERGENCE_FRACTION: '0.80'
           PAPER_MM_CLOSE_EDGE_PCT: '0.08'
           PAPER_MM_MAX_HOLD_SECONDS: '300'
 
           PAPER_MAX_OPEN_TRADES: '100'
-
-          # Open paper trades are refreshed concurrently.
+          # Refresh persistent OPEN paper positions concurrently.
           PAPER_MARK_WORKERS: '8'
-
           PAPER_MAX_CLOSED_TRADES: '5000'
           PAPER_MAX_SKIPPED_SIGNALS: '1000'
           PAPER_MM_PROFILE_SAMPLE_CAP: '100'
 
+          # MM gets extended observation after the first real excursion; final
+          # Telegram MM signals still require fresh positive pair economics.
           EXTENDED_MM_TRIGGER_EXCURSIONS: '1'
 
+          # Lighter target books are subscribed only for shortlisted markets.
+          # The first order_book payload is a full snapshot, then 50ms changes.
           LIGHTER_BOOK_WARMUP_SECONDS: '0.50'
 
+          # --------------------------------------------------
+          # V16.1 per-run market audit — text only, no chart
+          # --------------------------------------------------
+          # Telegram receives one compact line for every selected target:symbol
+          # after every run. Each line shows gross spread and the research
+          # gates that failed; profitability is reported only by fresh probes.
           SCAN_SUMMARY_ENABLED: 'false'
           SCAN_SUMMARY_MAX_CHARS: '3600'
 
+          # WATCH stays disabled.
           CONFIRMED_SCORE: '70'
           ALERT_LEVELS: ''
           ALERT_COOLDOWN_MINUTES: '60'
 
+          # Telegram charts.
           CHART_ALERT_LEVELS: ''
           CHARTS_DIR: 'charts'
 
@@ -287,14 +397,16 @@ jobs:
             exit 0
           fi
 
-          # Preserve the state produced by this scan outside the working tree.
+          # Keep the state produced by THIS scan outside the working tree.
+          # The remote main branch may advance while the 4-5 minute scan runs.
           cp state/state.json /tmp/scanner-state.json
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # main may advance while the scanner is running.
-          # Rebuild the state commit on top of the newest origin/main.
+          # Always rebuild the state commit on top of the newest origin/main.
+          # If main moves again between fetch and push, retry instead of failing
+          # the whole workflow with a non-fast-forward error.
           for attempt in 1 2 3 4 5; do
             echo "Persist attempt ${attempt}/5"
 
@@ -304,6 +416,7 @@ jobs:
             mkdir -p state
             cp /tmp/scanner-state.json state/state.json
 
+            # Another run may already have persisted exactly the same state.
             if git diff --quiet -- state/state.json; then
               echo "Scanner state is already up to date on origin/main"
               exit 0
