@@ -1,8 +1,11 @@
-name: Perp Inefficiency Scanner V16.3
+name: Perp Inefficiency Scanner V16.5
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    # GitHub cron работает в UTC.
+    # Сканирование каждые 5 минут.
+    - cron: "*/5 * * * *"
+
   workflow_dispatch:
 
 permissions:
@@ -15,382 +18,92 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 7
+    timeout-minutes: 15
+
+    env:
+      PYTHONUNBUFFERED: "1"
+
+      # Telegram
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      # Основной размер виртуальной сделки
+      PAPER_PROBE_NOTIONAL_USD: "100"
+      EXECUTION_MIN_NOTIONAL_USD: "100"
+
+      # Сигнал только если fresh executable NET строго > 0.10%
+      EXECUTION_MIN_NET_EDGE_PCT: "0.100001"
+      ECONOMIC_MIN_NET_EDGE_PCT: "0.100001"
+      PAPER_MIN_ENTRY_NET_EDGE_PCT: "0.100001"
+
+      # Проверяем все экономически интересные кандидаты
+      ECONOMIC_SIGNALS_ENABLED: "true"
+      ECONOMIC_PROBE_MIN_GROSS_PCT: "0.0"
+      ECONOMIC_PROBE_MAX_CANDIDATES: "1000"
+
+      # Не ограничиваем paper simulation искусственным капиталом биржи:
+      # хотим узнать результат, если бы входили во ВСЕ подходящие сигналы.
+      PAPER_TRADING_ENABLED: "true"
+      PAPER_ENFORCE_VENUE_CAPITAL: "false"
+
+      # Telegram не должен дублировать старые ACTIVE-LAG / ACTIVE-MM алерты.
+      ACTIVE_OUTCOME_ALERTS_ENABLED: "false"
+      ACTIVE_LAG_HORIZON_ALERTS_ENABLED: "false"
+      SCAN_SUMMARY_ENABLED: "false"
+
+      # Один непрерывный сигнал не спамим каждые 5 минут.
+      # Новый сигнал появится после исчезновения opportunity и нового crossing.
+      ECONOMIC_SIGNAL_COOLDOWN_MINUTES: "0"
+
+      # Daily paper report
+      PAPER_REPORT_ENABLED: "true"
+      PAPER_REPORT_SEND_TELEGRAM: "true"
+      DAILY_REPORT_TZ: "Europe/Riga"
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: 'pip'
+          python-version: "3.12"
+          cache: "pip"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Self-test
-        run: python monitor.py --self-test
+        run: |
+          python monitor.py --self-test
 
       - name: Scan markets
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-
-          # --------------------------------------------------
-          # Public market-data endpoints
-          # --------------------------------------------------
-          ASTER_BASE_URL: 'https://fapi.asterdex.com'
-          BYBIT_BASE_URL: 'https://api.bybit.com'
-          BITGET_BASE_URL: 'https://api.bitget.com'
-          MEXC_BASE_URL: 'https://api.mexc.com'
-          MEXC_CONTRACT_BASE_URL: 'https://contract.mexc.com'
-
-          HYPERLIQUID_INFO_URL: 'https://api.hyperliquid.xyz/info'
-          LIGHTER_BASE_URL: 'https://mainnet.zklighter.elliot.ai'
-          LIGHTER_WS_URL: 'wss://mainnet.zklighter.elliot.ai/stream?readonly=true'
-          EDGEX_WS_URL: 'wss://quote.edgex.exchange/api/v1/public/ws'
-          DYDX_BASE_URL: 'https://indexer.dydx.trade/v4'
-
-          HYPERLIQUID_ENABLED: 'true'
-          LIGHTER_ENABLED: 'true'
-          EDGEX_ENABLED: 'true'
-
-          # Bound slow exchange REST calls so one degraded venue cannot stretch
-          # a 5-minute scan into a 10-20 minute queued workflow.
-          REQUEST_TIMEOUT_SECONDS: '4'
-
-          # --------------------------------------------------
-          # V16.3 architecture
-          #
-          # Fair consensus sources:
-          # Bitget + MEXC + Bybit + Hyperliquid + Lighter + edgeX + dYdX
-          #
-          # Targets:
-          # Aster + Hyperliquid + Lighter
-          #
-          # The current target is always excluded from its own consensus.
-          # --------------------------------------------------
-          TARGET_VENUES: 'aster,hyperliquid,lighter'
-
-          MIN_FAIR_REFERENCE_EXCHANGES: '3'
-          MAX_FAIR_REFERENCE_DISAGREEMENT_PCT: '0.20'
-
-          MIN_EXEC_REFERENCE_EXCHANGES: '2'
-          MAX_EXEC_REFERENCE_DISAGREEMENT_PCT: '0.20'
-
-          STREAM_WARMUP_SECONDS: '3.0'
-
-          HYPERLIQUID_BOOK_POLL_SECONDS: '3.0'
-          HYPERLIQUID_TRADES_POLL_SECONDS: '10.0'
-          AUX_REFERENCE_REFRESH_SECONDS: '5.0'
-
-          MAX_CANDIDATES_ASTER: '40'
-          MAX_CANDIDATES_HYPERLIQUID: '12'
-          MAX_CANDIDATES_LIGHTER: '24'
-          MAX_CANDIDATES: '76'
-
-          # --------------------------------------------------
-          # Stage 1 discovery
-          # --------------------------------------------------
-          LAG_DISCOVERY_SHARE: '0.75'
-          LAG_DISCOVERY_EDGE_SHARE: '0.60'
-          LAG_DISCOVERY_ROTATION_ENABLED: 'true'
-
-          MM_DISCOVERY_MIN_24H_MOVE_PCT: '5.0'
-          MM_DISCOVERY_MIN_QUOTE_VOLUME_24H: '50000'
-
-          MIN_ASTER_SPREAD_PCT: '0.15'
-          MIN_DEVIATION_PCT: '0.20'
-          MIN_EXECUTABLE_EDGE_PCT: '0.15'
-          MIN_CURRENT_EXECUTABLE_EDGE_PCT: '0.15'
-          MIN_24H_MOVE_PCT: '5.0'
-          MIN_ASTER_QUOTE_VOLUME_24H: '50000'
-
-          MIN_PERP_REFERENCE_EXCHANGES: '2'
-          MAX_PERP_REFERENCE_DISAGREEMENT_PCT: '0.20'
-
-          MIN_SPOT_REFERENCE_EXCHANGES: '2'
-          MAX_SPOT_REFERENCE_DISAGREEMENT_PCT: '0.30'
-
-          MAX_CROSS_VENUE_PRICE_RATIO: '2.0'
-
-          # --------------------------------------------------
-          # Stage 2
-          # --------------------------------------------------
-          CONFIRM_DURATION_SECONDS: '30'
-          CONFIRM_INTERVAL_SECONDS: '1.5'
-          MAX_TRADE_ANALYSIS_CANDIDATES: '40'
-          ASTER_TRADE_LIMIT: '500'
-          TRADE_SAMPLE_MATCH_TOLERANCE_SECONDS: '3.0'
-
-          # --------------------------------------------------
-          # Stage 3
-          # --------------------------------------------------
-          EXTENDED_MM_ENABLED: 'true'
-          EXTENDED_MM_MAX_CANDIDATES: '4'
-          EXTENDED_MM_DURATION_SECONDS: '105'
-          EXTENDED_MM_INTERVAL_SECONDS: '1.5'
-          EXTENDED_MM_TRADES_POLL_SECONDS: '5'
-
-          EXTENDED_LAG_ENABLED: 'true'
-          EXTENDED_LAG_MAX_CANDIDATES: '5'
-          EXTENDED_LAG_DURATION_SECONDS: '105'
-          EXTENDED_LAG_INTERVAL_SECONDS: '1.5'
-
-          # --------------------------------------------------
-          # MATURE-MM
-          # --------------------------------------------------
-          MATURE_MM_MIN_OBSERVED_SECONDS: '90'
-          MATURE_MM_MIN_EXCURSIONS: '10'
-          MATURE_MM_MIN_CLEAN_REVERSION_RATE: '0.70'
-          MATURE_MM_MAX_MEDIAN_REVERSION_SECONDS: '5.0'
-          MATURE_MM_MIN_EXCURSIONS_PER_MINUTE: '3.0'
-          MATURE_MM_MAX_QUIET_SECONDS: '45'
-
-          # --------------------------------------------------
-          # LAG
-          # --------------------------------------------------
-          MIN_HEDGEABLE_EDGE_PCT: '0.10'
-          MIN_CURRENT_HEDGEABLE_EDGE_PCT: '0.10'
-          MIN_HEDGEABLE_EDGE_HIT_RATIO: '0.30'
-
-          ESTIMATED_ROUNDTRIP_FEES_PCT: '0.20'
-          MIN_NET_HEDGEABLE_EDGE_PCT: '0.00'
-
-          MAX_LAG_MEDIAN_SPREAD_PCT: '0.60'
-          MIN_ASTER_TRADES_FOR_LAG: '3'
-          MIN_REF_GOOD_RATIO: '0.80'
-
-          # --------------------------------------------------
-          # Extended LAG convergence
-          # --------------------------------------------------
-          LAG_MIN_EXTENDED_OBSERVED_SECONDS: '90'
-          LAG_MIN_CONVERGENCE_FRACTION: '0.50'
-          LAG_MIN_CONVERGENCE_EVENTS: '1'
-          LAG_FULL_CONVERGENCE_EDGE_PCT: '0.05'
-          LAG_REEXPANSION_FRACTION: '0.75'
-
-          LAG_MIN_VALID_BBO_COVERAGE: '0.80'
-          LAG_MIN_VALID_BBO_POINTS: '20'
-
-          LAG_BASELINE_LOOKBACK_MINUTES: '60'
-          LAG_BASELINE_MIN_POINTS: '3'
-          LAG_BASELINE_MAX_POINTS: '12'
-          LAG_BASELINE_MIN_EXCESS_PCT: '0.10'
-          LAG_BASELINE_MIN_RATIO: '1.25'
-
-          # --------------------------------------------------
-          # ACTIVE-LAG
-          # --------------------------------------------------
-          ACTIVE_LAG_ENABLED: 'true'
-          ACTIVE_LAG_MIN_GROSS_EDGE_PCT: '0.10'
-          ACTIVE_LAG_MIN_NET_EDGE_PCT: '0.00'
-          ACTIVE_LAG_MIN_HIT_RATIO: '0.30'
-          ACTIVE_LAG_MAX_REFERENCE_DISAGREEMENT_PCT: '0.20'
-
-          # V16.3:
-          # Expected capture = current executable spread
-          # × historical median convergence.
-          #
-          # After fees + exit-slippage the expected net must
-          # be at least 0.02%.
-          ACTIVE_LAG_MIN_CONVERGENCE_ADJUSTED_NET_PCT: '0.02'
-
-          # Prefer exact route history:
-          # target:symbol:side:hedge
-          ACTIVE_LAG_MIN_ROUTE_PROFILE_EPISODES: '1'
-
-          ACTIVE_LAG_MIN_VERIFIED_EPISODES: '1'
-          ACTIVE_LAG_PROFILE_LOOKBACK_HOURS: '24'
-          ACTIVE_LAG_PROFILE_MAX_POINTS: '50'
-
-          # --------------------------------------------------
-          # MM
-          # --------------------------------------------------
-          EXCURSION_THRESHOLD_PCT: '0.20'
-          REVERSION_BAND_PCT: '0.08'
-          MIN_EXCURSIONS: '3'
-          MIN_CLEAN_REVERSION_RATE: '0.70'
-          MAX_MEDIAN_REVERSION_SECONDS: '8.0'
-          MAX_REFERENCE_MOVE_DURING_REVERSION_PCT: '0.12'
-          MIN_ASTER_TRADES_FOR_MM: '3'
-
-          ACTIVE_MM_EXCURSION_ENABLED: 'true'
-          ACTIVE_MM_MIN_EXCURSION_PCT: '0.20'
-          ACTIVE_MM_MAX_REFERENCE_DISAGREEMENT_PCT: '0.20'
-          ACTIVE_MM_MIN_PRIOR_EXCURSIONS: '1'
-          ACTIVE_MM_MIN_CLEAN_REVERSION_RATE: '0.70'
-          ACTIVE_MM_INITIAL_LOOKBACK_SECONDS: '10'
-          ACTIVE_MM_ALERT_BATCH_SECONDS: '15'
-          ACTIVE_MM_REQUIRE_LIVE_EXCURSION: 'true'
-
-          # --------------------------------------------------
-          # Outcome tracking
-          # --------------------------------------------------
-          ACTIVE_LAG_OUTCOME_MAX_AGE_MINUTES: '1440'
-          ACTIVE_LAG_OUTCOME_HORIZONS_MINUTES: '5,30,120,360,1440'
-          ACTIVE_LAG_HORIZON_ALERTS_ENABLED: 'false'
-
-          ACTIVE_MM_OUTCOME_MAX_AGE_SECONDS: '120'
-          ACTIVE_OUTCOME_ALERTS_ENABLED: 'false'
-
-          # --------------------------------------------------
-          # Funding
-          # --------------------------------------------------
-          FUNDING_TRACKING_ENABLED: 'true'
-          FUNDING_NOTIONAL_USD: '100'
-
-          # --------------------------------------------------
-          # Capacity diagnostics
-          # --------------------------------------------------
-          BBO_NOTIONAL_CHECKS_USD: '100,500,1000'
-
-          # --------------------------------------------------
-          # Execution readiness
-          # --------------------------------------------------
-          EXECUTION_READINESS_ENABLED: 'true'
-          EXECUTION_PROBE_NOTIONALS_USD: '100,500,1000'
-          EXECUTION_MIN_NOTIONAL_USD: '100'
-          EXECUTION_MIN_NET_EDGE_PCT: '0.01'
-          EXECUTION_BOOK_LEVELS: '20'
-          EXECUTION_MAX_PROBE_SECONDS: '4.0'
-          EXECUTION_MAX_BOOK_AGE_SECONDS: '2.0'
-
-          # --------------------------------------------------
-          # Taker fees
-          # --------------------------------------------------
-          FEE_TAKER_ASTER_PCT: '0.040'
-          FEE_TAKER_HYPERLIQUID_PCT: '0.045'
-          FEE_TAKER_LIGHTER_PCT: '0.000'
-          FEE_TAKER_BITGET_PCT: '0.060'
-          FEE_TAKER_MEXC_PCT: '0.080'
-          FEE_TAKER_BYBIT_PCT: '0.055'
-          FEE_TAKER_BYBIT_INNOVATION_PCT: '0.110'
-          FEE_TAKER_BYBIT_PREMARKET_PCT: '0.100'
-          FEE_TAKER_DYDX_PCT: '0.050'
-          FEE_TAKER_EDGEX_PCT: '0.038'
-
-          # --------------------------------------------------
-          # Broad positive-economics alerts disabled
-          # --------------------------------------------------
-          ECONOMIC_SIGNALS_ENABLED: 'false'
-          ECONOMIC_PROBE_MIN_GROSS_PCT: '0.08'
-          ECONOMIC_MIN_NET_EDGE_PCT: '0.01'
-          ECONOMIC_EXIT_SLIPPAGE_MULTIPLIER: '1.0'
-          ECONOMIC_PROBE_MAX_CANDIDATES: '160'
-          ECONOMIC_SIGNAL_COOLDOWN_MINUTES: '15'
-          EXECUTION_MAX_HEDGE_FAIR_DEVIATION_PCT: '0.30'
-
-          # --------------------------------------------------
-          # Persistent paper portfolio
-          # --------------------------------------------------
-          PAPER_TRADING_ENABLED: 'true'
-
-          PAPER_NOTIONAL_X: '1.0'
-
-          PAPER_ENFORCE_VENUE_CAPITAL: 'true'
-          PAPER_VENUE_CAPACITY_X: '1.0'
-          PAPER_CAPITAL_FRACTION_PER_TRADE: '1.0'
-
-          PAPER_PROBE_NOTIONAL_USD: '100'
-          PAPER_MIN_ENTRY_NET_EDGE_PCT: '0.00'
-
-          PAPER_CHECKPOINT_MINUTES: '5,30,120,360,1440'
-
-          # --------------------------------------------------
-          # Paper LAG exits
-          # --------------------------------------------------
-          PAPER_LAG_CLOSE_CONVERGENCE_FRACTION: '0.80'
-          PAPER_LAG_CLOSE_EDGE_PCT: '0.05'
-          PAPER_LAG_MAX_HOLD_MINUTES: '1440'
-
-          # --------------------------------------------------
-          # Paper MM exits
-          # --------------------------------------------------
-          PAPER_MM_REQUIRE_LIVE_EXCURSION: 'true'
-          PAPER_MM_CLOSE_CONVERGENCE_FRACTION: '0.80'
-          PAPER_MM_CLOSE_EDGE_PCT: '0.08'
-          PAPER_MM_MAX_HOLD_SECONDS: '300'
-
-          PAPER_MAX_OPEN_TRADES: '100'
-
-          # Open paper positions are refreshed concurrently.
-          PAPER_MARK_WORKERS: '8'
-
-          PAPER_MAX_CLOSED_TRADES: '5000'
-          PAPER_MAX_SKIPPED_SIGNALS: '1000'
-          PAPER_MM_PROFILE_SAMPLE_CAP: '100'
-
-          EXTENDED_MM_TRIGGER_EXCURSIONS: '1'
-
-          LIGHTER_BOOK_WARMUP_SECONDS: '0.50'
-
-          # --------------------------------------------------
-          # Telegram noise reduction
-          # --------------------------------------------------
-          SCAN_SUMMARY_ENABLED: 'false'
-          SCAN_SUMMARY_MAX_CHARS: '3600'
-
-          CONFIRMED_SCORE: '70'
-          ALERT_LEVELS: ''
-          ALERT_COOLDOWN_MINUTES: '60'
-
-          CHART_ALERT_LEVELS: ''
-          CHARTS_DIR: 'charts'
-
-        run: python monitor.py
-
-      # ------------------------------------------------------
-      # Persist state between GitHub Actions runs
-      # ------------------------------------------------------
-      - name: Persist scanner state
-        shell: bash
         run: |
-          set -euo pipefail
+          python monitor.py
 
-          if git diff --quiet -- state/state.json; then
-            echo "No state change"
+      - name: Commit updated scanner state
+        if: always()
+        run: |
+          if [ ! -f state/state.json ]; then
+            echo "state/state.json does not exist; nothing to commit."
             exit 0
           fi
 
-          # Preserve state produced by this exact scan outside
-          # the working tree before resetting to newest main.
-          cp state/state.json /tmp/scanner-state.json
+          if git diff --quiet -- state/state.json; then
+            echo "No state changes."
+            exit 0
+          fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # main can advance while scanner is running.
-          # Always rebuild state commit on latest origin/main.
-          for attempt in 1 2 3 4 5; do
-            echo "Persist attempt ${attempt}/5"
+          git add state/state.json
+          git commit -m "Update scanner state [skip ci]"
 
-            git fetch origin main
-            git reset --hard origin/main
-
-            mkdir -p state
-            cp /tmp/scanner-state.json state/state.json
-
-            if git diff --quiet -- state/state.json; then
-              echo "Scanner state is already up to date on origin/main"
-              exit 0
-            fi
-
-            git add state/state.json
-            git commit -m "chore: update scanner state [skip ci]"
-
-            if git push origin HEAD:main; then
-              echo "Scanner state persisted successfully"
-              exit 0
-            fi
-
-            echo "Remote main moved during push; retrying..."
-            sleep $((attempt * 2))
-          done
-
-          echo "::error::Failed to persist scanner state after 5 attempts"
-          exit 1
+          # На случай, если между checkout и push в main появился новый commit.
+          git pull --rebase origin main
+          git push origin HEAD:main
