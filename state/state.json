@@ -1167,11 +1167,11 @@
       "entry_net_edge_pct": 0.14684240598386658,
       "entry_roundtrip_cost_pct": 0.09594356463874792,
       "entry_roundtrip_fees_pct": 0.09,
-      "estimated_pair_pnl_if_closed_pct": -0.01513949015714966,
+      "estimated_pair_pnl_if_closed_pct": 0.006265803648873608,
       "execution_ready": true,
       "full_ts": null,
       "funding": {
-        "hedge_error": "HTTPError: 400 Client Error: Bad Request for url: https://mainnet.zklighter.elliot.ai/api/v1/fundings?market_id=163&resolution=1h&start_timestamp=1789882252870&end_timestamp=1789883119138&count_back=750",
+        "hedge_error": "HTTPError: 400 Client Error: Bad Request for url: https://mainnet.zklighter.elliot.ai/api/v1/fundings?market_id=163&resolution=1h&start_timestamp=1789882252870&end_timestamp=1789883652413&count_back=750",
         "hedge_pnl_pct": -0.0,
         "hedge_settlement_count": 0,
         "hedge_settlements": {},
@@ -1184,7 +1184,7 @@
         "target_settlements": {},
         "target_side": "SHORT",
         "target_venue": "hyperliquid",
-        "updated_ts": 1789883119.1389267
+        "updated_ts": 1789883652.4130309
       },
       "funding_hedge_pnl_pct": -0.0,
       "funding_hedge_settlements": 0,
@@ -1215,8 +1215,8 @@
         }
       },
       "id": "hyperliquid:CHIPUSDT:SHORT:1789882252870",
-      "last_gap_pct": 0.16198189614101624,
-      "last_observed_ts": 1789883118.9797997,
+      "last_gap_pct": 0.14057660233499297,
+      "last_observed_ts": 1789883419.958337,
       "max_adverse_extra_pct": 0.017668031766883557,
       "max_gap_pct": 0.26045400238949806,
       "min_gap_pct": 0.1262205286973029,
@@ -1230,7 +1230,7 @@
       "target": "hyperliquid",
       "target_label": "Hyperliquid",
       "trigger": "historical-profile",
-      "valid_observations": 193,
+      "valid_observations": 194,
       "version": 15
     },
     "hyperliquid:EIGENUSDT:SHORT:1789729628175": {
@@ -5384,11 +5384,11 @@
       "entry_net_edge_pct": 0.11086968542554548,
       "entry_roundtrip_cost_pct": 0.09821251782562623,
       "entry_roundtrip_fees_pct": 0.09,
-      "estimated_pair_pnl_if_closed_pct": -0.17972239594024436,
+      "estimated_pair_pnl_if_closed_pct": -0.03411037981547166,
       "execution_ready": true,
       "full_ts": null,
       "funding": {
-        "hedge_error": "HTTPError: 400 Client Error: Bad Request for url: https://mainnet.zklighter.elliot.ai/api/v1/fundings?market_id=76&resolution=1h&start_timestamp=1789881557922&end_timestamp=1789883119138&count_back=750",
+        "hedge_error": "HTTPError: 400 Client Error: Bad Request for url: https://mainnet.zklighter.elliot.ai/api/v1/fundings?market_id=76&resolution=1h&start_timestamp=1789881557922&end_timestamp=1789883652413&count_back=750",
         "hedge_pnl_pct": -0.0,
         "hedge_settlement_count": 0,
         "hedge_settlements": {},
@@ -5401,7 +5401,7 @@
         "target_settlements": {},
         "target_side": "SHORT",
         "target_venue": "hyperliquid",
-        "updated_ts": 1789883119.1389267
+        "updated_ts": 1789883652.4130309
       },
       "funding_hedge_pnl_pct": -0.0,
       "funding_hedge_settlements": 0,
@@ -5413,6 +5413,23 @@
       "funding_tracking_status": "PARTIAL",
       "hedge_venue": "lighter-perp",
       "horizons": {
+        "30m": {
+          "captured_ts": 1789883419.958431,
+          "estimated_pair_pnl_if_closed_pct": -0.1428454287462424,
+          "full_ts": null,
+          "funding_hedge_pnl_pct": -0.0,
+          "funding_net_pnl_pct": 0.0,
+          "funding_target_pnl_pct": 0.0,
+          "gap_pct": 0.2537151141717879,
+          "label": "30m",
+          "max_convergence_fraction": 0.6534197220559204,
+          "max_gap_pct": 0.3269160915365175,
+          "min_gap_pct": 0.07246376811595165,
+          "minutes": 30.0,
+          "observed_age_seconds": 1862.0354368686676,
+          "t50": 124.34773707389832,
+          "t80": null
+        },
         "5m": {
           "captured_ts": 1789882205.5634658,
           "estimated_pair_pnl_if_closed_pct": -0.03437359707264251,
@@ -5432,8 +5449,8 @@
         }
       },
       "id": "hyperliquid:LINEAUSDT:SHORT:1789881557922",
-      "last_gap_pct": 0.29059208136578984,
-      "last_observed_ts": 1789883118.9797618,
+      "last_gap_pct": 0.14498006524101714,
+      "last_observed_ts": 1789883651.0516489,
       "max_adverse_extra_pct": 0.1178338882853458,
       "max_gap_pct": 0.3269160915365175,
       "min_gap_pct": 0.07246376811595165,
@@ -5447,7 +5464,7 @@
       "target": "hyperliquid",
       "target_label": "Hyperliquid",
       "trigger": "historical-profile",
-      "valid_observations": 194,
+      "valid_observations": 303,
       "version": 15
     },
     "hyperliquid:LITUSDT:SHORT:1789344015183": {
@@ -10815,27 +10832,6 @@
       "target": "aster",
       "target_label": "Aster"
     },
-    "aster:ARBUSDT:ABOVE:1789608495600": {
-      "clean_reversion": false,
-      "closed_ts": 1789608523.3871608,
-      "counted": true,
-      "direction": "ABOVE",
-      "extra_adverse_after_signal_pct": 0.0,
-      "id": "aster:ARBUSDT:ABOVE:1789608495600",
-      "maker_quote_edge_pct": 0.09569377990431893,
-      "max_peak_pct": 0.34101106790309,
-      "profile_counted": true,
-      "reversion_seconds": 25.050000190734863,
-      "side": "SHORT",
-      "signal_peak_pct": 0.34101106790309,
-      "start_ts": 1789608495.6,
-      "state_key": "aster:ARBUSDT",
-      "status": "REVERTED_NOT_CLEAN",
-      "symbol": "ARBUSDT",
-      "taker_edge_pct": -0.0299043062200924,
-      "target": "aster",
-      "target_label": "Aster"
-    },
     "aster:ARBUSDT:ABOVE:1789700828900": {
       "clean_reversion": false,
       "closed_ts": 1789700842.119304,
@@ -11270,25 +11266,6 @@
       "status": "REVERTED_NOT_CLEAN",
       "symbol": "CASHCATUSDT",
       "taker_edge_pct": -0.23664282709297746,
-      "target": "aster",
-      "target_label": "Aster"
-    },
-    "aster:CASHCATUSDT:BELOW:1789609343150": {
-      "closed_ts": 1789610074.1412797,
-      "counted": true,
-      "direction": "BELOW",
-      "extra_adverse_after_signal_pct": 0.0,
-      "id": "aster:CASHCATUSDT:BELOW:1789609343150",
-      "maker_quote_edge_pct": 0.26154731390908637,
-      "max_peak_pct": 0.41309349508471704,
-      "profile_counted": true,
-      "side": "LONG",
-      "signal_peak_pct": 0.41309349508471704,
-      "start_ts": 1789609343.15,
-      "state_key": "aster:CASHCATUSDT",
-      "status": "STALE_UNRESOLVED",
-      "symbol": "CASHCATUSDT",
-      "taker_edge_pct": 0.07846419417273172,
       "target": "aster",
       "target_label": "Aster"
     },
@@ -11904,6 +11881,25 @@
       "status": "REVERTED_NOT_CLEAN",
       "symbol": "INJUSDT",
       "taker_edge_pct": 0.07818608287723658,
+      "target": "aster",
+      "target_label": "Aster"
+    },
+    "aster:INJUSDT:BELOW:1789883463850": {
+      "closed_ts": 1789883653.0272388,
+      "counted": true,
+      "direction": "BELOW",
+      "extra_adverse_after_signal_pct": 0.0,
+      "id": "aster:INJUSDT:BELOW:1789883463850",
+      "maker_quote_edge_pct": 1.506616009432729,
+      "max_peak_pct": 1.57377910707552,
+      "profile_counted": true,
+      "side": "LONG",
+      "signal_peak_pct": 1.57377910707552,
+      "start_ts": 1789883463.85,
+      "state_key": "aster:INJUSDT",
+      "status": "STALE_UNRESOLVED",
+      "symbol": "INJUSDT",
+      "taker_edge_pct": -0.23581815799816316,
       "target": "aster",
       "target_label": "Aster"
     },
@@ -16574,6 +16570,27 @@
       "target": "hyperliquid",
       "target_label": "Hyperliquid"
     },
+    "hyperliquid:STRKUSDT:ABOVE:1789883463028": {
+      "clean_reversion": false,
+      "closed_ts": 1789883572.424079,
+      "counted": true,
+      "direction": "ABOVE",
+      "extra_adverse_after_signal_pct": 0.0,
+      "id": "hyperliquid:STRKUSDT:ABOVE:1789883463028",
+      "maker_quote_edge_pct": 0.18725554287487395,
+      "max_peak_pct": 0.37367075560221674,
+      "profile_counted": true,
+      "reversion_seconds": 105.97399997711182,
+      "side": "SHORT",
+      "signal_peak_pct": 0.37367075560221674,
+      "start_ts": 1789883463.028,
+      "state_key": "hyperliquid:STRKUSDT",
+      "status": "REVERTED_NOT_CLEAN",
+      "symbol": "STRKUSDT",
+      "taker_edge_pct": 0.12077428504947091,
+      "target": "hyperliquid",
+      "target_label": "Hyperliquid"
+    },
     "hyperliquid:STRKUSDT:BELOW:1789721330155": {
       "clean_reversion": false,
       "closed_ts": 1789721334.289625,
@@ -21194,9 +21211,7 @@
     }
   },
   "active_signal_open": {
-    "ACTIVE-LAG": [
-      "hyperliquid:CHIPUSDT:SHORT"
-    ],
+    "ACTIVE-LAG": [],
     "POSITIVE-ECONOMICS": []
   },
   "economic_signal_last_ts": {
@@ -21934,16 +21949,6 @@
     ],
     "aster:BNBUSDT": [
       {
-        "edge_pct": 0.10596,
-        "side": "SHORT",
-        "ts": 1789872157
-      },
-      {
-        "edge_pct": 0.104175,
-        "side": "SHORT",
-        "ts": 1789872760
-      },
-      {
         "edge_pct": 0.108552,
         "side": "SHORT",
         "ts": 1789873255
@@ -21987,6 +21992,11 @@
         "edge_pct": 0.041034,
         "side": "SHORT",
         "ts": 1789882449
+      },
+      {
+        "edge_pct": 0.087054,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "aster:BOMEUSDT": [
@@ -22030,11 +22040,6 @@
       }
     ],
     "aster:CAKEUSDT": [
-      {
-        "edge_pct": 0.016976,
-        "side": "SHORT",
-        "ts": 1789872760
-      },
       {
         "edge_pct": 0.127439,
         "side": "SHORT",
@@ -22099,6 +22104,11 @@
         "edge_pct": 0.12822,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.116445,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "aster:CAPUSDT": [
@@ -22385,11 +22395,6 @@
     ],
     "aster:FILUSDT": [
       {
-        "edge_pct": 0.057786,
-        "side": "SHORT",
-        "ts": 1789872760
-      },
-      {
         "edge_pct": 0.059371,
         "side": "SHORT",
         "ts": 1789873255
@@ -22438,6 +22443,11 @@
         "edge_pct": 0.097258,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.092232,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "aster:FLOCKUSDT": [
@@ -22550,6 +22560,11 @@
         "edge_pct": 0.032923,
         "side": "LONG",
         "ts": 1789881754
+      },
+      {
+        "edge_pct": 0.03732,
+        "side": "LONG",
+        "ts": 1789883658
       }
     ],
     "aster:ICPUSDT": [
@@ -22591,11 +22606,6 @@
     ],
     "aster:INJUSDT": [
       {
-        "edge_pct": 0.032049,
-        "side": "SHORT",
-        "ts": 1789872760
-      },
-      {
         "edge_pct": 0.019351,
         "side": "SHORT",
         "ts": 1789873255
@@ -22629,6 +22639,11 @@
         "edge_pct": 0.104521,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.039303,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "aster:INUSDT": [
@@ -22769,14 +22784,14 @@
         "edge_pct": 0.075006,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.062536,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "aster:LITUSDT": [
-      {
-        "edge_pct": 0.006449,
-        "side": "SHORT",
-        "ts": 1789872760
-      },
       {
         "edge_pct": 0.076367,
         "side": "SHORT",
@@ -22841,6 +22856,11 @@
         "edge_pct": 0.183508,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.167971,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "aster:LTCUSDT": [
@@ -23193,6 +23213,11 @@
         "edge_pct": 0.120745,
         "side": "SHORT",
         "ts": 1789881754
+      },
+      {
+        "edge_pct": 0.079946,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "aster:RESOLVUSDT": [
@@ -23411,11 +23436,6 @@
     ],
     "aster:TAOUSDT": [
       {
-        "edge_pct": 0.038855,
-        "side": "SHORT",
-        "ts": 1789872760
-      },
-      {
         "edge_pct": 0.015764,
         "side": "SHORT",
         "ts": 1789873255
@@ -23474,6 +23494,11 @@
         "edge_pct": 0.055172,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.058944,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "aster:TIAUSDT": [
@@ -23631,11 +23656,6 @@
     ],
     "aster:UNIUSDT": [
       {
-        "edge_pct": 0.03459,
-        "side": "SHORT",
-        "ts": 1789872760
-      },
-      {
         "edge_pct": 0.057727,
         "side": "SHORT",
         "ts": 1789873255
@@ -23689,6 +23709,11 @@
         "edge_pct": 0.090621,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.084298,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "aster:USELESSUSDT": [
@@ -23720,6 +23745,11 @@
         "edge_pct": 0.100531,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.043839,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "aster:WIFUSDT": [
@@ -23828,11 +23858,6 @@
     ],
     "aster:XLMUSDT": [
       {
-        "edge_pct": 0.052143,
-        "side": "SHORT",
-        "ts": 1789872760
-      },
-      {
         "edge_pct": 0.07577,
         "side": "SHORT",
         "ts": 1789874828
@@ -23886,6 +23911,11 @@
         "edge_pct": 0.094374,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.062844,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "aster:XMRUSDT": [
@@ -24176,9 +24206,9 @@
     ],
     "hyperliquid:ASTERUSDT": [
       {
-        "edge_pct": 0.100169,
+        "edge_pct": 0.050041,
         "side": "SHORT",
-        "ts": 1789830258
+        "ts": 1789883658
       }
     ],
     "hyperliquid:ATOMUSDT": [
@@ -24704,6 +24734,11 @@
         "edge_pct": 0.159826,
         "side": "SHORT",
         "ts": 1789880867
+      },
+      {
+        "edge_pct": 0.160321,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "hyperliquid:INJUSDT": [
@@ -24775,11 +24810,6 @@
     ],
     "hyperliquid:LINEAUSDT": [
       {
-        "edge_pct": 0.181291,
-        "side": "SHORT",
-        "ts": 1789872760
-      },
-      {
         "edge_pct": 0.146359,
         "side": "SHORT",
         "ts": 1789873255
@@ -24818,6 +24848,11 @@
         "edge_pct": 0.290381,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.253715,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "hyperliquid:LINKUSDT": [
@@ -25194,6 +25229,11 @@
         "edge_pct": 0.102777,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.103211,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "hyperliquid:STXUSDT": [
@@ -25689,6 +25729,11 @@
         "edge_pct": 0.169052,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.166389,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "lighter:CHIPUSDT": [
@@ -26065,48 +26110,23 @@
         "edge_pct": 0.052178,
         "side": "SHORT",
         "ts": 1789882449
+      },
+      {
+        "edge_pct": 0.04511,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "lighter:JUPUSDT": [
       {
-        "edge_pct": 0.138963,
-        "side": "SHORT",
-        "ts": 1789864103
-      },
-      {
-        "edge_pct": 0.153859,
-        "side": "SHORT",
-        "ts": 1789865152
-      },
-      {
-        "edge_pct": 0.163352,
-        "side": "SHORT",
-        "ts": 1789865926
-      },
-      {
-        "edge_pct": 0.177054,
-        "side": "SHORT",
-        "ts": 1789866501
-      },
-      {
-        "edge_pct": 0.146455,
-        "side": "SHORT",
-        "ts": 1789867315
-      },
-      {
-        "edge_pct": 0.142806,
-        "side": "SHORT",
-        "ts": 1789868037
-      },
-      {
-        "edge_pct": 0.118428,
-        "side": "SHORT",
-        "ts": 1789872157
-      },
-      {
         "edge_pct": 0.08086,
         "side": "SHORT",
         "ts": 1789874828
+      },
+      {
+        "edge_pct": 0.070383,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "lighter:KAITOUSDT": [
@@ -26337,6 +26357,11 @@
         "edge_pct": 0.05314,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.061988,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "lighter:NEARUSDT": [
@@ -26359,6 +26384,11 @@
         "edge_pct": 0.141189,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.131385,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "lighter:ONDOUSDT": [
@@ -26792,6 +26822,11 @@
         "edge_pct": 0.163159,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.15274,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "lighter:USELESSUSDT": [
@@ -26842,6 +26877,11 @@
         "edge_pct": 0.163456,
         "side": "SHORT",
         "ts": 1789883124
+      },
+      {
+        "edge_pct": 0.149533,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ],
     "lighter:WLFIUSDT": [
@@ -26922,11 +26962,6 @@
     ],
     "lighter:ZROUSDT": [
       {
-        "edge_pct": 0.171537,
-        "side": "SHORT",
-        "ts": 1789872157
-      },
-      {
         "edge_pct": 0.196791,
         "side": "SHORT",
         "ts": 1789873255
@@ -26980,6 +27015,11 @@
         "edge_pct": 0.181906,
         "side": "SHORT",
         "ts": 1789882449
+      },
+      {
+        "edge_pct": 0.176835,
+        "side": "SHORT",
+        "ts": 1789883658
       }
     ]
   },
@@ -31448,17 +31488,17 @@
       "unresolved": 0
     },
     "aster:INJUSDT": {
-      "clean_reversion_rate": 0.07692307692307693,
+      "clean_reversion_rate": 0.07142857142857142,
       "clean_reversion_seconds_samples": [
         65.90000009536743
       ],
       "clean_reversions": 1,
       "last_clean_reversion_ts": 1789838740.0500815,
-      "last_excursion_ts": 1789859113.95,
-      "max_peak_pct": 0.7889702417066937,
+      "last_excursion_ts": 1789883463.85,
+      "max_peak_pct": 1.57377910707552,
       "median_clean_reversion_seconds_recent": 65.90000009536743,
-      "median_peak_pct_recent": 0.38403014274328545,
-      "observed_excursions": 13,
+      "median_peak_pct_recent": 0.46735546471506506,
+      "observed_excursions": 14,
       "peak_pct_samples": [
         0.38403014274328545,
         0.6923987419616338,
@@ -31472,12 +31512,13 @@
         0.34668920862519864,
         0.31904910853926766,
         0.5506807866868446,
-        0.3517210281076126
+        0.3517210281076126,
+        1.57377910707552
       ],
       "reverted_not_clean": 9,
       "signal_sent": 1,
-      "sum_peak_pct": 6.2489739072774695,
-      "unresolved": 3
+      "sum_peak_pct": 7.8227530143529895,
+      "unresolved": 4
     },
     "aster:LITUSDT": {
       "clean_reversion_rate": 0.11904761904761904,
@@ -32663,7 +32704,7 @@
       "unresolved": 1
     },
     "hyperliquid:STRKUSDT": {
-      "clean_reversion_rate": 0.1981981981981982,
+      "clean_reversion_rate": 0.19642857142857142,
       "clean_reversion_seconds_samples": [
         4.08899998664856,
         0.5369999408721924,
@@ -32690,13 +32731,12 @@
       ],
       "clean_reversions": 22,
       "last_clean_reversion_ts": 1789834881.1010172,
-      "last_excursion_ts": 1789870500.301,
+      "last_excursion_ts": 1789883463.028,
       "max_peak_pct": 1.0654257006101575,
       "median_clean_reversion_seconds_recent": 19.299999952316284,
-      "median_peak_pct_recent": 0.4181017691147666,
-      "observed_excursions": 111,
+      "median_peak_pct_recent": 0.4140002276132718,
+      "observed_excursions": 112,
       "peak_pct_samples": [
-        0.8707033917596394,
         0.3963759909399612,
         0.49965124058704063,
         0.48419253773852616,
@@ -32795,11 +32835,12 @@
         0.4065958888637895,
         0.8038585209003288,
         0.4202704875063538,
-        0.3525005507821115
+        0.3525005507821115,
+        0.37367075560221674
       ],
-      "reverted_not_clean": 42,
+      "reverted_not_clean": 43,
       "signal_sent": 6,
-      "sum_peak_pct": 50.80590792951288,
+      "sum_peak_pct": 51.1795786851151,
       "unresolved": 47
     },
     "hyperliquid:SYRUPUSDT": {
@@ -33890,7 +33931,7 @@
     "ACTIVE-MM-EXCURSION": {
       "clean_reverted": 24,
       "full": 0,
-      "last_ts": 1789876680,
+      "last_ts": 1789883530,
       "reverted_not_clean": 47,
       "stale": 82,
       "symbols": {
@@ -33909,7 +33950,7 @@
         "aster:GENIUSUSDT": 2,
         "aster:GRIFFAINUSDT": 4,
         "aster:HYPEUSDT": 6,
-        "aster:INJUSDT": 13,
+        "aster:INJUSDT": 14,
         "aster:LITUSDT": 42,
         "aster:METUSDT": 1,
         "aster:MYXUSDT": 12,
@@ -33956,7 +33997,7 @@
         "hyperliquid:PONSUSDT": 15,
         "hyperliquid:PUMPUSDT": 1,
         "hyperliquid:SKYUSDT": 2,
-        "hyperliquid:STRKUSDT": 111,
+        "hyperliquid:STRKUSDT": 112,
         "hyperliquid:SYRUPUSDT": 1,
         "hyperliquid:UNIUSDT": 1,
         "hyperliquid:USELESSUSDT": 5,
@@ -33994,7 +34035,7 @@
       },
       "t50": 0,
       "t80": 0,
-      "total_started": 922
+      "total_started": 924
     }
   },
   "paper_performance_report": {
@@ -90172,9 +90213,9 @@
       "current_fees_pct_x": 0.21,
       "current_funding_hedge_pnl_pct_x": -0.015,
       "current_funding_target_pnl_pct_x": 0.01375,
-      "current_gross_pnl_pct_x": 0.1693914540967678,
-      "current_net_pnl_pct_x": -0.04185854590323218,
-      "current_spread_net_pnl_pct_x": -0.04060854590323218,
+      "current_gross_pnl_pct_x": 0.10677446037516969,
+      "current_net_pnl_pct_x": -0.1044755396248303,
+      "current_spread_net_pnl_pct_x": -0.1032255396248303,
       "dedupe_key": "paper:ECON:hyperliquid:IMXUSDT:SHORT:bitget:1789842269007",
       "engine_version_at_entry": "16.9",
       "entry_business_effective_net_pct": 0.12168666196189007,
@@ -90237,8 +90278,8 @@
       "entry_spread_expected_net_pct": 0.12168666196189007,
       "entry_target_fee_pct": 0.045,
       "entry_target_vwap": 0.14217,
-      "exact_route_convergence_fraction": 0.1515041086054664,
-      "exact_route_gap_pct": 0.28143476990503125,
+      "exact_route_convergence_fraction": -0.035062089116131095,
+      "exact_route_gap_pct": 0.3433162892622299,
       "expected_roundtrip_fees_pct_x": 0.21,
       "funding_breakdown_source": "complete-public-settlements-v169",
       "funding_breakdown_status": "READY",
@@ -90252,7 +90293,7 @@
       "funding_net_pnl_pct_x": -0.0012499999999999994,
       "funding_settlement_audit": {
         "account_cashflow_verified": false,
-        "asof_ts": 1789883124.4334526,
+        "asof_ts": 1789883658.400194,
         "complete_two_leg_snapshot": true,
         "hedge": [
           {
@@ -90423,14 +90464,14 @@
       "historical_median_convergence_fraction": 0.0,
       "historical_median_t50_seconds": null,
       "id": "paper:ECON:hyperliquid:IMXUSDT:SHORT:bitget:1789842269007",
-      "last_hedge_close_vwap": 0.13692464643635854,
-      "last_target_close_vwap": 0.13731,
-      "last_update_ts": 1789883124.009535,
-      "latest_same_side_gap_pct": 0.28143476990503125,
+      "last_hedge_close_vwap": 0.1369,
+      "last_target_close_vwap": 0.13737,
+      "last_update_ts": 1789883657.8505833,
+      "latest_same_side_gap_pct": 0.3433162892622299,
       "live_funding_expected_net_pct": 0.0,
       "live_funding_first_cluster_net_pct": 0.00125,
       "live_funding_first_settlement_ts": 1789884000.0,
-      "live_funding_forecast_asof_ts": 1789883124.4334526,
+      "live_funding_forecast_asof_ts": 1789883658.400194,
       "live_funding_forecast_horizon_seconds": 3600.0,
       "live_funding_forecast_status": "PARTIAL",
       "live_funding_hedge_forecast": {
@@ -90458,7 +90499,7 @@
         "error": "",
         "expected_pnl_pct": 0.00125,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": 0.00125,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -90489,25 +90530,25 @@
       "time_to_50_seconds": 5922.228607177734,
       "time_to_80_seconds": 34517.567155361176,
       "total_profit_lock_target_pct": 0.12168666196189007,
-      "updates": 62,
-      "v1610_exact_route_mark_ts": 1789883124.4334526,
+      "updates": 63,
+      "v1610_exact_route_mark_ts": 1789883658.400194,
       "v1610_exit_logic_version": 6,
       "v1610_funding_audit_version": 1,
       "v165_fresh_net_pct": 0.12168666196189007,
       "v165_signal_net_threshold_pct": 0.1,
       "v166_exact_route_exit": true,
-      "v166_exact_route_mark_ts": 1789883124.4334526,
+      "v166_exact_route_mark_ts": 1789883658.400194,
       "v166_exit_logic_version": 6,
       "v167_exact_route_exit": true,
-      "v167_exact_route_mark_ts": 1789883124.4334526,
+      "v167_exact_route_mark_ts": 1789883658.400194,
       "v167_exit_logic_version": 6,
       "v168_exact_route_exit": true,
-      "v168_exact_route_mark_ts": 1789883124.4334526,
+      "v168_exact_route_mark_ts": 1789883658.400194,
       "v168_exit_logic_version": 6,
       "v169_exact_route_exit": true,
-      "v169_exact_route_mark_ts": 1789883124.4334526,
+      "v169_exact_route_mark_ts": 1789883658.400194,
       "v169_exit_logic_version": 6,
-      "v169_last_complete_funding_asof_ts": 1789883124.4334526,
+      "v169_last_complete_funding_asof_ts": 1789883658.400194,
       "v169_last_complete_funding_hedge_pct": -0.015,
       "v169_last_complete_funding_net_pct": -0.0012499999999999994,
       "v169_last_complete_funding_target_pct": 0.01375,
@@ -90576,9 +90617,9 @@
       "current_fees_pct_x": 0.25,
       "current_funding_hedge_pnl_pct_x": -0.01,
       "current_funding_target_pnl_pct_x": 0.02344604,
-      "current_gross_pnl_pct_x": 0.13951723553596862,
-      "current_net_pnl_pct_x": -0.09703672446403137,
-      "current_spread_net_pnl_pct_x": -0.11048276446403138,
+      "current_gross_pnl_pct_x": -0.060342610850527834,
+      "current_net_pnl_pct_x": -0.29689657085052784,
+      "current_spread_net_pnl_pct_x": -0.31034261085052783,
       "dedupe_key": "paper:ECON:hyperliquid:JTOUSDT:SHORT:mexc:1789859051564",
       "engine_version_at_entry": "16.10",
       "entry_business_effective_net_pct": 0.10215543412265116,
@@ -90641,8 +90682,8 @@
       "entry_spread_expected_net_pct": 0.10215543412265116,
       "entry_target_fee_pct": 0.045,
       "entry_target_vwap": 0.49584,
-      "exact_route_convergence_fraction": 0.3546238244514373,
-      "exact_route_gap_pct": 0.2272727272727204,
+      "exact_route_convergence_fraction": -0.22373812067901463,
+      "exact_route_gap_pct": 0.4309460291401557,
       "expected_roundtrip_fees_pct_x": 0.25,
       "funding_breakdown_source": "complete-public-settlements-v1610",
       "funding_breakdown_status": "READY",
@@ -90655,7 +90696,7 @@
       "funding_net_pnl_pct_x": 0.013446040000000001,
       "funding_settlement_audit": {
         "account_cashflow_verified": false,
-        "asof_ts": 1789883124.4334526,
+        "asof_ts": 1789883658.400194,
         "complete_two_leg_snapshot": true,
         "hedge": [
           {
@@ -90761,14 +90802,14 @@
       "historical_median_convergence_fraction": 0.0,
       "historical_median_t50_seconds": null,
       "id": "paper:ECON:hyperliquid:JTOUSDT:SHORT:mexc:1789859051564",
-      "last_hedge_close_vwap": 0.4884,
-      "last_target_close_vwap": 0.48951,
-      "last_update_ts": 1789883124.009535,
-      "latest_same_side_gap_pct": 0.2272727272727204,
+      "last_hedge_close_vwap": 0.48730000000000007,
+      "last_target_close_vwap": 0.4894,
+      "last_update_ts": 1789883657.8505833,
+      "latest_same_side_gap_pct": 0.4309460291401557,
       "live_funding_expected_net_pct": 0.00125,
       "live_funding_first_cluster_net_pct": 0.00125,
       "live_funding_first_settlement_ts": 1789884000.0,
-      "live_funding_forecast_asof_ts": 1789883124.4334526,
+      "live_funding_forecast_asof_ts": 1789883658.400194,
       "live_funding_forecast_horizon_seconds": 3600.0,
       "live_funding_forecast_status": "READY",
       "live_funding_hedge_forecast": {
@@ -90777,7 +90818,7 @@
         "error": "",
         "expected_pnl_pct": -0.005,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 134.59277578989665,
+        "minutes_to_settlement": 125.69333010117212,
         "next_settlement_pnl_pct": -0.005,
         "next_settlement_ts": 1789891200.0,
         "outside_forecast_horizon": true,
@@ -90796,7 +90837,7 @@
         "error": "",
         "expected_pnl_pct": 0.00125,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": 0.00125,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -90809,7 +90850,7 @@
       },
       "live_funding_worst_prefix_net_pct": 0.0,
       "max_convergence_fraction": 0.6633966891477513,
-      "max_same_side_gap_pct": 0.3750000000000142,
+      "max_same_side_gap_pct": 0.4309460291401557,
       "min_same_side_gap_pct": 0.11853668506029533,
       "missing_depth_updates": 1,
       "notional_x": 1.0,
@@ -90827,27 +90868,27 @@
       "time_to_50_seconds": 13104.867399930954,
       "time_to_80_seconds": null,
       "total_profit_lock_target_pct": 0.10215543412265116,
-      "updates": 34,
+      "updates": 35,
       "v1610_dynamic_funding_management": true,
-      "v1610_exact_route_mark_ts": 1789883124.4334526,
+      "v1610_exact_route_mark_ts": 1789883658.400194,
       "v1610_exit_logic_version": 6,
       "v1610_funding_audit_version": 1,
       "v1610_total_profit_lock": true,
       "v165_fresh_net_pct": 0.10215543412265116,
       "v165_signal_net_threshold_pct": 0.1,
       "v166_exact_route_exit": true,
-      "v166_exact_route_mark_ts": 1789883124.4334526,
+      "v166_exact_route_mark_ts": 1789883658.400194,
       "v166_exit_logic_version": 6,
       "v167_exact_route_exit": true,
-      "v167_exact_route_mark_ts": 1789883124.4334526,
+      "v167_exact_route_mark_ts": 1789883658.400194,
       "v167_exit_logic_version": 6,
       "v168_exact_route_exit": true,
-      "v168_exact_route_mark_ts": 1789883124.4334526,
+      "v168_exact_route_mark_ts": 1789883658.400194,
       "v168_exit_logic_version": 6,
       "v169_exact_route_exit": true,
-      "v169_exact_route_mark_ts": 1789883124.4334526,
+      "v169_exact_route_mark_ts": 1789883658.400194,
       "v169_exit_logic_version": 6,
-      "v169_last_complete_funding_asof_ts": 1789883124.4334526,
+      "v169_last_complete_funding_asof_ts": 1789883658.400194,
       "v169_last_complete_funding_hedge_pct": -0.01,
       "v169_last_complete_funding_net_pct": 0.013446040000000001,
       "v169_last_complete_funding_target_pct": 0.02344604,
@@ -90867,7 +90908,7 @@
       ],
       "v169_settlement_funding": true,
       "verified_episodes_at_entry": 0,
-      "worst_net_pnl_pct_x": -0.26515267747008686
+      "worst_net_pnl_pct_x": -0.31398752113267486
     },
     "paper:ECON:hyperliquid:LINEAUSDT:SHORT:lighter:1789800611504": {
       "best_net_pnl_pct_x": -0.045,
@@ -91027,13 +91068,13 @@
       "id": "paper:ECON:hyperliquid:LINEAUSDT:SHORT:lighter:1789800611504",
       "last_hedge_close_vwap": 0.002751,
       "last_target_close_vwap": 0.002763,
-      "last_update_ts": 1789883124.009535,
+      "last_update_ts": 1789883657.8505833,
       "latest_same_side_gap_pct": 0.4362050163576825,
       "live_funding_expected_net_pct": -0.11875,
       "live_funding_first_cluster_net_pct": -0.11875,
       "live_funding_first_settlement_ts": 1789884000.0,
-      "live_funding_forecast_asof_ts": 1789883124.4334526,
-      "live_funding_forecast_horizon_seconds": 3600.0,
+      "live_funding_forecast_asof_ts": 1789883658.400194,
+      "live_funding_forecast_horizon_seconds": 3353.10448884964,
       "live_funding_forecast_status": "READY",
       "live_funding_hedge_forecast": {
         "available": true,
@@ -91041,7 +91082,7 @@
         "error": "",
         "expected_pnl_pct": -0.12,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": -0.12,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -91060,7 +91101,7 @@
         "error": "",
         "expected_pnl_pct": 0.00125,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": 0.00125,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -91075,7 +91116,7 @@
       "max_convergence_fraction": 0.8282506374977942,
       "max_same_side_gap_pct": 0.4756498110424223,
       "min_same_side_gap_pct": 0.035460992907806126,
-      "missing_depth_updates": 14,
+      "missing_depth_updates": 15,
       "notional_x": 1.0,
       "opened_ts": 1789800611.5046828,
       "probe_notional_usd": 100.0,
@@ -91092,20 +91133,20 @@
       "time_to_80_seconds": 6935.776588439941,
       "total_profit_lock_target_pct": 0.10334834910238273,
       "updates": 112,
-      "v1610_exact_route_mark_ts": 1789883124.4334526,
+      "v1610_exact_route_mark_ts": 1789883658.400194,
       "v1610_exit_logic_version": 6,
       "v165_fresh_net_pct": 0.10334834910238273,
       "v165_signal_net_threshold_pct": 0.1,
       "v166_exact_route_exit": true,
-      "v166_exact_route_mark_ts": 1789883124.4334526,
+      "v166_exact_route_mark_ts": 1789883658.400194,
       "v166_exit_logic_version": 6,
       "v167_exact_route_exit": true,
-      "v167_exact_route_mark_ts": 1789883124.4334526,
+      "v167_exact_route_mark_ts": 1789883658.400194,
       "v167_exit_logic_version": 6,
       "v168_exact_route_exit": true,
-      "v168_exact_route_mark_ts": 1789883124.4334526,
+      "v168_exact_route_mark_ts": 1789883658.400194,
       "v168_exit_logic_version": 6,
-      "v169_exact_route_mark_ts": 1789883124.4334526,
+      "v169_exact_route_mark_ts": 1789883658.400194,
       "v169_exit_logic_version": 6,
       "v169_settlement_funding": false,
       "verified_episodes_at_entry": 0,
@@ -91267,12 +91308,12 @@
       "id": "paper:ECON:hyperliquid:LINEAUSDT:SHORT:lighter:1789803892330",
       "last_hedge_close_vwap": 0.002751,
       "last_target_close_vwap": 0.002763,
-      "last_update_ts": 1789883124.009535,
+      "last_update_ts": 1789883657.8505833,
       "latest_same_side_gap_pct": 0.4362050163576825,
       "live_funding_expected_net_pct": -0.11875,
       "live_funding_first_cluster_net_pct": -0.11875,
       "live_funding_first_settlement_ts": 1789884000.0,
-      "live_funding_forecast_asof_ts": 1789883124.4334526,
+      "live_funding_forecast_asof_ts": 1789883658.400194,
       "live_funding_forecast_horizon_seconds": 3600.0,
       "live_funding_forecast_status": "READY",
       "live_funding_hedge_forecast": {
@@ -91281,7 +91322,7 @@
         "error": "",
         "expected_pnl_pct": -0.12,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": -0.12,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -91300,7 +91341,7 @@
         "error": "",
         "expected_pnl_pct": 0.00125,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": 0.00125,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -91315,7 +91356,7 @@
       "max_convergence_fraction": 0.8871161551039487,
       "max_same_side_gap_pct": 0.4756498110424223,
       "min_same_side_gap_pct": 0.035460992907806126,
-      "missing_depth_updates": 13,
+      "missing_depth_updates": 14,
       "notional_x": 1.0,
       "opened_ts": 1789803892.3308823,
       "probe_notional_usd": 100.0,
@@ -91332,20 +91373,20 @@
       "time_to_80_seconds": 3654.9503889083862,
       "total_profit_lock_target_pct": 0.20817264436376665,
       "updates": 108,
-      "v1610_exact_route_mark_ts": 1789883124.4334526,
+      "v1610_exact_route_mark_ts": 1789883658.400194,
       "v1610_exit_logic_version": 6,
       "v165_fresh_net_pct": 0.20817264436376665,
       "v165_signal_net_threshold_pct": 0.1,
       "v166_exact_route_exit": true,
-      "v166_exact_route_mark_ts": 1789883124.4334526,
+      "v166_exact_route_mark_ts": 1789883658.400194,
       "v166_exit_logic_version": 6,
       "v167_exact_route_exit": true,
-      "v167_exact_route_mark_ts": 1789883124.4334526,
+      "v167_exact_route_mark_ts": 1789883658.400194,
       "v167_exit_logic_version": 6,
       "v168_exact_route_exit": true,
-      "v168_exact_route_mark_ts": 1789883124.4334526,
+      "v168_exact_route_mark_ts": 1789883658.400194,
       "v168_exit_logic_version": 6,
-      "v169_exact_route_mark_ts": 1789883124.4334526,
+      "v169_exact_route_mark_ts": 1789883658.400194,
       "v169_exit_logic_version": 6,
       "v169_settlement_funding": false,
       "verified_episodes_at_entry": 0,
@@ -91482,7 +91523,7 @@
       "funding_net_pnl_pct_x": -1.46010949,
       "funding_settlement_audit": {
         "account_cashflow_verified": false,
-        "asof_ts": 1789883124.4334526,
+        "asof_ts": 1789883658.400194,
         "complete_two_leg_snapshot": true,
         "hedge": [
           {
@@ -91842,12 +91883,12 @@
       "id": "paper:ECON:hyperliquid:LINEAUSDT:SHORT:lighter:1789837176205",
       "last_hedge_close_vwap": 0.002751,
       "last_target_close_vwap": 0.002763,
-      "last_update_ts": 1789883124.009535,
+      "last_update_ts": 1789883657.8505833,
       "latest_same_side_gap_pct": 0.4362050163576825,
       "live_funding_expected_net_pct": -0.11875,
       "live_funding_first_cluster_net_pct": -0.11875,
       "live_funding_first_settlement_ts": 1789884000.0,
-      "live_funding_forecast_asof_ts": 1789883124.4334526,
+      "live_funding_forecast_asof_ts": 1789883658.400194,
       "live_funding_forecast_horizon_seconds": 3600.0,
       "live_funding_forecast_status": "READY",
       "live_funding_hedge_forecast": {
@@ -91856,7 +91897,7 @@
         "error": "",
         "expected_pnl_pct": -0.12,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": -0.12,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -91875,7 +91916,7 @@
         "error": "",
         "expected_pnl_pct": 0.00125,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": 0.00125,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -91890,7 +91931,7 @@
       "max_convergence_fraction": 0.8891252955082581,
       "max_same_side_gap_pct": 0.46965317919074323,
       "min_same_side_gap_pct": 0.035460992907806126,
-      "missing_depth_updates": 11,
+      "missing_depth_updates": 12,
       "notional_x": 1.0,
       "opened_ts": 1789837176.2053604,
       "probe_notional_usd": 100.0,
@@ -91907,24 +91948,24 @@
       "time_to_80_seconds": 27974.27495288849,
       "total_profit_lock_target_pct": 0.2298294243070325,
       "updates": 59,
-      "v1610_exact_route_mark_ts": 1789883124.4334526,
+      "v1610_exact_route_mark_ts": 1789883658.400194,
       "v1610_exit_logic_version": 6,
       "v1610_funding_audit_version": 1,
       "v165_fresh_net_pct": 0.2298294243070325,
       "v165_signal_net_threshold_pct": 0.1,
       "v166_exact_route_exit": true,
-      "v166_exact_route_mark_ts": 1789883124.4334526,
+      "v166_exact_route_mark_ts": 1789883658.400194,
       "v166_exit_logic_version": 6,
       "v167_exact_route_exit": true,
-      "v167_exact_route_mark_ts": 1789883124.4334526,
+      "v167_exact_route_mark_ts": 1789883658.400194,
       "v167_exit_logic_version": 6,
       "v168_exact_route_exit": true,
-      "v168_exact_route_mark_ts": 1789883124.4334526,
+      "v168_exact_route_mark_ts": 1789883658.400194,
       "v168_exit_logic_version": 6,
       "v169_exact_route_exit": true,
-      "v169_exact_route_mark_ts": 1789883124.4334526,
+      "v169_exact_route_mark_ts": 1789883658.400194,
       "v169_exit_logic_version": 6,
-      "v169_last_complete_funding_asof_ts": 1789883124.4334526,
+      "v169_last_complete_funding_asof_ts": 1789883658.400194,
       "v169_last_complete_funding_hedge_pct": -1.48,
       "v169_last_complete_funding_net_pct": -1.46010949,
       "v169_last_complete_funding_target_pct": 0.01989051,
@@ -92094,7 +92135,7 @@
       "funding_net_pnl_pct_x": -1.3413594899999999,
       "funding_settlement_audit": {
         "account_cashflow_verified": false,
-        "asof_ts": 1789883124.4334526,
+        "asof_ts": 1789883658.400194,
         "complete_two_leg_snapshot": true,
         "hedge": [
           {
@@ -92428,12 +92469,12 @@
       "id": "paper:ECON:hyperliquid:LINEAUSDT:SHORT:lighter:1789840609061",
       "last_hedge_close_vwap": 0.002751,
       "last_target_close_vwap": 0.002763,
-      "last_update_ts": 1789883124.009535,
+      "last_update_ts": 1789883657.8505833,
       "latest_same_side_gap_pct": 0.4362050163576825,
       "live_funding_expected_net_pct": -0.11875,
       "live_funding_first_cluster_net_pct": -0.11875,
       "live_funding_first_settlement_ts": 1789884000.0,
-      "live_funding_forecast_asof_ts": 1789883124.4334526,
+      "live_funding_forecast_asof_ts": 1789883658.400194,
       "live_funding_forecast_horizon_seconds": 3600.0,
       "live_funding_forecast_status": "READY",
       "live_funding_hedge_forecast": {
@@ -92442,7 +92483,7 @@
         "error": "",
         "expected_pnl_pct": -0.12,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": -0.12,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -92461,7 +92502,7 @@
         "error": "",
         "expected_pnl_pct": 0.00125,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": 0.00125,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -92476,7 +92517,7 @@
       "max_convergence_fraction": 0.8754432624113272,
       "max_same_side_gap_pct": 0.46965317919074323,
       "min_same_side_gap_pct": 0.035460992907806126,
-      "missing_depth_updates": 10,
+      "missing_depth_updates": 11,
       "notional_x": 1.0,
       "opened_ts": 1789840609.0610466,
       "probe_notional_usd": 100.0,
@@ -92493,24 +92534,24 @@
       "time_to_80_seconds": 24541.419266700745,
       "total_profit_lock_target_pct": 0.19469750889677326,
       "updates": 54,
-      "v1610_exact_route_mark_ts": 1789883124.4334526,
+      "v1610_exact_route_mark_ts": 1789883658.400194,
       "v1610_exit_logic_version": 6,
       "v1610_funding_audit_version": 1,
       "v165_fresh_net_pct": 0.19469750889677326,
       "v165_signal_net_threshold_pct": 0.1,
       "v166_exact_route_exit": true,
-      "v166_exact_route_mark_ts": 1789883124.4334526,
+      "v166_exact_route_mark_ts": 1789883658.400194,
       "v166_exit_logic_version": 6,
       "v167_exact_route_exit": true,
-      "v167_exact_route_mark_ts": 1789883124.4334526,
+      "v167_exact_route_mark_ts": 1789883658.400194,
       "v167_exit_logic_version": 6,
       "v168_exact_route_exit": true,
-      "v168_exact_route_mark_ts": 1789883124.4334526,
+      "v168_exact_route_mark_ts": 1789883658.400194,
       "v168_exit_logic_version": 6,
       "v169_exact_route_exit": true,
-      "v169_exact_route_mark_ts": 1789883124.4334526,
+      "v169_exact_route_mark_ts": 1789883658.400194,
       "v169_exit_logic_version": 6,
-      "v169_last_complete_funding_asof_ts": 1789883124.4334526,
+      "v169_last_complete_funding_asof_ts": 1789883658.400194,
       "v169_last_complete_funding_hedge_pct": -1.3599999999999999,
       "v169_last_complete_funding_net_pct": -1.3413594899999999,
       "v169_last_complete_funding_target_pct": 0.01864051,
@@ -92680,7 +92721,7 @@
       "funding_net_pnl_pct_x": -1.0675169500000001,
       "funding_settlement_audit": {
         "account_cashflow_verified": false,
-        "asof_ts": 1789883124.4334526,
+        "asof_ts": 1789883658.400194,
         "complete_two_leg_snapshot": true,
         "hedge": [
           {
@@ -92936,12 +92977,12 @@
       "id": "paper:ECON:hyperliquid:LINEAUSDT:SHORT:lighter:1789850215972",
       "last_hedge_close_vwap": 0.002751,
       "last_target_close_vwap": 0.002763,
-      "last_update_ts": 1789883124.009535,
+      "last_update_ts": 1789883657.8505833,
       "latest_same_side_gap_pct": 0.4362050163576825,
       "live_funding_expected_net_pct": -0.11875,
       "live_funding_first_cluster_net_pct": -0.11875,
       "live_funding_first_settlement_ts": 1789884000.0,
-      "live_funding_forecast_asof_ts": 1789883124.4334526,
+      "live_funding_forecast_asof_ts": 1789883658.400194,
       "live_funding_forecast_horizon_seconds": 3600.0,
       "live_funding_forecast_status": "READY",
       "live_funding_hedge_forecast": {
@@ -92950,7 +92991,7 @@
         "error": "",
         "expected_pnl_pct": -0.12,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": -0.12,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -92969,7 +93010,7 @@
         "error": "",
         "expected_pnl_pct": 0.00125,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": 0.00125,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -92984,7 +93025,7 @@
       "max_convergence_fraction": 0.8940441351012007,
       "max_same_side_gap_pct": 0.46965317919074323,
       "min_same_side_gap_pct": 0.035460992907806126,
-      "missing_depth_updates": 8,
+      "missing_depth_updates": 9,
       "notional_x": 1.0,
       "opened_ts": 1789850215.9728317,
       "probe_notional_usd": 100.0,
@@ -93001,24 +93042,24 @@
       "time_to_80_seconds": 14934.507481575012,
       "total_profit_lock_target_pct": 0.22165465276444854,
       "updates": 41,
-      "v1610_exact_route_mark_ts": 1789883124.4334526,
+      "v1610_exact_route_mark_ts": 1789883658.400194,
       "v1610_exit_logic_version": 6,
       "v1610_funding_audit_version": 1,
       "v165_fresh_net_pct": 0.22165465276444854,
       "v165_signal_net_threshold_pct": 0.1,
       "v166_exact_route_exit": true,
-      "v166_exact_route_mark_ts": 1789883124.4334526,
+      "v166_exact_route_mark_ts": 1789883658.400194,
       "v166_exit_logic_version": 6,
       "v167_exact_route_exit": true,
-      "v167_exact_route_mark_ts": 1789883124.4334526,
+      "v167_exact_route_mark_ts": 1789883658.400194,
       "v167_exit_logic_version": 6,
       "v168_exact_route_exit": true,
-      "v168_exact_route_mark_ts": 1789883124.4334526,
+      "v168_exact_route_mark_ts": 1789883658.400194,
       "v168_exit_logic_version": 6,
       "v169_exact_route_exit": true,
-      "v169_exact_route_mark_ts": 1789883124.4334526,
+      "v169_exact_route_mark_ts": 1789883658.400194,
       "v169_exit_logic_version": 6,
-      "v169_last_complete_funding_asof_ts": 1789883124.4334526,
+      "v169_last_complete_funding_asof_ts": 1789883658.400194,
       "v169_last_complete_funding_hedge_pct": -1.08,
       "v169_last_complete_funding_net_pct": -1.0675169500000001,
       "v169_last_complete_funding_target_pct": 0.01248305,
@@ -93180,7 +93221,7 @@
       "funding_net_pnl_pct_x": -0.8312499999999999,
       "funding_settlement_audit": {
         "account_cashflow_verified": false,
-        "asof_ts": 1789883124.4334526,
+        "asof_ts": 1789883658.400194,
         "complete_two_leg_snapshot": true,
         "hedge": [
           {
@@ -93384,12 +93425,12 @@
       "id": "paper:ECON:hyperliquid:LINEAUSDT:SHORT:lighter:1789857983748",
       "last_hedge_close_vwap": 0.002751,
       "last_target_close_vwap": 0.002763,
-      "last_update_ts": 1789883124.009535,
+      "last_update_ts": 1789883657.8505833,
       "latest_same_side_gap_pct": 0.4362050163576825,
       "live_funding_expected_net_pct": -0.11875,
       "live_funding_first_cluster_net_pct": -0.11875,
       "live_funding_first_settlement_ts": 1789884000.0,
-      "live_funding_forecast_asof_ts": 1789883124.4334526,
+      "live_funding_forecast_asof_ts": 1789883658.400194,
       "live_funding_forecast_horizon_seconds": 3600.0,
       "live_funding_forecast_status": "READY",
       "live_funding_hedge_forecast": {
@@ -93398,7 +93439,7 @@
         "error": "",
         "expected_pnl_pct": -0.12,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": -0.12,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -93417,7 +93458,7 @@
         "error": "",
         "expected_pnl_pct": 0.00125,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": 0.00125,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -93432,7 +93473,7 @@
       "max_convergence_fraction": 0.89773141330163,
       "max_same_side_gap_pct": 0.4367770584750241,
       "min_same_side_gap_pct": 0.035460992907806126,
-      "missing_depth_updates": 4,
+      "missing_depth_updates": 5,
       "notional_x": 1.0,
       "opened_ts": 1789857983.7486715,
       "probe_notional_usd": 100.0,
@@ -93450,7 +93491,7 @@
       "total_profit_lock_target_pct": 0.2448500958963064,
       "updates": 33,
       "v1610_dynamic_funding_management": true,
-      "v1610_exact_route_mark_ts": 1789883124.4334526,
+      "v1610_exact_route_mark_ts": 1789883658.400194,
       "v1610_exit_logic_version": 6,
       "v1610_funding_audit_version": 1,
       "v1610_partial_funding_audit": {
@@ -93467,18 +93508,18 @@
       "v165_fresh_net_pct": 0.2448500958963064,
       "v165_signal_net_threshold_pct": 0.1,
       "v166_exact_route_exit": true,
-      "v166_exact_route_mark_ts": 1789883124.4334526,
+      "v166_exact_route_mark_ts": 1789883658.400194,
       "v166_exit_logic_version": 6,
       "v167_exact_route_exit": true,
-      "v167_exact_route_mark_ts": 1789883124.4334526,
+      "v167_exact_route_mark_ts": 1789883658.400194,
       "v167_exit_logic_version": 6,
       "v168_exact_route_exit": true,
-      "v168_exact_route_mark_ts": 1789883124.4334526,
+      "v168_exact_route_mark_ts": 1789883658.400194,
       "v168_exit_logic_version": 6,
       "v169_exact_route_exit": true,
-      "v169_exact_route_mark_ts": 1789883124.4334526,
+      "v169_exact_route_mark_ts": 1789883658.400194,
       "v169_exit_logic_version": 6,
-      "v169_last_complete_funding_asof_ts": 1789883124.4334526,
+      "v169_last_complete_funding_asof_ts": 1789883658.400194,
       "v169_last_complete_funding_hedge_pct": -0.84,
       "v169_last_complete_funding_net_pct": -0.8312499999999999,
       "v169_last_complete_funding_target_pct": 0.00875,
@@ -93552,9 +93593,9 @@
       "current_fees_pct_x": 0.25,
       "current_funding_hedge_pnl_pct_x": -0.01,
       "current_funding_target_pnl_pct_x": 0.00875,
-      "current_gross_pnl_pct_x": -0.09296420383381188,
-      "current_net_pnl_pct_x": -0.34421420383381185,
-      "current_spread_net_pnl_pct_x": -0.3429642038338119,
+      "current_gross_pnl_pct_x": -0.06577542621633015,
+      "current_net_pnl_pct_x": -0.3170254262163301,
+      "current_spread_net_pnl_pct_x": -0.31577542621633015,
       "dedupe_key": "paper:ECON:hyperliquid:LINEAUSDT:SHORT:mexc:1789855320765",
       "engine_version_at_entry": "16.9",
       "entry_business_effective_net_pct": 0.10748463998598205,
@@ -93617,8 +93658,8 @@
       "entry_spread_expected_net_pct": 0.10748463998598205,
       "entry_target_fee_pct": 0.045,
       "entry_target_vwap": 0.0027724357437258415,
-      "exact_route_convergence_fraction": -0.251154456811317,
-      "exact_route_gap_pct": 0.4727272727272691,
+      "exact_route_convergence_fraction": -0.17658374637087298,
+      "exact_route_gap_pct": 0.4445520075712084,
       "expected_roundtrip_fees_pct_x": 0.25,
       "funding_breakdown_source": "complete-public-settlements-v169",
       "funding_breakdown_status": "READY",
@@ -93631,7 +93672,7 @@
       "funding_net_pnl_pct_x": -0.0012499999999999994,
       "funding_settlement_audit": {
         "account_cashflow_verified": false,
-        "asof_ts": 1789883124.4334526,
+        "asof_ts": 1789883658.400194,
         "complete_two_leg_snapshot": true,
         "hedge": [
           {
@@ -93748,14 +93789,14 @@
       "historical_median_convergence_fraction": 0.0,
       "historical_median_t50_seconds": null,
       "id": "paper:ECON:hyperliquid:LINEAUSDT:SHORT:mexc:1789855320765",
-      "last_hedge_close_vwap": 0.00275,
-      "last_target_close_vwap": 0.002763,
-      "last_update_ts": 1789883124.009535,
-      "latest_same_side_gap_pct": 0.4727272727272691,
+      "last_hedge_close_vwap": 0.0027539999999999995,
+      "last_target_close_vwap": 0.0027662429622885105,
+      "last_update_ts": 1789883657.8505833,
+      "latest_same_side_gap_pct": 0.4445520075712084,
       "live_funding_expected_net_pct": 0.00125,
       "live_funding_first_cluster_net_pct": 0.00125,
       "live_funding_first_settlement_ts": 1789884000.0,
-      "live_funding_forecast_asof_ts": 1789883124.4334526,
+      "live_funding_forecast_asof_ts": 1789883658.400194,
       "live_funding_forecast_horizon_seconds": 3600.0,
       "live_funding_forecast_status": "READY",
       "live_funding_hedge_forecast": {
@@ -93764,7 +93805,7 @@
         "error": "",
         "expected_pnl_pct": -0.005,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 134.59277578989665,
+        "minutes_to_settlement": 125.69333010117212,
         "next_settlement_pnl_pct": -0.005,
         "next_settlement_ts": 1789891200.0,
         "outside_forecast_horizon": true,
@@ -93783,7 +93824,7 @@
         "error": "",
         "expected_pnl_pct": 0.00125,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 14.592775789896647,
+        "minutes_to_settlement": 5.693330101172129,
         "next_settlement_pnl_pct": 0.00125,
         "next_settlement_ts": 1789884000.0,
         "outside_forecast_horizon": false,
@@ -93814,25 +93855,25 @@
       "time_to_50_seconds": 9829.714675664902,
       "time_to_80_seconds": null,
       "total_profit_lock_target_pct": 0.10748463998598205,
-      "updates": 40,
-      "v1610_exact_route_mark_ts": 1789883124.4334526,
+      "updates": 41,
+      "v1610_exact_route_mark_ts": 1789883658.400194,
       "v1610_exit_logic_version": 6,
       "v1610_funding_audit_version": 1,
       "v165_fresh_net_pct": 0.10748463998598205,
       "v165_signal_net_threshold_pct": 0.1,
       "v166_exact_route_exit": true,
-      "v166_exact_route_mark_ts": 1789883124.4334526,
+      "v166_exact_route_mark_ts": 1789883658.400194,
       "v166_exit_logic_version": 6,
       "v167_exact_route_exit": true,
-      "v167_exact_route_mark_ts": 1789883124.4334526,
+      "v167_exact_route_mark_ts": 1789883658.400194,
       "v167_exit_logic_version": 6,
       "v168_exact_route_exit": true,
-      "v168_exact_route_mark_ts": 1789883124.4334526,
+      "v168_exact_route_mark_ts": 1789883658.400194,
       "v168_exit_logic_version": 6,
       "v169_exact_route_exit": true,
-      "v169_exact_route_mark_ts": 1789883124.4334526,
+      "v169_exact_route_mark_ts": 1789883658.400194,
       "v169_exit_logic_version": 6,
-      "v169_last_complete_funding_asof_ts": 1789883124.4334526,
+      "v169_last_complete_funding_asof_ts": 1789883658.400194,
       "v169_last_complete_funding_hedge_pct": -0.01,
       "v169_last_complete_funding_net_pct": -0.0012499999999999994,
       "v169_last_complete_funding_target_pct": 0.00875,
@@ -93993,10 +94034,10 @@
       "total": 159
     },
     "MM-EXCURSION-OBSERVED": {
-      "last_ts": 1789876680,
+      "last_ts": 1789883530,
       "sides": {
-        "LONG": 235,
-        "SHORT": 680
+        "LONG": 236,
+        "SHORT": 681
       },
       "symbols": {
         "aster:ALGOUSDT": 1,
@@ -94014,7 +94055,7 @@
         "aster:GENIUSUSDT": 2,
         "aster:GRIFFAINUSDT": 4,
         "aster:HYPEUSDT": 6,
-        "aster:INJUSDT": 13,
+        "aster:INJUSDT": 14,
         "aster:LITUSDT": 42,
         "aster:METUSDT": 1,
         "aster:MYXUSDT": 12,
@@ -94061,7 +94102,7 @@
         "hyperliquid:PONSUSDT": 15,
         "hyperliquid:PUMPUSDT": 1,
         "hyperliquid:SKYUSDT": 2,
-        "hyperliquid:STRKUSDT": 111,
+        "hyperliquid:STRKUSDT": 112,
         "hyperliquid:SYRUPUSDT": 1,
         "hyperliquid:UNIUSDT": 1,
         "hyperliquid:USELESSUSDT": 5,
@@ -94096,13 +94137,13 @@
         "lighter:ZECUSDT": 21,
         "lighter:ZROUSDT": 1
       },
-      "total": 915
+      "total": 917
     },
     "POSITIVE-ECONOMICS": {
-      "last_ts": 1789882933,
+      "last_ts": 1789883469,
       "sides": {
         "LONG": 22,
-        "SHORT": 328
+        "SHORT": 329
       },
       "symbols": {
         "aster:ASTERUSDT": 8,
@@ -94121,7 +94162,7 @@
         "hyperliquid:FILUSDT": 2,
         "hyperliquid:IMXUSDT": 2,
         "hyperliquid:JTOUSDT": 1,
-        "hyperliquid:LINEAUSDT": 85,
+        "hyperliquid:LINEAUSDT": 86,
         "hyperliquid:MEGAUSDT": 1,
         "hyperliquid:SKYUSDT": 1,
         "hyperliquid:STRKUSDT": 13,
@@ -94156,7 +94197,7 @@
         "lighter:ZECUSDT": 3,
         "lighter:ZROUSDT": 18
       },
-      "total": 350
+      "total": 351
     }
   },
   "state_schema_version": 18,
@@ -99831,6 +99872,21 @@
       "symbol": "LINEAUSDT",
       "target": "hyperliquid",
       "ts": 1789882932.281731
+    },
+    {
+      "effective_net_pct": 0.04505710659900275,
+      "expected_net_funding_pct": -0.11875,
+      "forecast_status": "READY",
+      "funding_risk_adjustment_pct": -0.11875,
+      "funding_worst_prefix_net_pct": -0.11875,
+      "hedge_venue": "lighter-perp",
+      "reason": "IMMINENT_NEGATIVE_FUNDING_REDUCES_EFFECTIVE_NET_TO_THRESHOLD_OR_BELOW",
+      "side": "SHORT",
+      "spread_net_pct": 0.16380710659900274,
+      "state_key": "hyperliquid:LINEAUSDT",
+      "symbol": "LINEAUSDT",
+      "target": "hyperliquid",
+      "ts": 1789883467.7876341
     }
   ]
 }
