@@ -23259,52 +23259,111 @@
       "entry_net_edge_pct": 0.12115181221854357,
       "entry_roundtrip_cost_pct": 0.12224912486918138,
       "entry_roundtrip_fees_pct": 0.12,
-      "estimated_pair_pnl_if_closed_pct": -0.14046749756146518,
+      "estimated_pair_pnl_if_closed_pct": 0.46041239558024827,
       "execution_ready": true,
       "full_ts": null,
       "funding": {
         "hedge_error": "",
-        "hedge_pnl_pct": -0.0,
-        "hedge_settlement_count": 0,
-        "hedge_settlements": {},
+        "hedge_pnl_pct": -0.005,
+        "hedge_settlement_count": 1,
+        "hedge_settlements": {
+          "1791417600000": 0.005
+        },
         "hedge_side": "LONG",
         "hedge_venue": "bitget-perp",
-        "net_pnl_pct": 0.0,
-        "target_error": "HTTPError: 400 Client Error: Bad Request for url: https://mainnet.zklighter.elliot.ai/api/v1/fundings?market_id=60&resolution=1h&start_timestamp=1791404231529&end_timestamp=1791404233716&count_back=750",
-        "target_pnl_pct": 0.0,
-        "target_settlement_count": 0,
-        "target_settlements": {},
+        "net_pnl_pct": 0.475,
+        "target_error": "",
+        "target_pnl_pct": 0.48,
+        "target_settlement_count": 4,
+        "target_settlements": {
+          "1791406800000": 0.12,
+          "1791410400000": 0.12,
+          "1791414000000": 0.12,
+          "1791417600000": 0.12
+        },
         "target_side": "SHORT",
         "target_venue": "lighter",
-        "updated_ts": 1791404233.7167556
+        "updated_ts": 1791418587.7131677
       },
-      "funding_hedge_pnl_pct": -0.0,
-      "funding_hedge_settlements": 0,
-      "funding_net_pnl_pct": 0.0,
-      "funding_net_usd_at_notional": 0.0,
+      "funding_hedge_pnl_pct": -0.005,
+      "funding_hedge_settlements": 1,
+      "funding_net_pnl_pct": 0.475,
+      "funding_net_usd_at_notional": 0.475,
       "funding_notional_usd": 100.0,
-      "funding_target_pnl_pct": 0.0,
-      "funding_target_settlements": 0,
-      "funding_tracking_status": "PARTIAL",
+      "funding_target_pnl_pct": 0.48,
+      "funding_target_settlements": 4,
+      "funding_tracking_status": "READY",
       "hedge_venue": "bitget-perp",
-      "horizons": {},
+      "horizons": {
+        "2h": {
+          "captured_ts": 1791418353.8374197,
+          "estimated_pair_pnl_if_closed_pct": 0.42789351299161044,
+          "full_ts": null,
+          "funding_hedge_pnl_pct": -0.005,
+          "funding_net_pnl_pct": 0.475,
+          "funding_target_pnl_pct": 0.48,
+          "gap_pct": 0.1682582992269331,
+          "label": "2h",
+          "max_convergence_fraction": 0.30871959146857936,
+          "max_gap_pct": 0.26161930978000875,
+          "min_gap_pct": 0.1682582992269331,
+          "minutes": 120.0,
+          "observed_age_seconds": 14122.308239221573,
+          "t50": null,
+          "t80": null
+        },
+        "30m": {
+          "captured_ts": 1791418353.8374197,
+          "estimated_pair_pnl_if_closed_pct": 0.42789351299161044,
+          "full_ts": null,
+          "funding_hedge_pnl_pct": -0.005,
+          "funding_net_pnl_pct": 0.475,
+          "funding_target_pnl_pct": 0.48,
+          "gap_pct": 0.1682582992269331,
+          "label": "30m",
+          "max_convergence_fraction": 0.30871959146857936,
+          "max_gap_pct": 0.26161930978000875,
+          "min_gap_pct": 0.1682582992269331,
+          "minutes": 30.0,
+          "observed_age_seconds": 14122.308239221573,
+          "t50": null,
+          "t80": null
+        },
+        "5m": {
+          "captured_ts": 1791418353.8374197,
+          "estimated_pair_pnl_if_closed_pct": 0.42789351299161044,
+          "full_ts": null,
+          "funding_hedge_pnl_pct": -0.005,
+          "funding_net_pnl_pct": 0.475,
+          "funding_target_pnl_pct": 0.48,
+          "gap_pct": 0.1682582992269331,
+          "label": "5m",
+          "max_convergence_fraction": 0.30871959146857936,
+          "max_gap_pct": 0.26161930978000875,
+          "min_gap_pct": 0.1682582992269331,
+          "minutes": 5.0,
+          "observed_age_seconds": 14122.308239221573,
+          "t50": null,
+          "t80": null
+        }
+      },
       "id": "lighter:ZROUSDT:SHORT:1791404231529",
-      "last_gap_pct": 0.26161930978000875,
-      "last_observed_ts": 1791404231.5291805,
+      "last_gap_pct": 0.13573941663829525,
+      "last_observed_ts": 1791418587.0703712,
       "max_adverse_extra_pct": 0.018218372692283796,
       "max_gap_pct": 0.26161930978000875,
-      "min_gap_pct": 0.24340093708772495,
+      "min_gap_pct": 0.08348078580826931,
       "side": "SHORT",
       "start_ts": 1791404231.5291805,
       "state_key": "lighter:ZROUSDT",
       "status": "OPEN",
       "symbol": "ZROUSDT",
-      "t50": null,
+      "t50": 14176.629685878754,
       "t80": null,
       "target": "lighter",
       "target_label": "Lighter",
       "trigger": "same-run verified re-expansion",
-      "valid_observations": 1,
+      "valid_observations": 114,
       "version": 15
     }
   },
@@ -24884,6 +24943,25 @@
       "status": "REVERTED_NOT_CLEAN",
       "symbol": "METUSDT",
       "taker_edge_pct": 0.0,
+      "target": "aster",
+      "target_label": "Aster"
+    },
+    "aster:METUSDT:BELOW:1791418440850": {
+      "closed_ts": 1791418588.1400456,
+      "counted": true,
+      "direction": "BELOW",
+      "extra_adverse_after_signal_pct": 0.35629550573924507,
+      "id": "aster:METUSDT:BELOW:1791418440850",
+      "maker_quote_edge_pct": 0.22578460149017854,
+      "max_peak_pct": 0.6562977613953022,
+      "profile_counted": true,
+      "side": "LONG",
+      "signal_peak_pct": 0.3000022556560571,
+      "start_ts": 1791418440.85,
+      "state_key": "aster:METUSDT",
+      "status": "STALE_UNRESOLVED",
+      "symbol": "METUSDT",
+      "taker_edge_pct": -0.20320614134115067,
       "target": "aster",
       "target_label": "Aster"
     },
@@ -28233,27 +28311,6 @@
       "status": "STALE_UNRESOLVED",
       "symbol": "SEIUSDT",
       "taker_edge_pct": 0.13701036360442945,
-      "target": "hyperliquid",
-      "target_label": "Hyperliquid"
-    },
-    "hyperliquid:STRKUSDT:ABOVE:1789820292508": {
-      "clean_reversion": true,
-      "closed_ts": 1789820335.7149775,
-      "counted": true,
-      "direction": "ABOVE",
-      "extra_adverse_after_signal_pct": 0.021584286639333206,
-      "id": "hyperliquid:STRKUSDT:ABOVE:1789820292508",
-      "maker_quote_edge_pct": 0.329320304486314,
-      "max_peak_pct": 0.38851715950789245,
-      "profile_counted": true,
-      "reversion_seconds": 41.515000104904175,
-      "side": "SHORT",
-      "signal_peak_pct": 0.36693287286855925,
-      "start_ts": 1789820292.508,
-      "state_key": "hyperliquid:STRKUSDT",
-      "status": "CLEAN_REVERTED",
-      "symbol": "STRKUSDT",
-      "taker_edge_pct": 0.2645359822922801,
       "target": "hyperliquid",
       "target_label": "Hyperliquid"
     },
@@ -33865,9 +33922,7 @@
     "ACTIVE-LAG": [
       "lighter:ZROUSDT:SHORT"
     ],
-    "POSITIVE-ECONOMICS": [
-      "lighter:ZROUSDT:SHORT:mexc-perp"
-    ]
+    "POSITIVE-ECONOMICS": []
   },
   "economic_signal_last_ts": {
     "aster:ASTERUSDT:SHORT:lighter-perp": 1789566044,
@@ -34625,9 +34680,9 @@
     ],
     "aster:BNBUSDT": [
       {
-        "edge_pct": 0.108779,
+        "edge_pct": 0.098427,
         "side": "SHORT",
-        "ts": 1791404236
+        "ts": 1791418589
       }
     ],
     "aster:BOMEUSDT": [
@@ -34646,9 +34701,9 @@
     ],
     "aster:BTCUSDT": [
       {
-        "edge_pct": 0.01128,
-        "side": "LONG",
-        "ts": 1791267594
+        "edge_pct": 0.00703,
+        "side": "SHORT",
+        "ts": 1791418589
       }
     ],
     "aster:BTWUSDT": [
@@ -34919,9 +34974,9 @@
     ],
     "aster:HBARUSDT": [
       {
-        "edge_pct": 0.08604,
+        "edge_pct": 0.064662,
         "side": "SHORT",
-        "ts": 1791404236
+        "ts": 1791418589
       }
     ],
     "aster:HYPERUSDT": [
@@ -35112,8 +35167,8 @@
     "aster:METUSDT": [
       {
         "edge_pct": 0.0,
-        "side": "SHORT",
-        "ts": 1790125179
+        "side": "LONG",
+        "ts": 1791418589
       }
     ],
     "aster:MEUSDT": [
@@ -35378,9 +35433,9 @@
     ],
     "aster:SANDUSDT": [
       {
-        "edge_pct": 0.0,
-        "side": "SHORT",
-        "ts": 1791384648
+        "edge_pct": 0.022568,
+        "side": "LONG",
+        "ts": 1791418589
       }
     ],
     "aster:SEIUSDT": [
@@ -35506,16 +35561,16 @@
     ],
     "aster:STXUSDT": [
       {
-        "edge_pct": 0.089434,
+        "edge_pct": 0.013472,
         "side": "LONG",
-        "ts": 1791145819
+        "ts": 1791418589
       }
     ],
     "aster:SUIUSDT": [
       {
-        "edge_pct": 0.008924,
+        "edge_pct": 0.026492,
         "side": "SHORT",
-        "ts": 1791404236
+        "ts": 1791418589
       }
     ],
     "aster:SUSDT": [
@@ -35532,9 +35587,9 @@
     ],
     "aster:SUSHIUSDT": [
       {
-        "edge_pct": 0.136107,
+        "edge_pct": 0.0,
         "side": "LONG",
-        "ts": 1791191331
+        "ts": 1791418589
       }
     ],
     "aster:SYRUPUSDT": [
@@ -35656,23 +35711,23 @@
     ],
     "aster:WIFUSDT": [
       {
-        "edge_pct": 0.127877,
+        "edge_pct": 0.120544,
         "side": "LONG",
-        "ts": 1791359575
+        "ts": 1791418589
       }
     ],
     "aster:WLDUSDT": [
       {
-        "edge_pct": 0.05848,
+        "edge_pct": 0.057571,
         "side": "SHORT",
-        "ts": 1791404236
+        "ts": 1791418589
       }
     ],
     "aster:WLFIUSDT": [
       {
-        "edge_pct": 0.182548,
+        "edge_pct": 0.126927,
         "side": "SHORT",
-        "ts": 1791404236
+        "ts": 1791418589
       }
     ],
     "aster:XAGUSDT": [
@@ -35712,9 +35767,9 @@
     ],
     "aster:XMRUSDT": [
       {
-        "edge_pct": 0.03602,
+        "edge_pct": 0.021552,
         "side": "LONG",
-        "ts": 1790983103
+        "ts": 1791418589
       }
     ],
     "aster:XPDUSDT": [
@@ -35761,9 +35816,9 @@
     ],
     "aster:ZECUSDT": [
       {
-        "edge_pct": 0.030348,
+        "edge_pct": 0.02446,
         "side": "LONG",
-        "ts": 1791404236
+        "ts": 1791418589
       }
     ],
     "aster:ZENUSDT": [
@@ -35803,9 +35858,9 @@
     ],
     "aster:ZROUSDT": [
       {
-        "edge_pct": 0.041503,
+        "edge_pct": 0.031812,
         "side": "SHORT",
-        "ts": 1791359575
+        "ts": 1791418589
       }
     ],
     "hyperliquid:0GUSDT": [
@@ -35838,9 +35893,9 @@
     ],
     "hyperliquid:AEROUSDT": [
       {
-        "edge_pct": 0.021585,
+        "edge_pct": 0.147594,
         "side": "SHORT",
-        "ts": 1789938958
+        "ts": 1791418589
       }
     ],
     "hyperliquid:AIXBTUSDT": [
@@ -36236,16 +36291,16 @@
     ],
     "hyperliquid:JTOUSDT": [
       {
-        "edge_pct": 0.034202,
+        "edge_pct": 0.008306,
         "side": "SHORT",
-        "ts": 1791338244
+        "ts": 1791418589
       }
     ],
     "hyperliquid:JUPUSDT": [
       {
-        "edge_pct": 0.034693,
+        "edge_pct": 0.036161,
         "side": "SHORT",
-        "ts": 1790053051
+        "ts": 1791418589
       }
     ],
     "hyperliquid:KAITOUSDT": [
@@ -36384,9 +36439,9 @@
     ],
     "hyperliquid:NEARUSDT": [
       {
-        "edge_pct": 0.143918,
+        "edge_pct": 0.112528,
         "side": "SHORT",
-        "ts": 1791245648
+        "ts": 1791418589
       }
     ],
     "hyperliquid:NILUSDT": [
@@ -36973,9 +37028,9 @@
     ],
     "lighter:BIOUSDT": [
       {
-        "edge_pct": 0.148223,
+        "edge_pct": 0.187385,
         "side": "SHORT",
-        "ts": 1791359575
+        "ts": 1791418589
       }
     ],
     "lighter:BNBUSDT": [
@@ -37015,9 +37070,9 @@
     ],
     "lighter:CRVUSDT": [
       {
-        "edge_pct": 0.00128,
+        "edge_pct": 0.089825,
         "side": "SHORT",
-        "ts": 1790661429
+        "ts": 1791418589
       }
     ],
     "lighter:DASHUSDT": [
@@ -37076,9 +37131,9 @@
     ],
     "lighter:ETHFIUSDT": [
       {
-        "edge_pct": 0.16094,
+        "edge_pct": 0.181818,
         "side": "SHORT",
-        "ts": 1791404236
+        "ts": 1791418589
       }
     ],
     "lighter:ETHUSDT": [
@@ -37263,9 +37318,9 @@
     ],
     "lighter:NEARUSDT": [
       {
-        "edge_pct": 0.131097,
+        "edge_pct": 0.096411,
         "side": "SHORT",
-        "ts": 1791293234
+        "ts": 1791418589
       }
     ],
     "lighter:ONDOUSDT": [
@@ -37515,9 +37570,9 @@
     ],
     "lighter:STABLEUSDT": [
       {
-        "edge_pct": 0.116127,
+        "edge_pct": 0.026115,
         "side": "LONG",
-        "ts": 1791120281
+        "ts": 1791418589
       }
     ],
     "lighter:STONKUSDT": [
@@ -37529,9 +37584,9 @@
     ],
     "lighter:STRKUSDT": [
       {
-        "edge_pct": 0.195364,
+        "edge_pct": 0.067064,
         "side": "SHORT",
-        "ts": 1791191331
+        "ts": 1791418589
       }
     ],
     "lighter:SUIUSDT": [
@@ -37560,9 +37615,9 @@
     ],
     "lighter:SYRUPUSDT": [
       {
-        "edge_pct": 0.1433,
+        "edge_pct": 0.169713,
         "side": "SHORT",
-        "ts": 1791066383
+        "ts": 1791418589
       }
     ],
     "lighter:TAOUSDT": [
@@ -37698,9 +37753,9 @@
     ],
     "lighter:ZROUSDT": [
       {
-        "edge_pct": 0.25902,
+        "edge_pct": 0.172279,
         "side": "SHORT",
-        "ts": 1791404236
+        "ts": 1791418589
       }
     ]
   },
@@ -41112,6 +41167,20 @@
         "ts": 1791404236,
         "valid_bbo_points": 76,
         "version": 12
+      },
+      {
+        "bbo_coverage_ratio": 1.0,
+        "convergence_events": 1,
+        "detection_ts": 1791418401,
+        "full_cycles": 0,
+        "initial_gap_pct": 0.185126,
+        "max_convergence_fraction": 0.549061,
+        "side": "SHORT",
+        "time_to_50_seconds": 6.199221849441528,
+        "time_to_80_seconds": null,
+        "ts": 1791418589,
+        "valid_bbo_points": 89,
+        "version": 12
       }
     ]
   },
@@ -42004,17 +42073,17 @@
       "unresolved": 0
     },
     "aster:METUSDT": {
-      "clean_reversion_rate": 0.14285714285714285,
+      "clean_reversion_rate": 0.125,
       "clean_reversion_seconds_samples": [
         6.049999952316284
       ],
       "clean_reversions": 1,
       "last_clean_reversion_ts": 1791404095.6360025,
-      "last_excursion_ts": 1791404101.4,
+      "last_excursion_ts": 1791418440.85,
       "max_peak_pct": 1.6048792827229368,
       "median_clean_reversion_seconds_recent": 6.049999952316284,
-      "median_peak_pct_recent": 0.5830903790087516,
-      "observed_excursions": 7,
+      "median_peak_pct_recent": 0.594847818127155,
+      "observed_excursions": 8,
       "peak_pct_samples": [
         0.5830903790087516,
         0.5684542154646924,
@@ -42022,12 +42091,13 @@
         0.320736298982022,
         0.737379466817931,
         0.4612442344470686,
-        0.6066052572455584
+        0.6066052572455584,
+        0.6562977613953022
       ],
       "reverted_not_clean": 4,
       "signal_sent": 0,
-      "sum_peak_pct": 4.882389134688961,
-      "unresolved": 2
+      "sum_peak_pct": 5.538686896084263,
+      "unresolved": 3
     },
     "aster:MYXUSDT": {
       "clean_reversion_rate": 0.16666666666666666,
@@ -45164,7 +45234,7 @@
     "ACTIVE-MM-EXCURSION": {
       "clean_reverted": 32,
       "full": 0,
-      "last_ts": 1791404107,
+      "last_ts": 1791418444,
       "reverted_not_clean": 75,
       "stale": 100,
       "symbols": {
@@ -45192,7 +45262,7 @@
         "aster:LDOUSDT": 1,
         "aster:LITUSDT": 48,
         "aster:LTCUSDT": 1,
-        "aster:METUSDT": 7,
+        "aster:METUSDT": 8,
         "aster:MYXUSDT": 12,
         "aster:NEARUSDT": 22,
         "aster:NILUSDT": 6,
@@ -45301,12 +45371,12 @@
       },
       "t50": 0,
       "t80": 0,
-      "total_started": 1338
+      "total_started": 1339
     }
   },
   "paper_performance_report": {
     "current": {
-      "generated_ts": 1791404236,
+      "generated_ts": 1791418588,
       "lag": {
         "mean_realized_net_pct_x": -0.5880209797915366,
         "median_actual_max_convergence_fraction": 0.8045501269802794,
@@ -45333,18 +45403,18 @@
       },
       "portfolio": {
         "breakeven": 0,
-        "closed_trades": 745,
+        "closed_trades": 746,
         "losses": 133,
-        "mean_realized_net_pct_x": 1.143621804661595,
-        "median_realized_net_pct_x": 0.4288273031359896,
-        "open_trades": 1,
-        "profitable": 612,
-        "realized_pnl_x": 8.519982444728882,
+        "mean_realized_net_pct_x": 1.1424444605100934,
+        "median_realized_net_pct_x": 0.4282823209762542,
+        "open_trades": 0,
+        "profitable": 613,
+        "realized_pnl_x": 8.522635675405297,
         "skipped_signals": 78,
         "venue_capital_busy_skips": 78,
-        "win_rate": 0.8214765100671141
+        "win_rate": 0.82171581769437
       },
-      "report_version": 605,
+      "report_version": 606,
       "routes": [
         {
           "hedge_side": "LONG",
@@ -45444,152 +45514,11 @@
       ],
       "scanner_version": "16.10",
       "schema_version": 1,
-      "source_fingerprint": "dc771d272be6a1228095c5e233ddb8c576555c85e9b2c3caf5d5b42d7007ea4a"
+      "source_fingerprint": "9b53e168842b9ac045386565f515126963eae52c6cc8ca0f7a84f4211beff7a5"
     },
-    "current_version": 605,
-    "generated_ts": 1791404236,
+    "current_version": 606,
+    "generated_ts": 1791418588,
     "history": [
-      {
-        "generated_ts": 1790286689,
-        "lag": {
-          "mean_realized_net_pct_x": -0.5880209797915366,
-          "median_actual_max_convergence_fraction": 0.8045501269802794,
-          "median_hold_seconds": 11093.854939937592,
-          "median_predicted_convergence_fraction": 0.895,
-          "median_predicted_net_pct_x": 0.029815554595139147,
-          "median_realized_net_pct_x": -0.3133942594708923,
-          "profitable": 0,
-          "strategy": "LAG",
-          "trades": 11,
-          "win_rate": 0.0
-        },
-        "mm": {
-          "mean_realized_net_pct_x": -0.295261612891134,
-          "median_actual_max_convergence_fraction": 0.15190676017337598,
-          "median_hold_seconds": 934.7802391052246,
-          "median_predicted_convergence_fraction": null,
-          "median_predicted_net_pct_x": 0.059424721858060366,
-          "median_realized_net_pct_x": -0.154059721208479,
-          "profitable": 1,
-          "strategy": "MM",
-          "trades": 15,
-          "win_rate": 0.06666666666666667
-        },
-        "portfolio": {
-          "breakeven": 0,
-          "closed_trades": 697,
-          "losses": 127,
-          "mean_realized_net_pct_x": 1.0842362322402725,
-          "median_realized_net_pct_x": 0.37785198086920446,
-          "open_trades": 2,
-          "profitable": 570,
-          "realized_pnl_x": 7.557126538714699,
-          "skipped_signals": 78,
-          "venue_capital_busy_skips": 78,
-          "win_rate": 0.8177905308464849
-        },
-        "report_version": 556,
-        "routes": [
-          {
-            "hedge_side": "LONG",
-            "hedge_venue": "bitget",
-            "key": "ECON:lighter:NEARUSDT:SHORT:bitget",
-            "mean_realized_net_pct_x": 1.1729602471999143,
-            "median_actual_max_convergence_fraction": 0.37859264120070346,
-            "median_hold_seconds": 3973.085013628006,
-            "median_predicted_convergence_fraction": null,
-            "median_predicted_net_pct_x": 0.11980210570686418,
-            "median_realized_net_pct_x": 0.7715734630202558,
-            "profitable": 64,
-            "side": "SHORT",
-            "strategy": "ECON",
-            "symbol": "NEARUSDT",
-            "target": "lighter",
-            "target_label": "Lighter",
-            "trades": 64,
-            "win_rate": 1.0
-          },
-          {
-            "hedge_side": "LONG",
-            "hedge_venue": "lighter",
-            "key": "ECON:hyperliquid:LINEAUSDT:SHORT:lighter",
-            "mean_realized_net_pct_x": -1.1793761229171644,
-            "median_actual_max_convergence_fraction": 0.8915847153047294,
-            "median_hold_seconds": 52079.94109690189,
-            "median_predicted_convergence_fraction": null,
-            "median_predicted_net_pct_x": 0.13470903550890012,
-            "median_realized_net_pct_x": -0.26876058589949625,
-            "profitable": 16,
-            "side": "SHORT",
-            "strategy": "ECON",
-            "symbol": "LINEAUSDT",
-            "target": "hyperliquid",
-            "target_label": "Hyperliquid",
-            "trades": 62,
-            "win_rate": 0.25806451612903225
-          },
-          {
-            "hedge_side": "LONG",
-            "hedge_venue": "bitget",
-            "key": "ECON:lighter:EIGENUSDT:SHORT:bitget",
-            "mean_realized_net_pct_x": 3.665928852853455,
-            "median_actual_max_convergence_fraction": 0.32704091397366475,
-            "median_hold_seconds": 3297.1670339107513,
-            "median_predicted_convergence_fraction": null,
-            "median_predicted_net_pct_x": 0.11487666740528554,
-            "median_realized_net_pct_x": 0.8731412897493823,
-            "profitable": 52,
-            "side": "SHORT",
-            "strategy": "ECON",
-            "symbol": "EIGENUSDT",
-            "target": "lighter",
-            "target_label": "Lighter",
-            "trades": 52,
-            "win_rate": 1.0
-          },
-          {
-            "hedge_side": "LONG",
-            "hedge_venue": "bitget",
-            "key": "ECON:lighter:ENAUSDT:SHORT:bitget",
-            "mean_realized_net_pct_x": 1.0048540218538025,
-            "median_actual_max_convergence_fraction": 0.1642817553742653,
-            "median_hold_seconds": 3069.2150411605835,
-            "median_predicted_convergence_fraction": null,
-            "median_predicted_net_pct_x": 0.12320827943075952,
-            "median_realized_net_pct_x": 0.8945220225015086,
-            "profitable": 41,
-            "side": "SHORT",
-            "strategy": "ECON",
-            "symbol": "ENAUSDT",
-            "target": "lighter",
-            "target_label": "Lighter",
-            "trades": 41,
-            "win_rate": 1.0
-          },
-          {
-            "hedge_side": "LONG",
-            "hedge_venue": "bitget",
-            "key": "ECON:lighter:UNIUSDT:SHORT:bitget",
-            "mean_realized_net_pct_x": 1.3168785399687026,
-            "median_actual_max_convergence_fraction": 0.1307827182627041,
-            "median_hold_seconds": 3009.6819558143616,
-            "median_predicted_convergence_fraction": null,
-            "median_predicted_net_pct_x": 0.11135669362084402,
-            "median_realized_net_pct_x": 0.7665274766797384,
-            "profitable": 37,
-            "side": "SHORT",
-            "strategy": "ECON",
-            "symbol": "UNIUSDT",
-            "target": "lighter",
-            "target_label": "Lighter",
-            "trades": 37,
-            "win_rate": 1.0
-          }
-        ],
-        "scanner_version": "16.10",
-        "schema_version": 1,
-        "source_fingerprint": "ed39a077019de1e532c48880ddd6606cd5260803c5065336e6990a3a27de9b21"
-      },
       {
         "generated_ts": 1790294842,
         "lag": {
@@ -52498,12 +52427,153 @@
         "scanner_version": "16.10",
         "schema_version": 1,
         "source_fingerprint": "dc771d272be6a1228095c5e233ddb8c576555c85e9b2c3caf5d5b42d7007ea4a"
+      },
+      {
+        "generated_ts": 1791418588,
+        "lag": {
+          "mean_realized_net_pct_x": -0.5880209797915366,
+          "median_actual_max_convergence_fraction": 0.8045501269802794,
+          "median_hold_seconds": 11093.854939937592,
+          "median_predicted_convergence_fraction": 0.895,
+          "median_predicted_net_pct_x": 0.029815554595139147,
+          "median_realized_net_pct_x": -0.3133942594708923,
+          "profitable": 0,
+          "strategy": "LAG",
+          "trades": 11,
+          "win_rate": 0.0
+        },
+        "mm": {
+          "mean_realized_net_pct_x": -0.295261612891134,
+          "median_actual_max_convergence_fraction": 0.15190676017337598,
+          "median_hold_seconds": 934.7802391052246,
+          "median_predicted_convergence_fraction": null,
+          "median_predicted_net_pct_x": 0.059424721858060366,
+          "median_realized_net_pct_x": -0.154059721208479,
+          "profitable": 1,
+          "strategy": "MM",
+          "trades": 15,
+          "win_rate": 0.06666666666666667
+        },
+        "portfolio": {
+          "breakeven": 0,
+          "closed_trades": 746,
+          "losses": 133,
+          "mean_realized_net_pct_x": 1.1424444605100934,
+          "median_realized_net_pct_x": 0.4282823209762542,
+          "open_trades": 0,
+          "profitable": 613,
+          "realized_pnl_x": 8.522635675405297,
+          "skipped_signals": 78,
+          "venue_capital_busy_skips": 78,
+          "win_rate": 0.82171581769437
+        },
+        "report_version": 606,
+        "routes": [
+          {
+            "hedge_side": "LONG",
+            "hedge_venue": "bitget",
+            "key": "ECON:lighter:NEARUSDT:SHORT:bitget",
+            "mean_realized_net_pct_x": 1.1643447886863796,
+            "median_actual_max_convergence_fraction": 0.3700346444674554,
+            "median_hold_seconds": 3974.1842131614685,
+            "median_predicted_convergence_fraction": null,
+            "median_predicted_net_pct_x": 0.12070617515143794,
+            "median_realized_net_pct_x": 0.758038243434153,
+            "profitable": 65,
+            "side": "SHORT",
+            "strategy": "ECON",
+            "symbol": "NEARUSDT",
+            "target": "lighter",
+            "target_label": "Lighter",
+            "trades": 65,
+            "win_rate": 1.0
+          },
+          {
+            "hedge_side": "LONG",
+            "hedge_venue": "lighter",
+            "key": "ECON:hyperliquid:LINEAUSDT:SHORT:lighter",
+            "mean_realized_net_pct_x": -1.132413113535404,
+            "median_actual_max_convergence_fraction": 0.8891252955082581,
+            "median_hold_seconds": 48716.71223163605,
+            "median_predicted_convergence_fraction": null,
+            "median_predicted_net_pct_x": 0.13497187851519923,
+            "median_realized_net_pct_x": -0.2681872937358275,
+            "profitable": 17,
+            "side": "SHORT",
+            "strategy": "ECON",
+            "symbol": "LINEAUSDT",
+            "target": "hyperliquid",
+            "target_label": "Hyperliquid",
+            "trades": 63,
+            "win_rate": 0.2698412698412698
+          },
+          {
+            "hedge_side": "LONG",
+            "hedge_venue": "bitget",
+            "key": "ECON:lighter:EIGENUSDT:SHORT:bitget",
+            "mean_realized_net_pct_x": 3.713020106631147,
+            "median_actual_max_convergence_fraction": 0.32704091397366475,
+            "median_hold_seconds": 3436.694156050682,
+            "median_predicted_convergence_fraction": null,
+            "median_predicted_net_pct_x": 0.11540005736066103,
+            "median_realized_net_pct_x": 0.903473068803335,
+            "profitable": 54,
+            "side": "SHORT",
+            "strategy": "ECON",
+            "symbol": "EIGENUSDT",
+            "target": "lighter",
+            "target_label": "Lighter",
+            "trades": 54,
+            "win_rate": 1.0
+          },
+          {
+            "hedge_side": "LONG",
+            "hedge_venue": "bitget",
+            "key": "ECON:lighter:ENAUSDT:SHORT:bitget",
+            "mean_realized_net_pct_x": 1.0135628507160133,
+            "median_actual_max_convergence_fraction": 0.15714308676508557,
+            "median_hold_seconds": 3069.2150411605835,
+            "median_predicted_convergence_fraction": null,
+            "median_predicted_net_pct_x": 0.12320827943075952,
+            "median_realized_net_pct_x": 0.8945220225015086,
+            "profitable": 43,
+            "side": "SHORT",
+            "strategy": "ECON",
+            "symbol": "ENAUSDT",
+            "target": "lighter",
+            "target_label": "Lighter",
+            "trades": 43,
+            "win_rate": 1.0
+          },
+          {
+            "hedge_side": "LONG",
+            "hedge_venue": "bitget",
+            "key": "ECON:lighter:UNIUSDT:SHORT:bitget",
+            "mean_realized_net_pct_x": 1.3168785399687026,
+            "median_actual_max_convergence_fraction": 0.1307827182627041,
+            "median_hold_seconds": 3009.6819558143616,
+            "median_predicted_convergence_fraction": null,
+            "median_predicted_net_pct_x": 0.11135669362084402,
+            "median_realized_net_pct_x": 0.7665274766797384,
+            "profitable": 37,
+            "side": "SHORT",
+            "strategy": "ECON",
+            "symbol": "UNIUSDT",
+            "target": "lighter",
+            "target_label": "Lighter",
+            "trades": 37,
+            "win_rate": 1.0
+          }
+        ],
+        "scanner_version": "16.10",
+        "schema_version": 1,
+        "source_fingerprint": "9b53e168842b9ac045386565f515126963eae52c6cc8ca0f7a84f4211beff7a5"
       }
     ],
     "last_sent_ts": 1789458380,
     "last_sent_version": 1,
     "schema_version": 1,
-    "source_fingerprint": "dc771d272be6a1228095c5e233ddb8c576555c85e9b2c3caf5d5b42d7007ea4a"
+    "source_fingerprint": "9b53e168842b9ac045386565f515126963eae52c6cc8ca0f7a84f4211beff7a5"
   },
   "paper_portfolio_stats": {
     "by_route": {
@@ -52689,29 +52759,29 @@
       },
       "lighter->mexc": {
         "breakeven": 0,
-        "closed": 69,
-        "fees_pct_x": 11.040000000000006,
-        "funding_pct_x": 152.6777,
+        "closed": 70,
+        "fees_pct_x": 11.200000000000006,
+        "funding_pct_x": 153.15269999999998,
         "losses": 8,
         "opened": 71,
-        "realized_gross_pnl_pct_x": -20.591393996672195,
-        "realized_net_pnl_pct_x": 121.04630600332783,
-        "realized_pnl_x": 1.2104630600332782,
-        "wins": 61
+        "realized_gross_pnl_pct_x": -20.64107092903063,
+        "realized_net_pnl_pct_x": 121.31162907096939,
+        "realized_pnl_x": 1.213116290709694,
+        "wins": 62
       }
     },
     "by_strategy": {
       "ECON": {
         "breakeven": 0,
-        "closed": 620,
-        "fees_pct_x": 79.90999999999973,
-        "funding_pct_x": 944.1036568300005,
+        "closed": 621,
+        "fees_pct_x": 80.06999999999972,
+        "funding_pct_x": 944.5786568300006,
         "losses": 73,
         "opened": 720,
-        "realized_gross_pnl_pct_x": -32.9183692228841,
-        "realized_net_pnl_pct_x": 831.275287607116,
-        "realized_pnl_x": 8.312752876071155,
-        "wins": 547
+        "realized_gross_pnl_pct_x": -32.96804615524253,
+        "realized_net_pnl_pct_x": 831.5406106747575,
+        "realized_pnl_x": 8.31540610674757,
+        "wins": 548
       },
       "LAG": {
         "breakeven": 0,
@@ -53629,28 +53699,28 @@
       },
       "lighter:ZROUSDT": {
         "breakeven": 0,
-        "closed": 46,
-        "fees_pct_x": 5.4600000000000035,
-        "funding_pct_x": 57.06801762,
+        "closed": 47,
+        "fees_pct_x": 5.620000000000004,
+        "funding_pct_x": 57.54301762,
         "losses": 3,
         "opened": 52,
-        "realized_gross_pnl_pct_x": -4.1606368890162475,
-        "realized_net_pnl_pct_x": 47.44738073098375,
-        "realized_pnl_x": 0.4744738073098375,
-        "wins": 43
+        "realized_gross_pnl_pct_x": -4.210313821374681,
+        "realized_net_pnl_pct_x": 47.71270379862532,
+        "realized_pnl_x": 0.47712703798625317,
+        "wins": 44
       }
     },
-    "last_close_ts": 1791267593,
+    "last_close_ts": 1791418588,
     "last_open_ts": 1791404046,
     "losses": 98,
-    "realized_net_pnl_pct_x": 820.378132636042,
-    "realized_pnl_x": 8.203781326360415,
+    "realized_net_pnl_pct_x": 820.6434557036836,
+    "realized_pnl_x": 8.20643455703683,
     "signals_seen": 824,
     "skipped": 78,
     "skipped_capital": 78,
-    "trades_closed": 646,
+    "trades_closed": 647,
     "trades_opened": 746,
-    "wins": 548
+    "wins": 549
   },
   "paper_signals_skipped": [
     {
@@ -261297,19 +261367,19 @@
       "v169_settlement_funding": true,
       "verified_episodes_at_entry": 0,
       "worst_net_pnl_pct_x": -0.14739473012497006
-    }
-  ],
-  "paper_trades_open": {
-    "paper:ECON:lighter:ZROUSDT:SHORT:mexc:1791404046546": {
-      "best_net_pnl_pct_x": -0.08,
+    },
+    {
+      "best_net_pnl_pct_x": 0.26532306764156655,
       "business_thesis": "SPREAD+FUNDING",
       "capital_fraction_x": 1.0,
       "checkpoints": {},
+      "close_reason": "ECON_TOTAL_PROFIT_LOCK_AFTER_SETTLEMENT",
+      "closed_ts": 1791418588.1462815,
       "current_fees_pct_x": 0.16,
-      "current_funding_hedge_pnl_pct_x": 0.0,
-      "current_funding_target_pnl_pct_x": 0.0,
+      "current_funding_hedge_pnl_pct_x": -0.005,
+      "current_funding_target_pnl_pct_x": 0.48,
       "current_gross_pnl_pct_x": -0.0496769323584334,
-      "current_net_pnl_pct_x": -0.2096769323584334,
+      "current_net_pnl_pct_x": 0.26532306764156655,
       "current_spread_net_pnl_pct_x": -0.2096769323584334,
       "dedupe_key": "paper:ECON:lighter:ZROUSDT:SHORT:mexc:1791404046546",
       "engine_version_at_entry": "16.10",
@@ -261375,30 +261445,124 @@
       "entry_target_vwap": 2.2071,
       "exact_route_convergence_fraction": -0.18322559366752003,
       "exact_route_gap_pct": 0.3225366208716274,
+      "exit_hedge_vwap": 2.1982,
+      "exit_same_side_gap_pct": 0.3225366208716274,
+      "exit_target_vwap": 2.20529,
       "expected_roundtrip_fees_pct_x": 0.16,
-      "funding_breakdown_source": "partial-public-history-last-complete-preserved",
-      "funding_breakdown_status": "PARTIAL",
-      "funding_hedge_pnl_pct_x": 0.0,
-      "funding_hedge_settlement_count": 0,
-      "funding_hedge_settlement_ts": [],
-      "funding_net_pnl_pct_x": 0.0,
-      "funding_status": "PARTIAL",
-      "funding_target_pnl_pct_x": 0.0,
-      "funding_target_settlement_count": 0,
-      "funding_target_settlement_ts": [],
+      "funding_breakdown_source": "complete-public-settlements-v1610",
+      "funding_breakdown_status": "READY",
+      "funding_component_result": "WIN",
+      "funding_hedge_pnl_pct_x": -0.005,
+      "funding_hedge_settlement_count": 1,
+      "funding_hedge_settlement_ts": [
+        1791417600.0
+      ],
+      "funding_net_pnl_pct_x": 0.475,
+      "funding_settlement_audit": {
+        "account_cashflow_verified": false,
+        "asof_ts": 1791418588.1462815,
+        "complete_two_leg_snapshot": true,
+        "hedge": [
+          {
+            "cashflow_pct": -0.005,
+            "cashflow_usd_at_probe": -0.005,
+            "rate_pct": 0.005,
+            "settlement_ts": 1791417600.0,
+            "side": "LONG",
+            "source": "public-funding-history",
+            "symbol": "ZROUSDT",
+            "venue": "mexc"
+          }
+        ],
+        "hedge_cashflow_pct": -0.005,
+        "target": [
+          {
+            "cashflow_pct": 0.12,
+            "cashflow_usd_at_probe": 0.12,
+            "direction": "long",
+            "normalization_multiplier_to_pct": 100.0,
+            "normalized_rate_pct": 0.12,
+            "rate_pct": 0.12,
+            "raw_rate": 0.0012,
+            "raw_rate_unit": "api-native",
+            "settlement_ts": 1791406800.0,
+            "side": "SHORT",
+            "source": "lighter-public-fundings",
+            "symbol": "ZROUSDT",
+            "venue": "lighter"
+          },
+          {
+            "cashflow_pct": 0.12,
+            "cashflow_usd_at_probe": 0.12,
+            "direction": "long",
+            "normalization_multiplier_to_pct": 100.0,
+            "normalized_rate_pct": 0.12,
+            "rate_pct": 0.12,
+            "raw_rate": 0.0012,
+            "raw_rate_unit": "api-native",
+            "settlement_ts": 1791410400.0,
+            "side": "SHORT",
+            "source": "lighter-public-fundings",
+            "symbol": "ZROUSDT",
+            "venue": "lighter"
+          },
+          {
+            "cashflow_pct": 0.12,
+            "cashflow_usd_at_probe": 0.12,
+            "direction": "long",
+            "normalization_multiplier_to_pct": 100.0,
+            "normalized_rate_pct": 0.12,
+            "rate_pct": 0.12,
+            "raw_rate": 0.0012,
+            "raw_rate_unit": "api-native",
+            "settlement_ts": 1791414000.0,
+            "side": "SHORT",
+            "source": "lighter-public-fundings",
+            "symbol": "ZROUSDT",
+            "venue": "lighter"
+          },
+          {
+            "cashflow_pct": 0.12,
+            "cashflow_usd_at_probe": 0.12,
+            "direction": "long",
+            "normalization_multiplier_to_pct": 100.0,
+            "normalized_rate_pct": 0.12,
+            "rate_pct": 0.12,
+            "raw_rate": 0.0012,
+            "raw_rate_unit": "api-native",
+            "settlement_ts": 1791417600.0,
+            "side": "SHORT",
+            "source": "lighter-public-fundings",
+            "symbol": "ZROUSDT",
+            "venue": "lighter"
+          }
+        ],
+        "target_cashflow_pct": 0.48,
+        "verification_scope": "public-market-funding-history"
+      },
+      "funding_status": "READY",
+      "funding_target_pnl_pct_x": 0.48,
+      "funding_target_settlement_count": 4,
+      "funding_target_settlement_ts": [
+        1791406800.0,
+        1791410400.0,
+        1791414000.0,
+        1791417600.0
+      ],
       "hedge_side": "LONG",
       "hedge_venue": "mexc-perp",
       "historical_median_convergence_fraction": 0.0,
       "historical_median_t50_seconds": null,
+      "holding_seconds": 14541.59951710701,
       "id": "paper:ECON:lighter:ZROUSDT:SHORT:mexc:1791404046546",
       "last_hedge_close_vwap": 2.1982,
       "last_target_close_vwap": 2.20529,
       "last_update_ts": 1791404235.1984725,
       "latest_same_side_gap_pct": 0.3225366208716274,
-      "live_funding_expected_net_pct": 0.4,
-      "live_funding_first_cluster_net_pct": 0.4,
-      "live_funding_first_settlement_ts": 1791406800.001,
-      "live_funding_forecast_asof_ts": 1791404235.8873744,
+      "live_funding_expected_net_pct": 0.12,
+      "live_funding_first_cluster_net_pct": 0.12,
+      "live_funding_first_settlement_ts": 1791421200.0,
+      "live_funding_forecast_asof_ts": 1791418588.1462815,
       "live_funding_forecast_horizon_seconds": 3600.0,
       "live_funding_forecast_status": "READY",
       "live_funding_hedge_forecast": {
@@ -261407,9 +261571,9 @@
         "error": "",
         "expected_pnl_pct": -0.005,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 222.73521042664845,
+        "minutes_to_settlement": 223.53089530865353,
         "next_settlement_pnl_pct": -0.005,
-        "next_settlement_ts": 1791417600.0,
+        "next_settlement_ts": 1791432000.0,
         "outside_forecast_horizon": true,
         "rate_pct": 0.005,
         "side": "LONG",
@@ -261418,23 +261582,23 @@
         "timeline_pnl_pct": 0.0,
         "venue": "mexc"
       },
-      "live_funding_raw_timeline_net_pct": 0.4,
+      "live_funding_raw_timeline_net_pct": 0.12,
       "live_funding_risk_adjustment_pct": 0.0,
       "live_funding_target_forecast": {
         "available": true,
         "counted_in_timeline": true,
         "error": "",
-        "expected_pnl_pct": 0.4,
+        "expected_pnl_pct": 0.12,
         "extreme_rate_warning": false,
-        "minutes_to_settlement": 42.73522709210714,
-        "next_settlement_pnl_pct": 0.4,
-        "next_settlement_ts": 1791406800.001,
+        "minutes_to_settlement": 43.53089530865351,
+        "next_settlement_pnl_pct": 0.12,
+        "next_settlement_ts": 1791421200.0,
         "outside_forecast_horizon": false,
-        "rate_pct": 0.4,
+        "rate_pct": 0.12,
         "side": "SHORT",
         "source": "lighter-current_funding_rate",
         "symbol": "ZROUSDT",
-        "timeline_pnl_pct": 0.4,
+        "timeline_pnl_pct": 0.12,
         "venue": "lighter"
       },
       "live_funding_worst_prefix_net_pct": 0.0,
@@ -261442,13 +261606,26 @@
       "max_same_side_gap_pct": 0.3225366208716274,
       "min_same_side_gap_pct": 0.24291497975708048,
       "missing_depth_updates": 0,
+      "money_management_exit": true,
       "notional_x": 1.0,
       "opened_ts": 1791404046.5467644,
       "probe_notional_usd": 100.0,
+      "realized_fees_pct_x": 0.16,
+      "realized_funding_hedge_pnl_pct_x": -0.005,
+      "realized_funding_pct_x": 0.475,
+      "realized_funding_target_pnl_pct_x": 0.48,
+      "realized_gross_pnl_pct_x": -0.0496769323584334,
+      "realized_hedge_leg_pnl_pct_x": -0.13175230566534468,
+      "realized_net_pnl_pct_x": 0.26532306764156655,
+      "realized_pnl_x": 0.0026532306764156656,
+      "realized_profit_driver": "FUNDING",
+      "realized_spread_net_pnl_pct_x": -0.2096769323584334,
+      "realized_target_leg_pnl_pct_x": 0.08207537330691128,
       "reference_disagreement_pct": 0.13402694168691243,
       "source_event_type": "POSITIVE-ECONOMICS",
+      "spread_component_result": "LOSS",
       "state_key": "lighter:ZROUSDT",
-      "status": "OPEN",
+      "status": "CLOSED",
       "strategy": "ECON",
       "symbol": "ZROUSDT",
       "target": "lighter",
@@ -261456,11 +261633,13 @@
       "target_side": "SHORT",
       "time_to_50_seconds": null,
       "time_to_80_seconds": null,
+      "total_component_result": "WIN",
       "total_profit_lock_target_pct": 0.11259097723866376,
       "updates": 1,
       "v1610_dynamic_funding_management": true,
-      "v1610_exact_route_mark_ts": 1791404235.8873744,
+      "v1610_exact_route_mark_ts": 1791418588.1462815,
       "v1610_exit_logic_version": 6,
+      "v1610_funding_audit_version": 1,
       "v1610_partial_funding_audit": {
         "account_cashflow_verified": false,
         "asof_ts": 1791404235.8873744,
@@ -261475,17 +261654,32 @@
       "v165_fresh_net_pct": 0.11259097723866376,
       "v165_signal_net_threshold_pct": 0.1,
       "v166_exact_route_exit": true,
-      "v166_exact_route_mark_ts": 1791404235.8873744,
+      "v166_exact_route_mark_ts": 1791418588.1462815,
       "v166_exit_logic_version": 6,
       "v167_exact_route_exit": true,
-      "v167_exact_route_mark_ts": 1791404235.8873744,
+      "v167_exact_route_mark_ts": 1791418588.1462815,
       "v167_exit_logic_version": 6,
       "v168_exact_route_exit": true,
-      "v168_exact_route_mark_ts": 1791404235.8873744,
+      "v168_exact_route_mark_ts": 1791418588.1462815,
       "v168_exit_logic_version": 6,
       "v169_exact_route_exit": true,
-      "v169_exact_route_mark_ts": 1791404235.8873744,
+      "v169_exact_route_mark_ts": 1791418588.1462815,
       "v169_exit_logic_version": 6,
+      "v169_last_complete_funding_asof_ts": 1791418588.1462815,
+      "v169_last_complete_funding_hedge_pct": -0.005,
+      "v169_last_complete_funding_net_pct": 0.475,
+      "v169_last_complete_funding_target_pct": 0.48,
+      "v169_last_complete_hedge_settlement_count": 1,
+      "v169_last_complete_hedge_settlement_ts": [
+        1791417600.0
+      ],
+      "v169_last_complete_target_settlement_count": 4,
+      "v169_last_complete_target_settlement_ts": [
+        1791406800.0,
+        1791410400.0,
+        1791414000.0,
+        1791417600.0
+      ],
       "v169_partial_computed_net_pct": 0.0,
       "v169_partial_hedge_error": "",
       "v169_partial_hedge_observed_pct": -0.0,
@@ -261495,7 +261689,8 @@
       "verified_episodes_at_entry": 0,
       "worst_net_pnl_pct_x": -0.20974424078383203
     }
-  },
+  ],
+  "paper_trades_open": {},
   "reference_health": {},
   "scanner_version": "16.10",
   "signal_stats": {
@@ -261668,9 +261863,9 @@
       "total": 213
     },
     "MM-EXCURSION-OBSERVED": {
-      "last_ts": 1791404107,
+      "last_ts": 1791418444,
       "sides": {
-        "LONG": 355,
+        "LONG": 356,
         "SHORT": 976
       },
       "symbols": {
@@ -261698,7 +261893,7 @@
         "aster:LDOUSDT": 1,
         "aster:LITUSDT": 48,
         "aster:LTCUSDT": 1,
-        "aster:METUSDT": 7,
+        "aster:METUSDT": 8,
         "aster:MYXUSDT": 12,
         "aster:NEARUSDT": 22,
         "aster:NILUSDT": 6,
@@ -261804,7 +261999,7 @@
         "lighter:ZECUSDT": 21,
         "lighter:ZROUSDT": 20
       },
-      "total": 1331
+      "total": 1332
     },
     "POSITIVE-ECONOMICS": {
       "last_ts": 1791404049,
@@ -261988,12 +262183,16 @@
       {
         "date": "2026-10-06",
         "sent_ts": 1791327469
+      },
+      {
+        "date": "2026-10-07",
+        "sent_ts": 1791418588
       }
     ],
     "initialized": true,
     "initialized_ts": 1789462117,
-    "last_reported_date": "2026-10-06",
-    "last_sent_ts": 1791327469,
+    "last_reported_date": "2026-10-07",
+    "last_sent_ts": 1791418588,
     "timezone": "Europe/Riga"
   },
   "v165_signal_events": [
